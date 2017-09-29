@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_firstAid"
+        android:icon="@drawable/plus"
+        android:title="@string/first_aid"/>
+
+    <item
+        android:id="@+id/navigation_bloodNetwork"
+        android:icon="@drawable/blood_network"
+        android:title="@string/blood_network"/>
+
+    <item
+        android:id="@+id/navigation_searchHospital"
+        android:icon="@drawable/search_hospital"
+        android:title="@string/search_hospital"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile"
+        android:title="@string/profile"/>
+
+</menu>

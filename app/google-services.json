@@ -1,0 +1,151 @@
+{
+  "project_info": {
+    "project_number": "772795853177",
+    "firebase_url": "https://first-aid-b1780.firebaseio.com",
+    "project_id": "first-aid-b1780",
+    "storage_bucket": "first-aid-b1780.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772795853177:android:15274b15ab6d2f7f",
+        "android_client_info": {
+          "package_name": "co.firstaid101.firstaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772795853177-brn8li1nqai4dcttqqvekvko2ddvl89e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.firstaid101.firstaid",
+            "certificate_hash": "a2ab4f530511a22b7cecadf548713b66bdcd1b1d"
+          }
+        },
+        {
+          "client_id": "772795853177-9d0u95chv3qm3fko4dce4812iqse46mv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.firstaid101.firstaid",
+            "certificate_hash": "69c99339270238edbb642bce644c23f69edc3fdd"
+          }
+        },
+        {
+          "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq-oI3w6DFD7CJvMlSUJD1AMHYH36JJIA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772795853177:android:02607728a1b98015",
+        "android_client_info": {
+          "package_name": "com.example.thele.newblooddonationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772795853177-qnijk540cp11qfvkj2p1hva1vvefcuq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thele.newblooddonationapp",
+            "certificate_hash": "a2ab4f530511a22b7cecadf548713b66bdcd1b1d"
+          }
+        },
+        {
+          "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq-oI3w6DFD7CJvMlSUJD1AMHYH36JJIA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772795853177:android:24bb938ecdf6e134",
+        "android_client_info": {
+          "package_name": "com.practice.android.firstaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772795853177-iss9bsjd3asjhj9ei3imnf2rs47gbag6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.android.firstaid",
+            "certificate_hash": "97bed115b57a31d94ed0ce20132f468d0a1edb31"
+          }
+        },
+        {
+          "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq-oI3w6DFD7CJvMlSUJD1AMHYH36JJIA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772795853177-f6o0jfp0m488dp3uupfb8sva2amkrv2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
