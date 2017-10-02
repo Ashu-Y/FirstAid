@@ -26,11 +26,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class UserDetails extends AppCompatActivity implements OnConnectionFailedListener {
 
@@ -171,6 +175,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         DOB = etDob.getText().toString();
         PhoneNumber = etPhone.getText().toString();
 
+        FirstLogin = "true";
         Gender = etGender.getSelectedItem().toString();
         BloodGroup = etBloodGroup.getSelectedItem().toString();
         Languages = etLanguage.getSelectedItem().toString();
@@ -180,6 +185,8 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         } else {
             InterestedinDonating = "false";
         }
+
+        writeNewPost(Name, Gender, DOB, BloodGroup,PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
 
         Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
     }
@@ -192,6 +199,27 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         etDob.setText(sdf.format(myCalendar.getTime()));
     }
 
+    public void writeNewPost(String Name,String Gender,String DOB,String BloodGroup,String PhoneNumber,String Languages,String InterestedinDonating,String FirstLogin,List Cities)
+    {
+
+        String Key=mDatabase1.child(UserID).push().getKey();
+        UserInfo userinfo=new UserInfo(Name,Gender,DOB,BloodGroup,PhoneNumber,Languages,InterestedinDonating,FirstLogin,Cities);
+        Map<String,Object> postValues=userinfo.toMap();
+
+        Map<String,Object> childUpdates=new HashMap<>();
+        childUpdates.put("/"+UserID,postValues);
+
+        mDatabase1.updateChildren(childUpdates);
+
+
+    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent startMain = new Intent(Intent.ACTION_MAIN);
+//        startMain.addCategory(Intent.CATEGORY_HOME);
+//        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(startMain);
+//    }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
