@@ -9,7 +9,7 @@
     <string name="profile">PROFILE</string>
     <string name="tool_profile">Profile</string>
     <string name="loading">Loading...</string>
-
+    <string name="google_maps_key">AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_account_settings">ACCOUNT SETTINGS</string>

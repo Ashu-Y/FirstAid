@@ -83,7 +83,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edit"
                 android:orientation="horizontal"
-            >
+                >
 
                 <EditText
                     android:id="@+id/edit_date"
@@ -214,9 +214,12 @@
             </LinearLayout>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <RelativeLayout android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+
+
+
 
                 <ListView
                     android:id="@+id/city_listView"

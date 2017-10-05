@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.practice.android.firstaid.Adapters.PagerAdapter;
+import com.practice.android.firstaid.Adapters.PagerAdapterBloodNetwork;
 import com.practice.android.firstaid.R;
 
 /**
@@ -42,8 +42,9 @@ public class BloodNetworkFragment extends Fragment {
 
         final ViewPager viewPager = inflatedView.findViewById(R.id.view_pager_bloodNetwork);
 
-        PagerAdapter pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
+        PagerAdapterBloodNetwork pagerAdapterBloodNetwork = new PagerAdapterBloodNetwork(getActivity().getSupportFragmentManager(),
+                tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapterBloodNetwork);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

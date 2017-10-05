@@ -9,13 +9,13 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="8dp"
-              android:layout_marginTop="16dp"
-              android:gravity="center"
-              android:text="Learn first aid for..."
-              android:textColor="#000"
-              android:textSize="14sp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Learn first aid for..."
+        android:textColor="#000"
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,11 +84,11 @@
                     android:src="@drawable/bleeding"/>
 
                 <TextView android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
-                          android:text="Bleeding"
-                          android:textColor="#000"
-                          android:textSize="14sp"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Bleeding"
+                    android:textColor="#000"
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -162,11 +162,11 @@
                     android:src="@drawable/burns"/>
 
                 <TextView android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
-                          android:text="Burns"
-                          android:textColor="#000"
-                          android:textSize="14sp"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Burns"
+                    android:textColor="#000"
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
