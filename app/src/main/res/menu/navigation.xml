@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/navigation_firstAid"
-        android:icon="@drawable/plus"
+        android:icon="@drawable/menu_first_aid1"
         android:title="@string/first_aid"/>
 
     <item
         android:id="@+id/navigation_bloodNetwork"
-        android:icon="@drawable/blood_network"
+        android:icon="@drawable/menu_blood_net1"
         android:title="@string/blood_network"/>
 
     <item
         android:id="@+id/navigation_searchHospital"
-        android:icon="@drawable/search_hospital"
+        android:icon="@drawable/menu_hospital1"
         android:title="@string/search_hospital"/>
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/menu_profile1"
         android:title="@string/profile"/>
 
 </menu>
