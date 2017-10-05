@@ -11,11 +11,11 @@ import com.practice.android.firstaid.Fragments.ReceivedBloodRequest;
  * Created by parven on 24-09-2017.
  */
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapterBloodNetwork extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int numOfTabs) {
+    public PagerAdapterBloodNetwork(FragmentManager fm, int numOfTabs) {
         super(fm);
         this.mNumOfTabs = numOfTabs;
     }

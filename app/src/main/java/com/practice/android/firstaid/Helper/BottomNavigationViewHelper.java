@@ -1,4 +1,4 @@
-package com.practice.android.firstaid.Activities;
+package com.practice.android.firstaid.Helper;
 
 /**
  * Created by Ashutosh on 9/17/2017.

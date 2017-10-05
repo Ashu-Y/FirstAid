@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.practice.android.firstaid.Activities.*;
 import com.practice.android.firstaid.R;
 
 /**

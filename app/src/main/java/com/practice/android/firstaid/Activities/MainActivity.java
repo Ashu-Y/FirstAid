@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.practice.android.firstaid.Fragments.BloodNetworkFragment;
 import com.practice.android.firstaid.Fragments.FirstAidFragment;
 import com.practice.android.firstaid.Fragments.ProfileFragment;
+import com.practice.android.firstaid.Helper.BottomNavigationViewHelper;
 import com.practice.android.firstaid.R;
 
 public class MainActivity extends AppCompatActivity {
