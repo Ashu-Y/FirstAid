@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.practice.android.firstaid.Fragments.BloodNetworkFragment;
 import com.practice.android.firstaid.Fragments.FirstAidFragment;
+import com.practice.android.firstaid.Fragments.MapFragment;
 import com.practice.android.firstaid.Fragments.ProfileFragment;
 import com.practice.android.firstaid.Helper.BottomNavigationViewHelper;
 import com.practice.android.firstaid.R;
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_searchHospital:
                     mToolbar.setTitle(R.string.tool_search_hospital);
                     pid = R.id.navigation_searchHospital;
-                    selectedFragment = null;
-                    return true;
+                    selectedFragment = MapFragment.newInstance();
+                    break;
                 case R.id.navigation_profile:
                     mToolbar.setTitle(R.string.tool_profile);
                     pid = R.id.navigation_profile;
