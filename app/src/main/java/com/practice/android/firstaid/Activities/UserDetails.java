@@ -86,6 +86,8 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         mDatabase1 = FirebaseDatabase.getInstance().getReference("userinfo");
 
+        
+
 
 
         myCalendar = Calendar.getInstance();

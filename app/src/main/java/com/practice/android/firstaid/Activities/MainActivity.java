@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -35,20 +36,32 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_firstAid:
+
+                    item.setIcon(R.drawable.menu_first_aid2);
+
                     mToolbar.setTitle(R.string.tool_first_aid);
                         selectedFragment = FirstAidFragment.newInstance();
                     break;
                 case R.id.navigation_bloodNetwork:
+
+                    item.setIcon(R.drawable.menu_blood_net2);
+
                     mToolbar.setTitle(R.string.tool_blood_network);
                     pid = R.id.navigation_bloodNetwork;
                     selectedFragment = BloodNetworkFragment.newInstance();
                     break;
                 case R.id.navigation_searchHospital:
+
+                    item.setIcon(R.drawable.menu_hospital2);
+
                     mToolbar.setTitle(R.string.tool_search_hospital);
                     pid = R.id.navigation_searchHospital;
                     selectedFragment = null;
                     return true;
                 case R.id.navigation_profile:
+
+                    item.setIcon(R.drawable.menu_profile2);
+
                     mToolbar.setTitle(R.string.tool_profile);
                     pid = R.id.navigation_profile;
                     selectedFragment = ProfileFragment.newInstance();

@@ -33,6 +33,7 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
         app:itemBackground="@drawable/item_bg"
+        app:itemTextAppearance="@style/NavigationViewOwnStyle"
         app:itemIconTint="@drawable/bottom"
         app:itemTextColor="@drawable/bottom"
         app:menu="@menu/navigation"
