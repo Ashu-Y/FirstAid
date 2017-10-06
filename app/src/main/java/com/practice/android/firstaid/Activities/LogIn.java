@@ -42,7 +42,6 @@ public class LogIn extends AppCompatActivity implements
 
     private DatabaseReference mDatabase;
     String UserID;
-   private static UserInfo check;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -258,12 +257,13 @@ public class LogIn extends AppCompatActivity implements
 
                 UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
 
-                check = userInfo;
-
                 if (userInfo != null) {
 
                     if (userInfo.getFirstLogin().equals("true")) {
                         startActivity(new Intent(LogIn.this, MainActivity.class));
+                        LogIn.this.finish();
+                    }else {
+                        startActivity(new Intent(LogIn.this, UserDetails.class));
                         LogIn.this.finish();
                     }
 

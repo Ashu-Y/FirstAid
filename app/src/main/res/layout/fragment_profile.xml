@@ -58,6 +58,7 @@
                     app:fabSize="mini"/>
 
                 <TextView
+                    android:id="@+id/fa_btnTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -71,6 +72,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -125,7 +127,7 @@
                         android:textSize="16sp"/>
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/genderTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -168,6 +170,7 @@
                         android:textSize="16sp"/>
 
                     <TextView
+                        android:id="@+id/dobTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -210,6 +213,7 @@
                         android:textSize="16sp"/>
 
                     <TextView
+                        android:id="@+id/bgTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -252,6 +256,7 @@
                         android:textSize="16sp"/>
 
                     <TextView
+                        android:id="@+id/phoneTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -303,14 +308,18 @@
                         android:background="@drawable/image_rounded2"
                         android:src="@drawable/languages"/>
 
-                    <Spinner
+                    <TextView
+                        android:id="@+id/langTv"
+                        android:text="Hindi"
+                        android:gravity="center|right"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="4dp"
                         android:textColor="#000"
-                        android:textSize="16sp"/>
+                        android:textStyle="bold"
+                        android:textSize="15sp"/>
 
                 </LinearLayout>
 
@@ -320,6 +329,7 @@
         </android.support.v7.widget.CardView>
 
         <Switch
+            android:id="@+id/donateSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"

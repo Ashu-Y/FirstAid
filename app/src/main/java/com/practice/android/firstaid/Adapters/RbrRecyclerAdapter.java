@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.practice.android.firstaid.Models.BloodRequestDetail;
 import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 
 public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.MyViewHolder> {
 
-    ArrayList<Post> mPosts;
+    ArrayList<BloodRequestDetail> mPosts;
     Context mContext;
 
-    public RbrRecyclerAdapter(ArrayList<Post> posts) {
+    public RbrRecyclerAdapter(ArrayList<BloodRequestDetail> posts) {
         mPosts = posts;
     }
 
-    public RbrRecyclerAdapter(ArrayList<Post> posts, Context context) {
+    public RbrRecyclerAdapter(ArrayList<BloodRequestDetail> posts, Context context) {
         mPosts = posts;
         mContext = context;
     }
@@ -43,7 +44,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        Post post = mPosts.get(position);
+        BloodRequestDetail post = mPosts.get(position);
         holder.setData(post, position);
 
         holder.row_itemCard.setOnClickListener(new OnClickListener() {
@@ -75,7 +76,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             row_itemCard = itemView.findViewById(R.id.row_itemCard);
         }
 
-        public void setData(Post post, int position){
+        public void setData(BloodRequestDetail post, int position){
             nameTV.setText(post.getName());
             statusTV.setText(post.getStatus());
             dateTV.setText(post.getDate());

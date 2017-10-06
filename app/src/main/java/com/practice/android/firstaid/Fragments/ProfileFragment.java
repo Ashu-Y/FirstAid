@@ -5,10 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
 /**
@@ -16,6 +28,15 @@ import com.practice.android.firstaid.R;
  */
 public class ProfileFragment extends Fragment {
 
+    private FirebaseAuth mAuth;
+//    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private FirebaseUser firebaseUser;
+    private DatabaseReference mDatabase;
+    String UserID;
+//    private GoogleApiClient mGoogleApiClient;
+
+    TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv;
+    Switch donateSwitch;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -31,9 +52,33 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        nameTv = view.findViewById(R.id.nameTv);
+        fa_btnTv = view.findViewById(R.id.fa_btnTv);
+        genderTv = view.findViewById(R.id.genderTv);
+        dobTv = view.findViewById(R.id.dobTv);
+        bgTv = view.findViewById(R.id.bgTv);
+        phoneTv = view.findViewById(R.id.phoneTv);
+        langTv = view.findViewById(R.id.langTv);
+
+        donateSwitch = view.findViewById(R.id.donateSwitch);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+
+            UserID = user.getUid();
+            final String curremail = user.getEmail();
+            Log.d("FirstSignInSupport", curremail);
+        }
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("userinfo");
+
+        getDetails();
+
         setHasOptionsMenu(true);
-        Toolbar toolbar =  view.findViewById(R.id.tool);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        Toolbar toolbar = view.findViewById(R.id.tool);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setLogo(R.drawable.settings);
         toolbar.inflateMenu(R.menu.menu_main);
 
@@ -47,6 +92,40 @@ public class ProfileFragment extends Fragment {
 //            super.onCreateOptionsMenu(menu,inflater);
 //
 //        }
+
+    public void getDetails() {
+        mDatabase.child(UserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
+
+                ch(userInfo);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
+    public void ch(UserInfo userInfo){
+
+        nameTv.setText(userInfo.getName());
+        fa_btnTv.setText(userInfo.getBloodGroup());
+        genderTv.setText(userInfo.getGender());
+        dobTv.setText(userInfo.getDOB());
+        bgTv.setText(userInfo.getBloodGroup());
+        phoneTv.setText(userInfo.getPhoneNumber());
+        langTv.setText(userInfo.getLanguages());
+
+        if(userInfo.getInterestedinDonating().equals("true")){
+            donateSwitch.setChecked(true);
+        }
+
+    }
+
+}
 
 

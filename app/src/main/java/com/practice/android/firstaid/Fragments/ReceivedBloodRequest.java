@@ -5,12 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.RbrRecyclerAdapter;
+import com.practice.android.firstaid.Models.BloodRequestDetail;
 import com.practice.android.firstaid.Models.Post;
+import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -20,10 +30,13 @@ import java.util.ArrayList;
  */
 public class ReceivedBloodRequest extends Fragment {
 
+    private DatabaseReference mDatabase;
+    String UserID;
+
     RecyclerView mRecyclerView;
     RbrRecyclerAdapter mRecyclerAdapter;
 
-    ArrayList<Post> check ;
+    ArrayList<BloodRequestDetail> check;
 
 
     public ReceivedBloodRequest() {
@@ -36,27 +49,73 @@ public class ReceivedBloodRequest extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        check = new ArrayList<>();
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
-        check.add(new Post("Robin", "Pending", "27th May, 2017", "08:00 AM"));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+
+            UserID = user.getUid();
+            final String curremail = user.getEmail();
+            Log.d("FirstSignInSupport", curremail);
+        }
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+
 
         View v = inflater.inflate(R.layout.fragment_received_blood_request, container, false);
 
         mRecyclerView = v.findViewById(R.id.recycler_receivedBR);
 
+        getDetails();
+
+//        mRecyclerAdapter = new RbrRecyclerAdapter(check);
+//
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(linearLayoutManager);
+//        mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        return v;
+    }
+
+
+    public void getDetails() {
+
+
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                check = new ArrayList<>();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    BloodRequestDetail userInfo = postSnapshot.getValue(BloodRequestDetail.class);
+
+                    ch(userInfo);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ch(BloodRequestDetail detail) {
+
+        check.add(new BloodRequestDetail(detail.getName(), detail.getPhone(), detail.getCity(), detail.getComments(),
+                detail.getBloodGroup(), detail.getDate(), detail.getTime(), detail.getStatus()));
+
         mRecyclerAdapter = new RbrRecyclerAdapter(check);
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mRecyclerAdapter);
-
-        return v;
     }
 
 }
