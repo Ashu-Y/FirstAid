@@ -24,8 +24,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -85,10 +88,6 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
                 .build();
 
         mDatabase1 = FirebaseDatabase.getInstance().getReference("userinfo");
-
-        
-
-
 
         myCalendar = Calendar.getInstance();
         selectCal = (ImageView) findViewById(R.id.select_cal);
@@ -188,7 +187,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             InterestedinDonating = "false";
         }
 
-        writeNewPost(Name, Gender, DOB, BloodGroup,PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
+        writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
 
         Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
     }
@@ -201,21 +200,21 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         etDob.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void writeNewPost(String Name,String Gender,String DOB,String BloodGroup,String PhoneNumber,String Languages,String InterestedinDonating,String FirstLogin,List Cities)
-    {
+    public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, List Cities) {
 
-        String Key=mDatabase1.child(UserID).push().getKey();
-        UserInfo userinfo=new UserInfo(Name,Gender,DOB,BloodGroup,PhoneNumber,Languages,InterestedinDonating,FirstLogin,Cities);
-        Map<String,Object> postValues=userinfo.toMap();
+        String Key = mDatabase1.child(UserID).push().getKey();
+        UserInfo userinfo = new UserInfo(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, Cities);
+        Map<String, Object> postValues = userinfo.toMap();
 
-        Map<String,Object> childUpdates=new HashMap<>();
-        childUpdates.put("/"+UserID,postValues);
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/" + UserID, postValues);
 
         mDatabase1.updateChildren(childUpdates);
 
 
     }
-//    @Override
+
+    //    @Override
 //    public void onBackPressed() {
 //        Intent startMain = new Intent(Intent.ACTION_MAIN);
 //        startMain.addCategory(Intent.CATEGORY_HOME);

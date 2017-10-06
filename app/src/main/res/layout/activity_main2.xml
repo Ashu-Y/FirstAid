@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.practice.android.firstaid.Activities.Main2Activity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/setting"
+        style="@style/MyToolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:title="Setting"
-        app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
-        style="@style/MyToolbar"/>
+        app:titleTextAppearance="@style/ToolbarTextAppearance.Title" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -28,52 +27,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/set1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Legal"
                 android:textColor="#000"
-                android:id="@+id/set1"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/set2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Licences"
                 android:textColor="#000"
-                android:layout_marginTop="10dp"
-                android:id="@+id/set2"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Privacy Policy"
-                android:layout_marginTop="10dp"
-                android:textColor="#000"
                 android:id="@+id/set3"
-                android:textSize="15dp"/>
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Terms &amp; Conditions"
                 android:layout_marginTop="10dp"
+                android:text="Privacy Policy"
                 android:textColor="#000"
-                android:id="@+id/set4"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/set4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Terms &amp; Conditions"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/set5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Delete Account"
                 android:textColor="#000"
-                android:id="@+id/set5"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -82,34 +80,35 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="0.8">
+        android:layout_weight="0.8"
+        android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-        android:text="LOG OUT"/>
-        
-        
+            android:text="LOG OUT" />
+
+
         <ImageView
 
             android:layout_width="80dp"
             android:layout_height="80dp"
-        android:src="@drawable/logo"
             android:layout_above="@+id/tv"
-            android:layout_centerHorizontal="true"/>
-        
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo" />
+
         <TextView
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Version 1.0.1 (android)"
             android:layout_marginBottom="10pt"
-            android:id="@+id/tv"/>
-        
+            android:text="Version 1.0.1 (android)" />
+
 
     </RelativeLayout>
 

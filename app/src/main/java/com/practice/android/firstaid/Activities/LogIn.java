@@ -24,6 +24,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
 public class LogIn extends AppCompatActivity implements
@@ -34,6 +40,9 @@ public class LogIn extends AppCompatActivity implements
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser firebaseUser;
 
+    private DatabaseReference mDatabase;
+    String UserID;
+   private static UserInfo check;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -47,6 +56,14 @@ public class LogIn extends AppCompatActivity implements
         setContentView(R.layout.activity_log_in);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+
+            UserID = user.getUid();
+            final String curremail = user.getEmail();
+            Log.d("FirstSignInSupport", curremail);
+        }
 
         // [START configure_signin]
         // Configure sign-in to request the user's ID, email address, and basic
@@ -66,6 +83,8 @@ public class LogIn extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         // [END build_client]
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("userinfo");
 
         findViewById(R.id.signInButton).setOnClickListener(this);
     }
@@ -198,7 +217,26 @@ public class LogIn extends AppCompatActivity implements
         hideProgressDialog();
 
         if (user != null) {
-            startActivity(new Intent(this, UserDetails.class));
+
+            FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user1 != null) {
+
+                UserID = user.getUid();
+                final String curremail = user.getEmail();
+                Log.d("FirstSignInSupport", curremail);
+            }
+
+            first();
+
+
+//            if (check != null && check.getFirstLogin().equals("true")) {
+//                startActivity(new Intent(LogIn.this, MainActivity.class));
+//                this.finish();
+//            } else {
+//                startActivity(new Intent(this, UserDetails.class));
+//                this.finish();
+//            }
         } else {
             Log.w(TAG, "No Authenticated User Found!");
         }
@@ -211,5 +249,49 @@ public class LogIn extends AppCompatActivity implements
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
+
+    private void first() {
+
+        mDatabase.child(UserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
+
+                check = userInfo;
+
+                if (userInfo != null) {
+
+                    if (userInfo.getFirstLogin().equals("true")) {
+                        startActivity(new Intent(LogIn.this, MainActivity.class));
+                        LogIn.this.finish();
+                    }
+
+                    Log.e("first method", userInfo.getFirstLogin());
+                }else {
+                    startActivity(new Intent(LogIn.this, UserDetails.class));
+                    LogIn.this.finish();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
+
+    }
 
 }
