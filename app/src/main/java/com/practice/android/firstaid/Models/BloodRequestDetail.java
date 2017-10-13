@@ -17,12 +17,15 @@ public class BloodRequestDetail {
     private String Date;
     private String Time;
     private String Status;
+    private String UserID;
+    private String Key;
+    private String AcceptorID;
 
     public BloodRequestDetail() {
     }
 
     public BloodRequestDetail(String Name, String Phone, String City, String Comments, String BloodGroup,
-                              String Date, String Time, String Status) {
+                              String Date, String Time, String Status, String UserID, String Key, String AcceptorID) {
         this.Name = Name;
         this.Phone = Phone;
         this.City = City;
@@ -31,6 +34,9 @@ public class BloodRequestDetail {
         this.Date = Date;
         this.Time = Time;
         this.Status = Status;
+        this.UserID = UserID;
+        this.Key = Key;
+        this.AcceptorID = AcceptorID;
     }
 
     public String getStatus() {
@@ -97,6 +103,30 @@ public class BloodRequestDetail {
         this.Time = Time;
     }
 
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String UserID) {
+        this.UserID = UserID;
+    }
+
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String Key) {
+        this.Key = Key;
+    }
+
+    public String getAcceptorID() {
+        return AcceptorID;
+    }
+
+    public void setAcceptorID(String AcceptorID) {
+        this.AcceptorID = AcceptorID;
+    }
+
     public Map<String,Object> toMap()
     {
         HashMap<String,Object> result=new HashMap<>();
@@ -107,6 +137,9 @@ public class BloodRequestDetail {
         result.put("Date", Date);
         result.put("Time", Time);
         result.put("Status", Status);
+        result.put("UserID", UserID);
+        result.put("Key", Key);
+        result.put("AcceptorID", null);
         return result;
     }
 }

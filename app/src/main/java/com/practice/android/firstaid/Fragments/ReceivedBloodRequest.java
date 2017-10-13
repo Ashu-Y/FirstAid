@@ -58,6 +58,8 @@ public class ReceivedBloodRequest extends Fragment {
             Log.d("FirstSignInSupport", curremail);
         }
 
+        check = new ArrayList<>();
+
         mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
 
 
@@ -87,7 +89,7 @@ public class ReceivedBloodRequest extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                check = new ArrayList<>();
+                check.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
@@ -95,6 +97,14 @@ public class ReceivedBloodRequest extends Fragment {
 
                     ch(userInfo);
                 }
+
+
+                mRecyclerAdapter = new RbrRecyclerAdapter(check);
+
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(linearLayoutManager);
+                mRecyclerView.setAdapter(mRecyclerAdapter);
 
             }
 
@@ -108,14 +118,10 @@ public class ReceivedBloodRequest extends Fragment {
     public void ch(BloodRequestDetail detail) {
 
         check.add(new BloodRequestDetail(detail.getName(), detail.getPhone(), detail.getCity(), detail.getComments(),
-                detail.getBloodGroup(), detail.getDate(), detail.getTime(), detail.getStatus()));
+                detail.getBloodGroup(), detail.getDate(), detail.getTime(), detail.getStatus(), detail.getUserID(),
+                detail.getKey(), detail.getAcceptorID()));
 
-        mRecyclerAdapter = new RbrRecyclerAdapter(check);
-
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(mRecyclerAdapter);
     }
+
 
 }

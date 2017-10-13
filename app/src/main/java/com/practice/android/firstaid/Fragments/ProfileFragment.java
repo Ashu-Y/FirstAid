@@ -4,6 +4,8 @@ package com.practice.android.firstaid.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +39,9 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference mDatabase;
     String UserID;
 //    private GoogleApiClient mGoogleApiClient;
-
+ArrayList<String> cityList;
+    CityRecyclerAdapter cityRecyclerAdapter;
+    RecyclerView cityRecycler;
     TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv;
     Switch donateSwitch;
 
@@ -59,8 +66,11 @@ public class ProfileFragment extends Fragment {
         bgTv = view.findViewById(R.id.bgTv);
         phoneTv = view.findViewById(R.id.phoneTv);
         langTv = view.findViewById(R.id.langTv);
+        cityRecycler = view.findViewById(R.id.city_recycler);
 
         donateSwitch = view.findViewById(R.id.donateSwitch);
+
+        cityList = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -112,6 +122,14 @@ public class ProfileFragment extends Fragment {
 
     public void ch(UserInfo userInfo){
 
+        cityList.clear();
+        cityList = (ArrayList<String>) userInfo.getCities();
+
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        cityRecycler.setLayoutManager(linearLayoutManager);
+        cityRecycler.setAdapter(cityRecyclerAdapter);
+
         nameTv.setText(userInfo.getName());
         fa_btnTv.setText(userInfo.getBloodGroup());
         genderTv.setText(userInfo.getGender());
@@ -123,6 +141,7 @@ public class ProfileFragment extends Fragment {
         if(userInfo.getInterestedinDonating().equals("true")){
             donateSwitch.setChecked(true);
         }
+
 
     }
 

@@ -3,6 +3,8 @@ package com.practice.android.firstaid.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,8 +36,10 @@ public class BloodRequestForm extends AppCompatActivity {
 
     GoogleApiClient mGoogleApiClient;
     DatabaseReference mDatabase1, mDatabase2;
-Calendar myCalender;
+    Calendar myCalender;
     String UserID;
+
+    private static int flag = 0;
 
     Spinner bgSpinner;
     Button uploadBtn;
@@ -57,6 +61,10 @@ Calendar myCalender;
         etCity = (EditText) findViewById(R.id.etCity);
         etComments = (EditText) findViewById(R.id.etComments);
 
+        InputFilter[] filterArray = new InputFilter[1];
+        filterArray[0] = new InputFilter.LengthFilter(10);
+        etPhone.setFilters(filterArray);
+
         bgSpinner = (Spinner) findViewById(R.id.bgSpinner);
         ArrayAdapter adapterBloodGroup = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, bloodGroupArray);
         adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -75,7 +83,11 @@ Calendar myCalender;
             @Override
             public void onClick(View view) {
                 getDetails();
-               BloodRequestForm.this.finish();
+
+                if (flag != -1) {
+                    flag = 0;
+                    BloodRequestForm.this.finish();
+                }
             }
         });
 
@@ -102,7 +114,7 @@ Calendar myCalender;
         }
     }
 
-    private void getDetails(){
+    private void getDetails() {
 
         name = etName.getText().toString();
         phone = etPhone.getText().toString();
@@ -110,15 +122,41 @@ Calendar myCalender;
         comments = etComments.getText().toString();
         bg = bgSpinner.getSelectedItem().toString();
 
-//        String myFormat = "dd/MM/yyyy"; //In which you need put here
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, getResources().getConfiguration().locale);
+        if (TextUtils.isEmpty(name)) {
+            etName.setError("Cannot be empty.");
+            flag = -1;
+            return;
+        }
 
-        date = "" + myCalender.get(Calendar.DATE) + "/" + (myCalender.get(Calendar.MONTH) + 1) + "/" + myCalender.get(Calendar.YEAR);
-        time = "" + myCalender.get(Calendar.HOUR) + ":" + myCalender.get(Calendar.MINUTE);
-        if ((int)myCalender.get(Calendar.AM_PM) == 0){
+        if (TextUtils.isEmpty(phone)) {
+            etPhone.setError("Cannot be empty.");
+            flag = -1;
+            return;
+        }
+
+        if (TextUtils.isEmpty(city)) {
+            flag = -1;
+            etCity.setError("Cannot be empty.");
+            return;
+        }
+
+        flag = 0;
+
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, getResources().getConfiguration().locale);
+
+        date = sdf.format(myCalender.getTime());
+
+        myFormat = "hh:mm";
+        sdf = new SimpleDateFormat(myFormat, getResources().getConfiguration().locale);
+//        date = "" + myCalender.get(Calendar.DATE) + "/" + (myCalender.get(Calendar.MONTH) + 1) + "/" + myCalender.get(Calendar.YEAR);
+//        time = "" + myCalender.get(Calendar.HOUR) + ":" + myCalender.get(Calendar.MINUTE);
+
+        time = sdf.format(myCalender.getTime());
+
+        if ((int) myCalender.get(Calendar.AM_PM) == 0) {
             time = time + (" am");
-        }else {
+        } else {
             time = time + (" pm");
         }
 
@@ -128,11 +166,11 @@ Calendar myCalender;
     public void writeNewPost(String name, String phone, String city, String comments, String bg, String date, String time) {
 
         String Key = mDatabase1.child(UserID).push().getKey();
-        BloodRequestDetail userinfo = new BloodRequestDetail(name, phone, city, comments, bg, date, time, "Pending");
+        BloodRequestDetail userinfo = new BloodRequestDetail(name, phone, city, comments, bg, date, time, "Pending", UserID, Key, null);
         Map<String, Object> postValues = userinfo.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/" + UserID, postValues);
+        childUpdates.put("/" + Key, postValues);
 
         mDatabase1.updateChildren(childUpdates);
 

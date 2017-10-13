@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,6 +47,8 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
     GoogleApiClient mGoogleApiClient;
     DatabaseReference mDatabase1, mDatabase2;
+
+    private static int flag = 0;
 
     Calendar myCalendar;
     Button continueButton;
@@ -165,7 +168,18 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
                 getDetails();
 
-                startActivity(new Intent(UserDetails.this, MainActivity.class));
+                if (flag != -1) {
+                    flag = 0;
+
+                    writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
+
+                    Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
+
+                    UserDetails.this.finish();
+                    startActivity(new Intent(UserDetails.this, MainActivity.class));
+                }
+
+
             }
         });
 
@@ -181,15 +195,34 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         BloodGroup = etBloodGroup.getSelectedItem().toString();
         Languages = etLanguage.getSelectedItem().toString();
 
+        if (TextUtils.isEmpty(Name)) {
+            etName.setError("Cannot be empty.");
+            flag = -1;
+            return;
+        }
+
+        if (TextUtils.isEmpty(DOB)) {
+            etName.setError("Cannot be empty.");
+            flag = -1;
+            return;
+        }
+        if (TextUtils.isEmpty(PhoneNumber)) {
+            etName.setError("Cannot be empty.");
+            flag = -1;
+            return;
+        }
+
+        flag = 0;
+
         if (etInterestedInDonating.isChecked()) {
             InterestedinDonating = "true";
         } else {
             InterestedinDonating = "false";
         }
 
-        writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
-
-        Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
+//        writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
+//
+//        Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
     }
 
     private void updateLabel() {
