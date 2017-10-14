@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
 ArrayList<String> cityList;
     CityRecyclerAdapter cityRecyclerAdapter;
     RecyclerView cityRecycler;
-    TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv;
+    TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv, noCity;
     Switch donateSwitch;
 
     public ProfileFragment() {
@@ -67,6 +67,7 @@ ArrayList<String> cityList;
         phoneTv = view.findViewById(R.id.phoneTv);
         langTv = view.findViewById(R.id.langTv);
         cityRecycler = view.findViewById(R.id.city_recycler);
+        noCity = view.findViewById(R.id.noCity);
 
         donateSwitch = view.findViewById(R.id.donateSwitch);
 
@@ -79,7 +80,7 @@ ArrayList<String> cityList;
 
             UserID = user.getUid();
             final String curremail = user.getEmail();
-            Log.d("FirstSignInSupport", curremail);
+            Log.d("ProfileFragment", curremail);
         }
 
         mDatabase = FirebaseDatabase.getInstance().getReference("userinfo");

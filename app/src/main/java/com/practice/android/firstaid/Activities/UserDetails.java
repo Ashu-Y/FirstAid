@@ -103,6 +103,8 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         cityAdapter = new ArrayAdapter(UserDetails.this, android.R.layout.simple_list_item_1, cityList);
 
         etName = (EditText) findViewById(R.id.name);
+        etName.setText(user.getDisplayName());
+
         etDob = (EditText) findViewById(R.id.edit_date);
         etPhone = (EditText) findViewById(R.id.phone);
         etCity = (EditText) findViewById(R.id.edit_city);
@@ -186,6 +188,10 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     }
 
     private void getDetails() {
+
+
+        flag = 0;
+
         Name = etName.getText().toString();
         DOB = etDob.getText().toString();
         PhoneNumber = etPhone.getText().toString();
@@ -200,19 +206,17 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             flag = -1;
             return;
         }
-
-        if (TextUtils.isEmpty(DOB)) {
-            etName.setError("Cannot be empty.");
-            flag = -1;
-            return;
-        }
-        if (TextUtils.isEmpty(PhoneNumber)) {
-            etName.setError("Cannot be empty.");
-            flag = -1;
-            return;
-        }
-
-        flag = 0;
+//
+//        if (TextUtils.isEmpty(DOB)) {
+//            etDob.setError("Cannot be empty.");
+//            flag = -1;
+//            return;
+//        }
+//        if (TextUtils.isEmpty(PhoneNumber)) {
+//            etPhone.setError("Cannot be empty.");
+//            flag = -1;
+//            return;
+//        }
 
         if (etInterestedInDonating.isChecked()) {
             InterestedinDonating = "true";
