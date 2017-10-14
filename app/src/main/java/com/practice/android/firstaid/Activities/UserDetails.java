@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -15,14 +18,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -49,7 +60,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     DatabaseReference mDatabase1, mDatabase2;
 
     private static int flag = 0;
-
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Calendar myCalendar;
     Button continueButton;
     EditText etName, etDob, etPhone, etCity;
@@ -58,15 +69,21 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     Switch etInterestedInDonating;
     ListView cityLV;
 
+    TextView noCity;
+    ArrayList<String> cityList;
+    CityRecyclerAdapter cityRecyclerAdapter;
+    RecyclerView cityRecycler;
+
+    ScrollView scrollView;
     String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin;
     String[] cities;
 
-    ArrayList<String> cityList;
+    //    ArrayList<String> cityList;
     ArrayAdapter cityAdapter;
 
     int i = 0;
-    String[] genderArray = {"Male", "Female", "Others"};
-    String[] bloodGroupArray = {"O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"};
+    String[] genderArray = {"Select gender", "Male", "Female", "Others"};
+    String[] bloodGroupArray = {"Select blood group", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"};
     String[] languageArray = {"English", "Hindi"};
 
     @Override
@@ -97,16 +114,32 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         addNewCity = (ImageView) findViewById(R.id.add_newCity);
 
-        cityLV = (ListView) findViewById(R.id.city_listView);
+        noCity = (TextView) findViewById(R.id.noCity);
+
+        cityRecycler = (RecyclerView) findViewById(R.id.city_recycler);
+
+//        cityLV = (ListView) findViewById(R.id.city_listView);
 
         cityList = new ArrayList<>();
-        cityAdapter = new ArrayAdapter(UserDetails.this, android.R.layout.simple_list_item_1, cityList);
+//        cityAdapter = new ArrayAdapter(UserDetails.this, android.R.layout.simple_list_item_1, cityList);
+
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        cityRecycler.setLayoutManager(linearLayoutManager);
+
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        scrollView.setVerticalScrollBarEnabled(false);
 
         etName = (EditText) findViewById(R.id.name);
         etName.setText(user.getDisplayName());
 
         etDob = (EditText) findViewById(R.id.edit_date);
         etPhone = (EditText) findViewById(R.id.phone);
+        InputFilter[] filterArray = new InputFilter[1];
+        filterArray[0] = new InputFilter.LengthFilter(10);
+        etPhone.setFilters(filterArray);
+
         etCity = (EditText) findViewById(R.id.edit_city);
 
         etGender = (Spinner) findViewById(R.id.gender);
@@ -115,6 +148,24 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         etInterestedInDonating = (Switch) findViewById(R.id.interested);
 
+
+        etCity.setFocusable(false);
+        etCity.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(UserDetails.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+            }
+        });
+
         addNewCity.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,9 +173,19 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
                 etCity.setText("");
 
-                cityAdapter.notifyDataSetChanged();
-                cityLV.setAdapter(cityAdapter);
-                cityLV.setVisibility(View.VISIBLE);
+                cityRecyclerAdapter.notifyDataSetChanged();
+//                cityAdapter.notifyDataSetChanged();
+//                cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+                cityRecycler.setAdapter(cityRecyclerAdapter);
+//                cityLV.setAdapter(cityAdapter);
+
+                if (!cityList.isEmpty()) {
+                    noCity.setVisibility(View.GONE);
+                    cityRecycler.setVisibility(View.VISIBLE);
+                }else {
+                    noCity.setVisibility(View.VISIBLE);
+                    cityRecycler.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -197,8 +258,22 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         PhoneNumber = etPhone.getText().toString();
 
         FirstLogin = "true";
-        Gender = etGender.getSelectedItem().toString();
-        BloodGroup = etBloodGroup.getSelectedItem().toString();
+//        Gender = etGender.getSelectedItem().toString();
+
+        if(etGender.getSelectedItem().toString().equals("Select gender")){
+            Gender = null;
+        }else {
+            Gender = etGender.getSelectedItem().toString();
+        }
+
+//        BloodGroup = etBloodGroup.getSelectedItem().toString();
+
+        if(etBloodGroup.getSelectedItem().toString().equals("Select blood group")){
+            BloodGroup = null;
+        }else {
+            BloodGroup = etBloodGroup.getSelectedItem().toString();
+        }
+
         Languages = etLanguage.getSelectedItem().toString();
 
         if (TextUtils.isEmpty(Name)) {
@@ -261,5 +336,23 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i("UserDetails: ", "Place: " + place.getName());
+                etCity.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i("UserDetails: ", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
     }
 }

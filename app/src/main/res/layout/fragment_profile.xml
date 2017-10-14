@@ -361,6 +361,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|top"
+                    android:padding="16dp"
                     android:text="No cities added" />
 
                 <android.support.v7.widget.RecyclerView

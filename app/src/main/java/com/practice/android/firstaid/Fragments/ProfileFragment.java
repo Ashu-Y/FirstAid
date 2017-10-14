@@ -124,23 +124,29 @@ ArrayList<String> cityList;
     public void ch(UserInfo userInfo){
 
         cityList.clear();
-        cityList = (ArrayList<String>) userInfo.getCities();
 
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        cityRecycler.setLayoutManager(linearLayoutManager);
-        cityRecycler.setAdapter(cityRecyclerAdapter);
+        try {
 
-        nameTv.setText(userInfo.getName());
-        fa_btnTv.setText(userInfo.getBloodGroup());
-        genderTv.setText(userInfo.getGender());
-        dobTv.setText(userInfo.getDOB());
-        bgTv.setText(userInfo.getBloodGroup());
-        phoneTv.setText(userInfo.getPhoneNumber());
-        langTv.setText(userInfo.getLanguages());
+            cityList = (ArrayList<String>) userInfo.getCities();
 
-        if(userInfo.getInterestedinDonating().equals("true")){
-            donateSwitch.setChecked(true);
+            cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            cityRecycler.setLayoutManager(linearLayoutManager);
+            cityRecycler.setAdapter(cityRecyclerAdapter);
+
+            nameTv.setText(userInfo.getName());
+            fa_btnTv.setText(userInfo.getBloodGroup());
+            genderTv.setText(userInfo.getGender());
+            dobTv.setText(userInfo.getDOB());
+            bgTv.setText(userInfo.getBloodGroup());
+            phoneTv.setText(userInfo.getPhoneNumber());
+            langTv.setText(userInfo.getLanguages());
+
+            if (userInfo.getInterestedinDonating().equals("true")) {
+                donateSwitch.setChecked(true);
+            }
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
         }
 
 
