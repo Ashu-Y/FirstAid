@@ -35,11 +35,8 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
@@ -169,9 +166,10 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         addNewCity.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!etCity.getText().toString().isEmpty()){
                 cityList.add(etCity.getText().toString());
 
-                etCity.setText("");
+                etCity.setText("");}
 
                 cityRecyclerAdapter.notifyDataSetChanged();
 //                cityAdapter.notifyDataSetChanged();
