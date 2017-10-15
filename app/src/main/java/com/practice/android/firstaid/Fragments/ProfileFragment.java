@@ -1,8 +1,10 @@
 package com.practice.android.firstaid.Fragments;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,7 @@ public class ProfileFragment extends Fragment {
     RecyclerView cityRecycler;
     TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv, noCity;
     Switch donateSwitch;
+    LinearLayout cityView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -68,8 +71,40 @@ public class ProfileFragment extends Fragment {
         langTv = view.findViewById(R.id.langTv);
         cityRecycler = view.findViewById(R.id.city_recycler);
         noCity = view.findViewById(R.id.noCity);
+        cityView = view.findViewById(R.id.your_cities);
+        cityView.setVisibility(View.GONE);
+
 
         donateSwitch = view.findViewById(R.id.donateSwitch);
+
+        //handles alert dialog popup
+
+//        donateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                Toast.makeText(getContext(), "Working!!", Toast.LENGTH_SHORT).show();
+//                createAlertDialog();
+//            }
+//        });
+
+//        donateSwitch.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                createAlertDialog();
+//
+//                return true;
+//            }
+//        });
+
+        donateSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (donateSwitch.isChecked())
+                    createAlertDialog();
+                else
+                    cityView.setVisibility(View.GONE);
+            }
+        });
 
         cityList = new ArrayList<>();
         cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
@@ -120,6 +155,48 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+// handle creating dialog and its functioning
+    public void createAlertDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.title);
+
+        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                donateSwitch.setChecked(true);
+                cityView.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+
+        builder.setNegativeButton(R.string.reject, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                donateSwitch.setChecked(false);
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                donateSwitch.setChecked(false);
+            }
+        });
+
+
+        dialog.show();
+
+
+    }
 
     public void ch(UserInfo userInfo) {
 
@@ -156,6 +233,7 @@ public class ProfileFragment extends Fragment {
 
             if (userInfo.getInterestedinDonating().equals("true")) {
                 donateSwitch.setChecked(true);
+                cityView.setVisibility(View.VISIBLE);
             }
         } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
