@@ -355,13 +355,13 @@
                     android:text="@string/label_your_cities"
                     android:textColor="#9E9E9E" />
 
-                <android.support.v7.widget.RecyclerView
+<!--                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/city_recycler_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="4dp"> -->
 
 
                     <TextView
@@ -373,7 +373,7 @@
                         android:text="No cities added" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/city_recycler"
+                        android:id="@+id/city_recycler_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone">
