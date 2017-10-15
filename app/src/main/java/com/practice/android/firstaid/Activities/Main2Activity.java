@@ -52,7 +52,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
                 onBackPressed();
 
-                Toast.makeText(getApplicationContext(),"your icon was clicked",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"your icon was clicked",Toast.LENGTH_SHORT).show();
             }
         });
 

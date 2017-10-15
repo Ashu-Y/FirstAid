@@ -2,16 +2,15 @@ package com.practice.android.firstaid.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,15 +28,17 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
@@ -49,7 +50,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserDetails extends AppCompatActivity implements OnConnectionFailedListener {
+public class EditProfile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     FirebaseAuth firebaseAuth, mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -60,7 +61,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     private static int flag = 0;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Calendar myCalendar;
-    Button continueButton;
+    Button saveButton;
     EditText etName, etDob, etPhone, etCity;
     ImageView selectCal, addNewCity;
     Spinner etGender, etBloodGroup, etLanguage;
@@ -81,16 +82,35 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     ArrayAdapter cityAdapter;
 
     int i = 0;
-    String[] genderArray = {"Select gender", "Male", "Female", "Others"};
-    String[] bloodGroupArray = {"Select blood group", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"};
+    ArrayList<String> genderArray = new ArrayList<>();
+    ArrayList<String> bloodGroupArray = new ArrayList<>();
     String[] languageArray = {"English", "Hindi"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_details);
+        setContentView(R.layout.activity_edit_profile);
 
         Languages = null;
+
+//        {"Select blood group", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"};
+        bloodGroupArray.add("Select blood group");
+        bloodGroupArray.add("O+");
+        bloodGroupArray.add("O-");
+        bloodGroupArray.add("A+");
+        bloodGroupArray.add("A-");
+        bloodGroupArray.add("B+");
+        bloodGroupArray.add("B-");
+        bloodGroupArray.add("AB+");
+        bloodGroupArray.add("AB-");
+
+//        {"Select gender", "Male", "Female", "Others"};
+
+        genderArray.add("Select gender");
+        genderArray.add("Male");
+        genderArray.add("Female");
+        genderArray.add("Others");
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -151,7 +171,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
 
         etCity.setFocusable(false);
-        etCity.setOnClickListener(new OnClickListener() {
+        etCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -161,7 +181,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(typeFilter)
-                                    .build(UserDetails.this);
+                                    .build(EditProfile.this);
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
                     // TODO: Handle the error.
@@ -171,13 +191,14 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             }
         });
 
-        addNewCity.setOnClickListener(new OnClickListener() {
+        addNewCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!etCity.getText().toString().isEmpty()){
-                cityList.add(etCity.getText().toString());
+                if (!etCity.getText().toString().isEmpty()) {
+                    cityList.add(etCity.getText().toString());
 
-                etCity.setText("");}
+                    etCity.setText("");
+                }
 
                 cityRecyclerAdapter.notifyDataSetChanged();
 //                cityAdapter.notifyDataSetChanged();
@@ -188,7 +209,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
                 if (!cityList.isEmpty()) {
                     noCity.setVisibility(View.GONE);
                     cityRecycler.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     noCity.setVisibility(View.VISIBLE);
                     cityRecycler.setVisibility(View.GONE);
                 }
@@ -208,10 +229,10 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             }
         };
 
-        selectCal.setOnClickListener(new OnClickListener() {
+        selectCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(UserDetails.this, date, myCalendar
+                new DatePickerDialog(EditProfile.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -230,8 +251,8 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 //        adapterLanguage.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        etLanguage.setAdapter(adapterLanguage);
 
-        continueButton = (Button) findViewById(R.id.continue_button);
-        continueButton.setOnClickListener(new OnClickListener() {
+        saveButton = (Button) findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -244,14 +265,15 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
-                    UserDetails.this.finish();
-                    startActivity(new Intent(UserDetails.this, MainActivity.class));
+                    EditProfile.this.finish();
+                    startActivity(new Intent(EditProfile.this, MainActivity.class));
                 }
 
 
             }
         });
 
+        setDetails();
     }
 
     private void getDetails() {
@@ -266,17 +288,17 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         FirstLogin = "true";
 //        Gender = etGender.getSelectedItem().toString();
 
-        if(etGender.getSelectedItem().toString().equals("Select gender")){
+        if (etGender.getSelectedItem().toString().equals("Select gender")) {
             Gender = null;
-        }else {
+        } else {
             Gender = etGender.getSelectedItem().toString();
         }
 
 //        BloodGroup = etBloodGroup.getSelectedItem().toString();
 
-        if(etBloodGroup.getSelectedItem().toString().equals("Select blood group")){
+        if (etBloodGroup.getSelectedItem().toString().equals("Select blood group")) {
             BloodGroup = null;
-        }else {
+        } else {
             BloodGroup = etBloodGroup.getSelectedItem().toString();
         }
 
@@ -359,5 +381,124 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
                 // The user canceled the operation.
             }
         }
+    }
+
+    public void setDetails() {
+        mDatabase1.child(UserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
+
+                ch(userInfo);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ch(UserInfo userInfo) {
+
+        cityList.clear();
+
+        cityList = (ArrayList<String>) userInfo.getCities();
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter.notifyDataSetChanged();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        cityRecycler.setLayoutManager(linearLayoutManager);
+        cityRecycler.setAdapter(cityRecyclerAdapter);
+
+        try {
+
+
+//            if(cityList.isEmpty()){
+//                noCity.setVisibility(View.VISIBLE);
+//                cityRecycler.setVisibility(View.GONE);
+//            } else {
+//                noCity.setVisibility(View.GONE);
+//                cityRecycler.setVisibility(View.VISIBLE);
+//            }
+//
+//            noCity.setVisibility(View.GONE);
+//            cityRecycler.setVisibility(View.VISIBLE);
+
+            if (cityList.isEmpty()) {
+                noCity.setVisibility(View.VISIBLE);
+                cityRecycler.setVisibility(View.GONE);
+            } else {
+                noCity.setVisibility(View.GONE);
+                cityRecycler.setVisibility(View.VISIBLE);
+            }
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            etName.setText(userInfo.getName());
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            if (userInfo.getBloodGroup().isEmpty()) {
+                etBloodGroup.setSelection(0);
+            } else {
+
+                etBloodGroup.setSelection(bloodGroupArray.indexOf(userInfo.getBloodGroup()));
+            }
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            if (userInfo.getGender().isEmpty()) {
+                etGender.setSelection(0);
+            } else {
+                etGender.setSelection(genderArray.indexOf(userInfo.getGender()));
+            }
+
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            if (userInfo.getGender().isEmpty()) {
+                etGender.setSelection(0);
+            } else {
+                etGender.setSelection(genderArray.indexOf(userInfo.getGender()));
+            }
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            etDob.setText(userInfo.getDOB());
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+
+        try {
+//            bgTv.setText(userInfo.getBloodGroup());
+            etPhone.setText(userInfo.getPhoneNumber());
+//            langTv.setText(userInfo.getLanguages());
+
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
+            if (userInfo.getInterestedinDonating().equals("true")) {
+                etInterestedInDonating.setChecked(true);
+            }
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+
     }
 }

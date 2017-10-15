@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:title="@string/first_aid"
-        android:visibility="gone"
+        app:popupTheme="@style/MyPopupMenu"
         app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
         style="@style/MyToolbar"
     />

@@ -148,33 +148,37 @@
                 android:paddingRight="16dp"
                 android:paddingTop="8dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="8dp"
-                android:text="Languages"
-                android:textColor="#757575"/>
+            <!--
+            Languages
+            !-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/edit">
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:text="Languages"-->
+                <!--android:textColor="#757575"/>-->
 
-                <Spinner
-                    android:id="@+id/languages"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="6dp"/>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:background="@drawable/edit">-->
+
+                <!--<Spinner-->
+                    <!--android:id="@+id/languages"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:padding="6dp"/>-->
+            <!--</LinearLayout>-->
 
             <Switch
                 android:id="@+id/interested"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:text="Interested in Donating"
                 android:textColor="#757575"/>
 

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FirstAidFragment mFirstAidFragment;
     private FragmentManager mFragmentManager;
 
-    private static  int pid;
+    private static int pid;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.menu_first_aid2);
 
                     mToolbar.setTitle(R.string.tool_first_aid);
-                        selectedFragment = FirstAidFragment.newInstance();
+                    selectedFragment = FirstAidFragment.newInstance();
                     break;
                 case R.id.navigation_bloodNetwork:
 
@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         pid = R.id.navigation_firstAid;
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(mToolbar);
+//        toolbar.setLogo(R.drawable.settings);
+//        toolbar.inflateMenu(R.menu.menu_main);
+
         mFirstAidFragment = new FirstAidFragment();
         mFragmentManager = getSupportFragmentManager();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -112,11 +117,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        switch (pid){
-            case R.id.navigation_profile:
-                getMenuInflater().inflate(R.menu.menu_main, menu);
-                break;
-        }
+//        switch (pid) {
+//            case R.id.navigation_profile:
+//                getMenuInflater().inflate(R.menu.menu_main, menu);
+//                break;
+//
+//            default:
+//                supportInvalidateOptionsMenu();
+//
+//
+//        }
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -125,8 +135,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miCompose:
-                Intent intent = new Intent(this,Main2Activity.class);
+                Intent intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.editProfileTmenu:
+                Intent intent1 = new Intent(this, EditProfile.class);
+                startActivity(intent1);
                 return true;
         }
         return super.onOptionsItemSelected(item);

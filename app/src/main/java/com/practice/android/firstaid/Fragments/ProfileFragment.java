@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
@@ -64,7 +66,7 @@ public class ProfileFragment extends Fragment {
         dobTv = view.findViewById(R.id.dobTv);
         bgTv = view.findViewById(R.id.bgTv);
         phoneTv = view.findViewById(R.id.phoneTv);
-        langTv = view.findViewById(R.id.langTv);
+//        langTv = view.findViewById(R.id.langTv);
         cityRecycler = view.findViewById(R.id.city_recycler_profile);
         noCity = view.findViewById(R.id.noCity);
 
@@ -87,10 +89,10 @@ public class ProfileFragment extends Fragment {
         getDetails();
 
         setHasOptionsMenu(true);
-        Toolbar toolbar = view.findViewById(R.id.tool);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        Toolbar toolbar = view.findViewById(R.id.tool);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setLogo(R.drawable.settings);
-        toolbar.inflateMenu(R.menu.menu_main);
+//        toolbar.inflateMenu(R.menu.menu_main);
 
         return view;
     }
@@ -131,13 +133,6 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         cityRecycler.setLayoutManager(linearLayoutManager);
         cityRecycler.setAdapter(cityRecyclerAdapter);
-        if(cityList.isEmpty()){
-                noCity.setVisibility(View.VISIBLE);
-                cityRecycler.setVisibility(View.GONE);
-            } else {
-                noCity.setVisibility(View.GONE);
-                cityRecycler.setVisibility(View.VISIBLE);
-            }
 
         try {
 
@@ -154,13 +149,21 @@ public class ProfileFragment extends Fragment {
 //            noCity.setVisibility(View.GONE);
 //            cityRecycler.setVisibility(View.VISIBLE);
 
+            if(cityList.isEmpty()){
+                noCity.setVisibility(View.VISIBLE);
+                cityRecycler.setVisibility(View.GONE);
+            } else {
+                noCity.setVisibility(View.GONE);
+                cityRecycler.setVisibility(View.VISIBLE);
+            }
+
             nameTv.setText(userInfo.getName());
             fa_btnTv.setText(userInfo.getBloodGroup());
             genderTv.setText(userInfo.getGender());
             dobTv.setText(userInfo.getDOB());
             bgTv.setText(userInfo.getBloodGroup());
             phoneTv.setText(userInfo.getPhoneNumber());
-            langTv.setText(userInfo.getLanguages());
+//            langTv.setText(userInfo.getLanguages());
 
             if (userInfo.getInterestedinDonating().equals("true")) {
                 donateSwitch.setChecked(true);
@@ -172,6 +175,13 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.menu_main, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 }
 
 
