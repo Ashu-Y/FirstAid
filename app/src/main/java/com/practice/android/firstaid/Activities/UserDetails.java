@@ -1,9 +1,12 @@
 package com.practice.android.firstaid.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -66,6 +70,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     Spinner etGender, etBloodGroup, etLanguage;
     Switch etInterestedInDonating;
     ListView cityLV;
+    LinearLayout cityView;
 
     TextView noCity;
     ArrayList<String> cityList;
@@ -117,6 +122,9 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         noCity = (TextView) findViewById(R.id.noCity);
 
+        cityView = (LinearLayout)findViewById(R.id.city_view);
+        cityView.setVisibility(View.GONE);
+
         cityRecycler = (RecyclerView) findViewById(R.id.city_recycler_profile);
 
 //        cityLV = (ListView) findViewById(R.id.city_listView);
@@ -148,6 +156,17 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 //        etLanguage = (Spinner) findViewById(R.id.languages);
 
         etInterestedInDonating = (Switch) findViewById(R.id.interested);
+
+        etInterestedInDonating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+       //         Toast.makeText(UserDetails.this, "working", Toast.LENGTH_SHORT).show();
+                if (etInterestedInDonating.isChecked())
+                    createAlertDialog(UserDetails.this);
+                else
+                    cityView.setVisibility(View.GONE);
+            }
+        });
 
 
         etCity.setFocusable(false);
@@ -316,6 +335,49 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, getResources().getConfiguration().locale);
 
         etDob.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    // handle creating dialog and its functioning
+    public void createAlertDialog(Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.title);
+
+        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                etInterestedInDonating.setChecked(true);
+                cityView.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+
+        builder.setNegativeButton(R.string.reject, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                etInterestedInDonating.setChecked(false);
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                etInterestedInDonating.setChecked(false);
+            }
+        });
+
+
+        dialog.show();
+
+
     }
 
     public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, List Cities) {
