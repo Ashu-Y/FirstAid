@@ -11,12 +11,12 @@
     <!-- TODO: Update blank fragment layout -->
 
     <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/tool"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:title="Profile"-->
-        <!--app:titleTextColor="@android:color/white" />-->
+    <!--android:id="@+id/tool"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--android:title="Profile"-->
+    <!--app:titleTextColor="@android:color/white" />-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,11 +37,11 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user"
                     android:layout_width="150dp"
-                    android:layout_marginTop="12dp"
                     android:layout_height="150dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
                     android:src="@drawable/user" />
 
                 <FrameLayout
@@ -276,57 +276,57 @@
             </android.support.v7.widget.CardView>
 
             <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="24dp"-->
-                <!--android:layout_marginRight="24dp"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:text="LANGUAGES"-->
-                <!--android:textColor="#9E9E9E" />-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="24dp"-->
+            <!--android:layout_marginRight="24dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:text="LANGUAGES"-->
+            <!--android:textColor="#9E9E9E" />-->
 
             <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="4dp"-->
-                <!--android:layout_marginLeft="24dp"-->
-                <!--android:layout_marginRight="24dp"-->
-                <!--android:layout_marginTop="4dp">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:layout_marginLeft="24dp"-->
+            <!--android:layout_marginRight="24dp"-->
+            <!--android:layout_marginTop="4dp">-->
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_margin="8dp"-->
-                        <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:orientation="horizontal">-->
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="32dp"-->
-                            <!--android:layout_height="32dp"-->
-                            <!--android:layout_margin="4dp"-->
-                            <!--android:background="@drawable/image_rounded2"-->
-                            <!--android:src="@drawable/languages" />-->
+            <!--<ImageView-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_margin="4dp"-->
+            <!--android:background="@drawable/image_rounded2"-->
+            <!--android:src="@drawable/languages" />-->
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/langTv"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:layout_marginRight="4dp"-->
-                            <!--android:gravity="center|right"-->
-                            <!--android:text="Hindi"-->
-                            <!--android:textColor="#000"-->
-                            <!--android:textSize="15sp"-->
-                            <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/langTv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="4dp"-->
+            <!--android:gravity="center|right"-->
+            <!--android:text="Hindi"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textStyle="bold" />-->
 
-                    <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
 
-                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
             <!--</android.support.v7.widget.CardView>-->
 
@@ -335,9 +335,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:clickable="false"
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="12dp"
+                android:clickable="false"
                 android:text="Interested in Donating"
                 android:textSize="16sp" />
 
@@ -353,6 +353,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="4dp">
@@ -376,14 +377,14 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="16dp"
-                android:text="Tap on card to update fields"
-                android:textColor="#9E9E9E" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="12dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:text="Tap on card to update fields"-->
+            <!--android:textColor="#9E9E9E" />-->
 
 
         </LinearLayout>

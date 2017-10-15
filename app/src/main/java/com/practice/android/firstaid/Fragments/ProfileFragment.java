@@ -156,21 +156,55 @@ public class ProfileFragment extends Fragment {
                 noCity.setVisibility(View.GONE);
                 cityRecycler.setVisibility(View.VISIBLE);
             }
+        } catch (NullPointerException e) {
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
 
+
+        try {
             nameTv.setText(userInfo.getName());
+
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
             fa_btnTv.setText(userInfo.getBloodGroup());
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
             genderTv.setText(userInfo.getGender());
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
             dobTv.setText(userInfo.getDOB());
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
             bgTv.setText(userInfo.getBloodGroup());
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+        try {
             phoneTv.setText(userInfo.getPhoneNumber());
+        }catch (NullPointerException e){
+            Log.e("ProfileFragment: ", e.getMessage());
+        }
+
+
 //            langTv.setText(userInfo.getLanguages());
 
             if (userInfo.getInterestedinDonating().equals("true")) {
                 donateSwitch.setChecked(true);
             }
-        } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
-        }
+
 
 
     }
@@ -181,6 +215,12 @@ public class ProfileFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
 

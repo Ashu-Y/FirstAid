@@ -266,7 +266,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
                     EditProfile.this.finish();
-                    startActivity(new Intent(EditProfile.this, MainActivity.class));
+                    onBackPressed();
                 }
 
 
