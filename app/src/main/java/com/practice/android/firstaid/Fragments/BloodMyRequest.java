@@ -3,6 +3,7 @@ package com.practice.android.firstaid.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,7 +72,7 @@ public class BloodMyRequest extends Fragment {
         placeHolderImg = v.findViewById(R.id.noReqImg);
         placeHolderTv = v.findViewById(R.id.noReqTV);
 
-        TextView here = v.findViewById(R.id.openForm);
+        FloatingActionButton here = v.findViewById(R.id.fab_open_form);
 
         here.setOnClickListener(new OnClickListener() {
             @Override

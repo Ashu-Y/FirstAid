@@ -324,8 +324,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/" + UserID, postValues);
 
-
-
+        mDatabase1.updateChildren(childUpdates);
 
     }
 

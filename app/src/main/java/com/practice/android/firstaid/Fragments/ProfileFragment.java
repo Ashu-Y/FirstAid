@@ -34,12 +34,12 @@ import java.util.ArrayList;
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthListener;
+    //    private FirebaseAuth.AuthStateListener mAuthListener;
 //    private FirebaseUser firebaseUser;
     private DatabaseReference mDatabase;
     String UserID;
-//    private GoogleApiClient mGoogleApiClient;
-ArrayList<String> cityList;
+    //    private GoogleApiClient mGoogleApiClient;
+    ArrayList<String> cityList;
     CityRecyclerAdapter cityRecyclerAdapter;
     RecyclerView cityRecycler;
     TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv, noCity;
@@ -72,7 +72,7 @@ ArrayList<String> cityList;
         donateSwitch = view.findViewById(R.id.donateSwitch);
 
         cityList = new ArrayList<>();
-
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -121,7 +121,7 @@ ArrayList<String> cityList;
         });
     }
 
-    public void ch(UserInfo userInfo){
+    public void ch(UserInfo userInfo) {
 
         cityList.clear();
 
@@ -129,10 +129,22 @@ ArrayList<String> cityList;
 
             cityList = (ArrayList<String>) userInfo.getCities();
 
-            cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+            cityRecyclerAdapter.notifyDataSetChanged();
+
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             cityRecycler.setLayoutManager(linearLayoutManager);
             cityRecycler.setAdapter(cityRecyclerAdapter);
+
+//            if(cityList.isEmpty()){
+//                noCity.setVisibility(View.VISIBLE);
+//                cityRecycler.setVisibility(View.GONE);
+//            } else {
+//                noCity.setVisibility(View.GONE);
+//                cityRecycler.setVisibility(View.VISIBLE);
+//            }
+
+            noCity.setVisibility(View.GONE);
+            cityRecycler.setVisibility(View.VISIBLE);
 
             nameTv.setText(userInfo.getName());
             fa_btnTv.setText(userInfo.getBloodGroup());
@@ -145,7 +157,7 @@ ArrayList<String> cityList;
             if (userInfo.getInterestedinDonating().equals("true")) {
                 donateSwitch.setChecked(true);
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
