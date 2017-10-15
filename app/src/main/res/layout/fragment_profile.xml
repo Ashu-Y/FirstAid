@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="16dp"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:paddingBottom="4dp"
@@ -341,51 +342,58 @@
                 android:text="Interested in Donating"
                 android:textSize="16sp" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/your_cities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/label_your_cities"
-                android:textColor="#9E9E9E" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="4dp">
-
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/noCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|top"
-                    android:padding="16dp"
-                    android:text="No cities added" />
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/label_your_cities"
+                    android:textColor="#9E9E9E" />
 
-                <android.support.v7.widget.RecyclerView
+<!--                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/city_recycler_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                </android.support.v7.widget.RecyclerView>
-
-            </android.support.v7.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="16dp"
-                android:text="Tap on card to update fields"
-                android:textColor="#9E9E9E" />
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="4dp"> -->
 
 
+                    <TextView
+                        android:id="@+id/noCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:padding="16dp"
+                        android:text="No cities added" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/city_recycler_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Tap on card to update fields"
+                    android:textColor="#9E9E9E" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
