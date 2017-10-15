@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,7 +65,7 @@ public class ProfileFragment extends Fragment {
         bgTv = view.findViewById(R.id.bgTv);
         phoneTv = view.findViewById(R.id.phoneTv);
         langTv = view.findViewById(R.id.langTv);
-        cityRecycler = view.findViewById(R.id.city_recycler);
+        cityRecycler = view.findViewById(R.id.city_recycler_profile);
         noCity = view.findViewById(R.id.noCity);
 
         donateSwitch = view.findViewById(R.id.donateSwitch);
@@ -125,15 +124,24 @@ public class ProfileFragment extends Fragment {
 
         cityList.clear();
 
+        cityList = (ArrayList<String>) userInfo.getCities();
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter.notifyDataSetChanged();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        cityRecycler.setLayoutManager(linearLayoutManager);
+        cityRecycler.setAdapter(cityRecyclerAdapter);
+        if(cityList.isEmpty()){
+                noCity.setVisibility(View.VISIBLE);
+                cityRecycler.setVisibility(View.GONE);
+            } else {
+                noCity.setVisibility(View.GONE);
+                cityRecycler.setVisibility(View.VISIBLE);
+            }
+
         try {
 
-            cityList = (ArrayList<String>) userInfo.getCities();
 
-            cityRecyclerAdapter.notifyDataSetChanged();
-
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            cityRecycler.setLayoutManager(linearLayoutManager);
-            cityRecycler.setAdapter(cityRecyclerAdapter);
 
 //            if(cityList.isEmpty()){
 //                noCity.setVisibility(View.VISIBLE);
@@ -142,9 +150,9 @@ public class ProfileFragment extends Fragment {
 //                noCity.setVisibility(View.GONE);
 //                cityRecycler.setVisibility(View.VISIBLE);
 //            }
-
-            noCity.setVisibility(View.GONE);
-            cityRecycler.setVisibility(View.VISIBLE);
+//
+//            noCity.setVisibility(View.GONE);
+//            cityRecycler.setVisibility(View.VISIBLE);
 
             nameTv.setText(userInfo.getName());
             fa_btnTv.setText(userInfo.getBloodGroup());

@@ -114,7 +114,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         noCity = (TextView) findViewById(R.id.noCity);
 
-        cityRecycler = (RecyclerView) findViewById(R.id.city_recycler);
+        cityRecycler = (RecyclerView) findViewById(R.id.city_recycler_profile);
 
 //        cityLV = (ListView) findViewById(R.id.city_listView);
 
