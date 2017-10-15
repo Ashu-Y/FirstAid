@@ -67,6 +67,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "772795853177-3t7ti0eaim2td71fvmje8k6sqh784s7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thele.newblooddonationapp",
+            "certificate_hash": "2d6155dafe0b4bf1b21cf5c22cabf37d448065e6"
+          }
+        },
+        {
           "client_id": "772795853177-qnijk540cp11qfvkj2p1hva1vvefcuq3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -110,6 +118,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "772795853177-ipvcce7gak5m3glffb4n6966vaop54ad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.android.firstaid",
+            "certificate_hash": "f6098068d00b90e3895bfb06edcc61a5c3f1b65c"
+          }
+        },
+        {
+          "client_id": "772795853177-fi2vehblrc5k147q2ie1onasvao22g6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.android.firstaid",
+            "certificate_hash": "fe054203570dd70851232877e247d3683807a602"
+          }
+        },
         {
           "client_id": "772795853177-iss9bsjd3asjhj9ei3imnf2rs47gbag6.apps.googleusercontent.com",
           "client_type": 1,

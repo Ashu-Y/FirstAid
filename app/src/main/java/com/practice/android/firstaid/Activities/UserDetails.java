@@ -171,9 +171,10 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         addNewCity.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!etCity.getText().toString().isEmpty()){
                 cityList.add(etCity.getText().toString());
 
-                etCity.setText("");
+                etCity.setText("");}
 
                 cityRecyclerAdapter.notifyDataSetChanged();
 //                cityAdapter.notifyDataSetChanged();
