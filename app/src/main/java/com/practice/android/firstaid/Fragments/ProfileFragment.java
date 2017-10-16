@@ -73,7 +73,7 @@ public class ProfileFragment extends Fragment {
         donateSwitch = view.findViewById(R.id.donateSwitch);
 
         cityList = new ArrayList<>();
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "ProfileFragment", getContext());
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -127,7 +127,7 @@ public class ProfileFragment extends Fragment {
         cityList.clear();
 
         cityList = (ArrayList<String>) userInfo.getCities();
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "ProfileFragment", getContext());
         cityRecyclerAdapter.notifyDataSetChanged();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

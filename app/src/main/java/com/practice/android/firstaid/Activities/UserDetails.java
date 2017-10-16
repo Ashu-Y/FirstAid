@@ -43,6 +43,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
+import com.practice.android.firstaid.Adapters.IMethodCaller;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -53,7 +54,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserDetails extends AppCompatActivity implements OnConnectionFailedListener {
+public class UserDetails extends AppCompatActivity implements OnConnectionFailedListener, IMethodCaller {
 
     FirebaseAuth firebaseAuth, mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -122,7 +123,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         noCity = (TextView) findViewById(R.id.noCity);
 
-        cityView = (LinearLayout)findViewById(R.id.city_view);
+        cityView = (LinearLayout) findViewById(R.id.city_view);
         cityView.setVisibility(View.GONE);
 
         cityRecycler = (RecyclerView) findViewById(R.id.city_recycler_profile);
@@ -132,7 +133,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         cityList = new ArrayList<>();
 //        cityAdapter = new ArrayAdapter(UserDetails.this, android.R.layout.simple_list_item_1, cityList);
 
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "UserDetails", this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         cityRecycler.setLayoutManager(linearLayoutManager);
@@ -160,7 +161,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         etInterestedInDonating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-       //         Toast.makeText(UserDetails.this, "working", Toast.LENGTH_SHORT).show();
+                //         Toast.makeText(UserDetails.this, "working", Toast.LENGTH_SHORT).show();
                 if (etInterestedInDonating.isChecked())
                     createAlertDialog(UserDetails.this);
                 else
@@ -190,13 +191,22 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             }
         });
 
+        if (!cityList.isEmpty()) {
+            noCity.setVisibility(View.GONE);
+            cityRecycler.setVisibility(View.VISIBLE);
+        } else {
+            noCity.setVisibility(View.VISIBLE);
+            cityRecycler.setVisibility(View.GONE);
+        }
+
         addNewCity.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!etCity.getText().toString().isEmpty()){
-                cityList.add(etCity.getText().toString());
+                if (!etCity.getText().toString().isEmpty()) {
+                    cityList.add(etCity.getText().toString());
 
-                etCity.setText("");}
+                    etCity.setText("");
+                }
 
                 cityRecyclerAdapter.notifyDataSetChanged();
 //                cityAdapter.notifyDataSetChanged();
@@ -207,7 +217,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
                 if (!cityList.isEmpty()) {
                     noCity.setVisibility(View.GONE);
                     cityRecycler.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     noCity.setVisibility(View.VISIBLE);
                     cityRecycler.setVisibility(View.GONE);
                 }
@@ -285,17 +295,17 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         FirstLogin = "true";
 //        Gender = etGender.getSelectedItem().toString();
 
-        if(etGender.getSelectedItem().toString().equals("Select gender")){
+        if (etGender.getSelectedItem().toString().equals("Select gender")) {
             Gender = null;
-        }else {
+        } else {
             Gender = etGender.getSelectedItem().toString();
         }
 
 //        BloodGroup = etBloodGroup.getSelectedItem().toString();
 
-        if(etBloodGroup.getSelectedItem().toString().equals("Select blood group")){
+        if (etBloodGroup.getSelectedItem().toString().equals("Select blood group")) {
             BloodGroup = null;
-        }else {
+        } else {
             BloodGroup = etBloodGroup.getSelectedItem().toString();
         }
 
@@ -422,4 +432,17 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
             }
         }
     }
+
+    @Override
+    public void checkNoCity() {
+        if (!cityList.isEmpty()) {
+            noCity.setVisibility(View.GONE);
+            cityRecycler.setVisibility(View.VISIBLE);
+        } else {
+            noCity.setVisibility(View.VISIBLE);
+            cityRecycler.setVisibility(View.GONE);
+        }
+    }
+
+
 }
