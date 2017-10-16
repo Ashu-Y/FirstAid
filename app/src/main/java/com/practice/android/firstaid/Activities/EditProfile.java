@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
+import com.practice.android.firstaid.Adapters.IMethodCaller;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -50,7 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EditProfile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class EditProfile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, IMethodCaller {
 
     FirebaseAuth firebaseAuth, mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -144,7 +145,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         cityList = new ArrayList<>();
 //        cityAdapter = new ArrayAdapter(UserDetails.this, android.R.layout.simple_list_item_1, cityList);
 
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "EditProfile", this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         cityRecycler.setLayoutManager(linearLayoutManager);
@@ -405,7 +406,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         cityList.clear();
 
         cityList = (ArrayList<String>) userInfo.getCities();
-        cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+        cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "EditProfile", this);
         cityRecyclerAdapter.notifyDataSetChanged();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -500,5 +501,16 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         }
 
 
+    }
+
+    @Override
+    public void checkNoCity() {
+        if (!cityList.isEmpty()) {
+            noCity.setVisibility(View.GONE);
+            cityRecycler.setVisibility(View.VISIBLE);
+        } else {
+            noCity.setVisibility(View.VISIBLE);
+            cityRecycler.setVisibility(View.GONE);
+        }
     }
 }
