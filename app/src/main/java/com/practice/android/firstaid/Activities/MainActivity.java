@@ -1,5 +1,6 @@
 package com.practice.android.firstaid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,9 @@ import com.practice.android.firstaid.Fragments.MapFragment;
 import com.practice.android.firstaid.Fragments.ProfileFragment;
 import com.practice.android.firstaid.Helper.BottomNavigationViewHelper;
 import com.practice.android.firstaid.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,9 +84,20 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+}
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/opensans-regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
         pid = R.id.navigation_firstAid;
 
