@@ -152,13 +152,13 @@
                         android:text="Call: +91998886666"
                         android:textColor="#9E9E9E" />
 
-                    <TextView
-                        android:id="@+id/accept"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:text="Accept"
-                        android:textColor="#2e7d32" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/accept"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:paddingTop="8dp"-->
+                        <!--android:text="Accept"-->
+                        <!--android:textColor="#2e7d32" />-->
 
                     <!--<TextView-->
                         <!--android:id="@+id/reject"-->

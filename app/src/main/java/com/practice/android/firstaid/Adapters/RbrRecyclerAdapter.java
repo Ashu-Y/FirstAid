@@ -56,7 +56,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         final BloodRequestDetail post = mPosts.get(position);
         holder.setData(post, position);
@@ -74,36 +74,51 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             @Override
             public void onClick(View view) {
 
+//                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+//
+//                mDatabase.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//                        if (user != null) {
+//
+//                            UserID = user.getUid();
+//                            final String curremail = user.getEmail();
+//                            Log.d("FirstSignInSupport", curremail);
+//                        }
+//
+//                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//
+//                            BloodRequestDetail userInfo = postSnapshot.getValue(BloodRequestDetail.class);
+//
+//                            if (userInfo.getKey().equals(mPosts.get(position).getKey())) {
+//
+//                                if (userInfo.getStatus().equals("Pending")) {
+//
+//                                    if (!userInfo.getUserID().equals(UserID)) {
+//                                        vis = 1;
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
-
-                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
-
-                mDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                            BloodRequestDetail userInfo = postSnapshot.getValue(BloodRequestDetail.class);
-
-                            if (userInfo.getUserID() != null && (userInfo.getStatus().equals("Pending"))) {
-
-                                if (!userInfo.getUserID().equals(UserID)) {
-                                    vis = 1;
-                                }
-                            }
-                        }
-
+                if(!mPosts.get(position).getUserID().equals(UserID)){
+                    if (mPosts.get(position).getStatus().equals("Pending")){
+                        vis = 1;
                     }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                }
 
                 if (vis == 1) {
-
                     if (holder.ll.getVisibility() == View.GONE) {
                         holder.ll.setVisibility(View.VISIBLE);
                     } else {
@@ -115,42 +130,42 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             }
         });
 
-        holder.acceptTV.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
-
-                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                            String ck = post.getKey();
-                            BloodRequestDetail bloodRequestDetail = snapshot.getValue(BloodRequestDetail.class);
-
-
-
-                            if (bloodRequestDetail.getKey().equals(ck)) {
-
-                                mDatabase.child(ck).child("Status").setValue("Accepted");
-                                mDatabase.child(ck).child("AcceptorID").setValue(UserID);
-
-                            }
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-        });
+//        holder.acceptTV.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+//
+//                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//
+//                            String ck = post.getKey();
+//                            BloodRequestDetail bloodRequestDetail = snapshot.getValue(BloodRequestDetail.class);
+//
+//
+//
+//                            if (bloodRequestDetail.getKey().equals(ck)) {
+//
+//                                mDatabase.child(ck).child("Status").setValue("Accepted");
+//                                mDatabase.child(ck).child("AcceptorID").setValue(UserID);
+//
+//                            }
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//
+//            }
+//        });
 
 //        holder.rejectTV.setOnClickListener(new OnClickListener() {
 //            @Override
@@ -181,7 +196,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             fa_bg = itemView.findViewById(R.id.fa_bg);
             row_itemCard = itemView.findViewById(R.id.row_itemCard);
             ll = itemView.findViewById(R.id.select_status);
-            acceptTV = itemView.findViewById(R.id.accept);
+//            acceptTV = itemView.findViewById(R.id.accept);
 //            rejectTV = itemView.findViewById(R.id.reject);
         }
 

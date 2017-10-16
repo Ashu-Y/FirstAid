@@ -127,7 +127,7 @@ public class MyBrRecyclerAdapter extends RecyclerView.Adapter<MyBrRecyclerAdapte
             fa_bg = itemView.findViewById(R.id.fa_bg);
             row_itemCard = itemView.findViewById(R.id.row_itemCard);
             ll = itemView.findViewById(R.id.select_status);
-            acceptTV = itemView.findViewById(R.id.accept);
+//            acceptTV = itemView.findViewById(R.id.accept);
 //            rejectTV = itemView.findViewById(R.id.reject);
             del = itemView.findViewById(R.id.del);
         }
