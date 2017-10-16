@@ -13,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:title="@string/first_aid"
+        app:title="@string/tool_first_aid"
         app:popupTheme="@style/MyPopupMenu"
         app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
         style="@style/MyToolbar"

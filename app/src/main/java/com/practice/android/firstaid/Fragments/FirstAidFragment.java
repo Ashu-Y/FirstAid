@@ -1,6 +1,7 @@
 package com.practice.android.firstaid.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.practice.android.firstaid.Activities.FragmentInfo;
+import com.practice.android.firstaid.Activities.Main3Activity;
 import com.practice.android.firstaid.R;
 
 
@@ -39,9 +42,11 @@ public class FirstAidFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content, Animal.newInstance(), "Animal");
-                transaction.commit();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.content, FragmentInfo.newInstance(), "Animal");
+//                transaction.commit();
+
+                startActivity(new Intent(getActivity(), Main3Activity.class));
             }
 
         });

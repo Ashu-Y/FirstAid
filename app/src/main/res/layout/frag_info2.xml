@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#EEEEEE"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarFaSub"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Animal Bite"
+        android:layout_marginBottom="8dp"
+        app:popupTheme="@style/MyPopupMenu"
+        app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
+        style="@style/MyToolbar"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fa_sub_recyclerList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

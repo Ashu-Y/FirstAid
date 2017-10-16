@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.practice.android.firstaid.Adapters.RecyclerAdapter;
+import com.practice.android.firstaid.Fragments.FirstAidFragment;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -31,6 +32,10 @@ public class FragmentInfo extends Fragment {
         // Required empty public constructor
     }
 
+    public static FragmentInfo newInstance() {
+        FragmentInfo fragment = new FragmentInfo();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +43,7 @@ public class FragmentInfo extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_info, container, false);
 
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -59,34 +64,39 @@ public class FragmentInfo extends Fragment {
         return view;
     }
 
-    private void prepareMovieData()
-    {
-        Matter movie = new Matter("Mad Max: Fury Road", "Action & Adventure");
+    private void prepareMovieData() {
+        Matter movie = new Matter("Apply cold treatment", "Wash the bitten area well to remove any remaining venom from the skin.\n"
+                + "Keep the patient still to reduce the toxic effects of the venom.\n"
+                + "Apply a wrapped ice pack for up to 10 minutes at a time, or a cold \n" +
+                "compress that has been soaked in water to which a few ice cubes have been \n" +
+                "added.");
         matterlist.add(movie);
 
-        movie = new Matter("Inside Out", "Animation, Kids & Family");
+        movie = new Matter("Raise a bitten limb", "If the bite is on a limb, raise it to limit swelling.\n"
+                + "If an arm or hand is involved, apply an elevation sling to provide comfort \n" +
+                "and support.");
         matterlist.add(movie);
 
-        movie = new Matter("Star Wars: Episode VII - The Force Awakens", "Action");
-        matterlist.add(movie);
-
-        movie = new Matter("Shaun the Sheep", "Animation");
-        matterlist.add(movie);
-
-        movie = new Matter("The Martian", "Science Fiction & Fantasy");
-        matterlist.add(movie);
-
-        movie = new Matter("Mission: Impossible Rogue Nation", "Action");
-        matterlist.add(movie);
-
-        movie = new Matter("Up", "Animation");
-        matterlist.add(movie);
-
-        movie = new Matter("Star Trek", "Science Fiction");
-        matterlist.add(movie);
-
-        movie = new Matter("The LEGO Matter()", "Animation");
-        matterlist.add(movie);
+//        movie = new Matter("Star Wars: Episode VII - The Force Awakens", "Action");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("Shaun the Sheep", "Animation");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("The Martian", "Science Fiction & Fantasy");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("Mission: Impossible Rogue Nation", "Action");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("Up", "Animation");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("Star Trek", "Science Fiction");
+//        matterlist.add(movie);
+//
+//        movie = new Matter("The LEGO Matter()", "Animation");
+//        matterlist.add(movie);
 
 
         mAdapter.notifyDataSetChanged();
