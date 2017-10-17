@@ -199,7 +199,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTV, statusTV, dateTV, timeTV, fa_bg, acceptTV, rejectTV;
+        TextView nameTV, statusTV, dateTV, timeTV, fa_bg, acceptTV, rejectTV, phoneTv;
         CardView row_itemCard;
         LinearLayout ll;
 
