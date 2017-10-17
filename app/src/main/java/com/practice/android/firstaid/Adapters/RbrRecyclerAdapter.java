@@ -1,5 +1,7 @@
 package com.practice.android.firstaid.Adapters;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +15,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
-import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -73,6 +70,8 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
         holder.row_itemCard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+            
 
 //                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
 //
@@ -130,6 +129,20 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             }
         });
 
+        holder.row_itemCard.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ClipboardManager clipBoard = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Number",post.getPhone());
+                clipBoard.setPrimaryClip(clip);
+
+           //     Toast.makeText(mContext, "Number Copied", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+
+
 //        holder.acceptTV.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -186,7 +199,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
         CardView row_itemCard;
         LinearLayout ll;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView)  {
             super(itemView);
 
             nameTV = itemView.findViewById(R.id.name);
@@ -196,6 +209,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             fa_bg = itemView.findViewById(R.id.fa_bg);
             row_itemCard = itemView.findViewById(R.id.row_itemCard);
             ll = itemView.findViewById(R.id.select_status);
+
 //            acceptTV = itemView.findViewById(R.id.accept);
 //            rejectTV = itemView.findViewById(R.id.reject);
         }
@@ -207,5 +221,6 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             timeTV.setText(post.getTime());
             fa_bg.setText(post.getBloodGroup());
         }
+
     }
 }

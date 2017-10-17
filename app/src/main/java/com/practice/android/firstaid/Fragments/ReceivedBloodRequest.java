@@ -19,8 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.RbrRecyclerAdapter;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
-import com.practice.android.firstaid.Models.Post;
-import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -99,7 +97,7 @@ public class ReceivedBloodRequest extends Fragment {
                 }
 
 
-                mRecyclerAdapter = new RbrRecyclerAdapter(check);
+                mRecyclerAdapter = new RbrRecyclerAdapter(check,getContext());
 
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
