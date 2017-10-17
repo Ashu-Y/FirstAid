@@ -65,9 +65,16 @@ public class AnimalBiteFragment extends Fragment {
                     "compress that has been soaked in water to which a few ice cubes have been\n" +
                     "added.");
 
-        } else {
+        } else if (mPageNumber == 1) {
             biteImage.setImageResource(R.drawable.spider2);
             titleBite.setText("2\t Raise a bitten limb");
+            text1.setText("\u2022 \t If the bite is on a limb, raise it to limit swelling.");
+            text2.setText("\u2022 \t If an arm or hand is involved, apply an elevation sling to provide comfort \n" +
+                    "and support.");
+            text3.setVisibility(View.GONE);
+        } else {
+            biteImage.setImageResource(R.drawable.spider3);
+            titleBite.setText("3\t Raise a bitten limb");
             text1.setText("\u2022 \t If the bite is on a limb, raise it to limit swelling.");
             text2.setText("\u2022 \t If an arm or hand is involved, apply an elevation sling to provide comfort \n" +
                     "and support.");
