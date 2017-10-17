@@ -13,13 +13,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
-import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -30,13 +25,11 @@ import java.util.ArrayList;
 
 public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.MyViewHolder> {
 
-    private DatabaseReference mDatabase;
     String UserID;
-
     int vis = 0;
-
     ArrayList<BloodRequestDetail> mPosts;
     Context mContext;
+    private DatabaseReference mDatabase;
 
     public RbrRecyclerAdapter(ArrayList<BloodRequestDetail> posts) {
         mPosts = posts;
@@ -182,7 +175,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTV, statusTV, dateTV, timeTV, fa_bg, acceptTV, rejectTV;
+        TextView nameTV, statusTV, dateTV, timeTV, fa_bg, acceptTV, rejectTV, phoneTv;
         CardView row_itemCard;
         LinearLayout ll;
 
@@ -196,6 +189,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             fa_bg = itemView.findViewById(R.id.fa_bg);
             row_itemCard = itemView.findViewById(R.id.row_itemCard);
             ll = itemView.findViewById(R.id.select_status);
+            phoneTv = itemView.findViewById(R.id.phone);
 //            acceptTV = itemView.findViewById(R.id.accept);
 //            rejectTV = itemView.findViewById(R.id.reject);
         }
@@ -206,6 +200,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             dateTV.setText(post.getDate());
             timeTV.setText(post.getTime());
             fa_bg.setText(post.getBloodGroup());
+            phoneTv.setText(post.getPhone());
         }
     }
 }
