@@ -1,7 +1,6 @@
 package com.practice.android.firstaid.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.practice.android.firstaid.Activities.AidInfoActivity;
+import com.practice.android.firstaid.Activities.MainActivity;
 import com.practice.android.firstaid.Activities.Matter;
+import com.practice.android.firstaid.Fragments.SpiderContentFragment;
+import com.practice.android.firstaid.Interfaces.HideFirstAidToolbar;
 import com.practice.android.firstaid.Models.FaSubCategory;
 import com.practice.android.firstaid.R;
 
@@ -50,7 +51,7 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        FaSubCategory subCategory = subCategoriesList.get(position);
+        final FaSubCategory subCategory = subCategoriesList.get(position);
         holder.subCategoryImg.setImageResource(subCategory.getImg());
         holder.subCategoryName.setText(subCategory.getSubCategoryName());
 
@@ -85,7 +86,16 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
         holder.subCategoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, AidInfoActivity.class));
+
+                if (context instanceof HideFirstAidToolbar) {
+                    ((HideFirstAidToolbar) context).hideToolbar(subCategory.getSubCategoryName());
+                }
+
+
+                ((MainActivity) context).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, SpiderContentFragment.newInstance(), "Spider content").commit();
+
+//                context.startActivity(new Intent(context, AidInfoActivity.class));
             }
         });
 
@@ -154,4 +164,6 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
 
         }
     }
+
+
 }

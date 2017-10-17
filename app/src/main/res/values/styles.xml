@@ -28,6 +28,12 @@
         <item name="android:elevation" tools:targetApi="lollipop">4dp</item>
     </style>
 
+    <style name="MyToolbar1">
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:background">#ff5252</item>
+        <item name="android:elevation" tools:targetApi="lollipop">4dp</item>
+    </style>
+
     <style name="MyPopupMenu">
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:background">@android:color/white</item>

@@ -15,13 +15,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
-import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -32,7 +27,6 @@ import java.util.ArrayList;
 
 public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.MyViewHolder> {
 
-    private DatabaseReference mDatabase;
     String UserID;
 
     int vis = 0;

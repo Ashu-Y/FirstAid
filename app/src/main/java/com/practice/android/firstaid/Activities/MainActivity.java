@@ -10,27 +10,26 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.practice.android.firstaid.Fragments.BloodNetworkFragment;
 import com.practice.android.firstaid.Fragments.FirstAidFragment;
 import com.practice.android.firstaid.Fragments.MapFragment;
 import com.practice.android.firstaid.Fragments.ProfileFragment;
 import com.practice.android.firstaid.Helper.BottomNavigationViewHelper;
+import com.practice.android.firstaid.Interfaces.HideFirstAidToolbar;
 import com.practice.android.firstaid.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HideFirstAidToolbar {
 
+    private static int pid;
     private Toolbar mToolbar;
     private FirstAidFragment mFirstAidFragment;
     private FragmentManager mFragmentManager;
-
-    private static int pid;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -46,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.menu_first_aid2);
 
                     mToolbar.setTitle(R.string.tool_first_aid);
+                    mToolbar.setVisibility(View.VISIBLE);
+//                    mToolbar.inflateMenu(R.menu.activity_screen_slide);
+
+//                    getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.content)).commit();
+
                     selectedFragment = FirstAidFragment.newInstance();
                     break;
                 case R.id.navigation_bloodNetwork:
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.menu_blood_net2);
 
                     mToolbar.setTitle(R.string.tool_blood_network);
+                    mToolbar.setVisibility(View.VISIBLE);
                     pid = R.id.navigation_bloodNetwork;
                     selectedFragment = BloodNetworkFragment.newInstance();
                     break;
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.menu_hospital2);
 
                     mToolbar.setTitle(R.string.tool_search_hospital);
+                    mToolbar.setVisibility(View.VISIBLE);
                     pid = R.id.navigation_searchHospital;
                     selectedFragment = MapFragment.newInstance();
                     break;
@@ -69,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.menu_profile2);
 
                     mToolbar.setTitle(R.string.tool_profile);
+                    mToolbar.setVisibility(View.VISIBLE);
+                    mToolbar.inflateMenu(R.menu.menu_main);
+//                    mToolbar.showOverflowMenu();
                     pid = R.id.navigation_profile;
                     selectedFragment = ProfileFragment.newInstance();
                     break;
@@ -129,22 +138,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
 //        switch (pid) {
 //            case R.id.navigation_profile:
 //                getMenuInflater().inflate(R.menu.menu_main, menu);
 //                break;
 //
 //            default:
-//                supportInvalidateOptionsMenu();
-//
-//
+//                menu.clear();
+////                supportInvalidateOptionsMenu();
 //        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -161,4 +169,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void hideToolbar(String s) {
+//        mToolbar.setVisibility(View.GONE);
+        mToolbar.setTitle(s);
+    }
+
 }
