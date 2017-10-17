@@ -1,11 +1,8 @@
 package com.practice.android.firstaid.Adapters;
 
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.practice.android.firstaid.Activities.AidInfoActivity;
 import com.practice.android.firstaid.Activities.Matter;
 import com.practice.android.firstaid.Models.FaSubCategory;
 import com.practice.android.firstaid.R;
@@ -27,30 +25,10 @@ import java.util.List;
 public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCategoryRecyclerAdapter.MyViewHolder> {
 
     ArrayList<FaSubCategory> subCategoriesList;
-    private List<Matter> matterlist = new ArrayList<>();
-
     Context context;
-
+    private List<Matter> matterlist = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView subCategoryName;
-        ImageView subCategoryImg;
-        CardView subCategoryCard;
-        RecyclerView content;
-
-        public MyViewHolder(View view) {
-
-            super(view);
-            subCategoryName = (TextView) view.findViewById(R.id.fa_sub_tv);
-            subCategoryImg = (ImageView) view.findViewById(R.id.fa_sub_img);
-            subCategoryCard = view.findViewById(R.id.subCategoryCard);
-            content = view.findViewById(R.id.subCategoryContent);
-
-        }
-    }
 
     public FaSubCategoryRecyclerAdapter() {
     }
@@ -76,31 +54,38 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
         holder.subCategoryImg.setImageResource(subCategory.getImg());
         holder.subCategoryName.setText(subCategory.getSubCategoryName());
 
+//        holder.subCategoryCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (holder.content.getVisibility() == View.GONE) {
+//                    holder.content.setVisibility(View.VISIBLE);
+//                    mAdapter = new RecyclerAdapter(matterlist);
+//                    prepareMovieData();
+//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+//                    holder.content.setLayoutManager(mLayoutManager);
+//                    holder.content.setItemAnimator(new DefaultItemAnimator());
+//
+//                    RecyclerView.ItemDecoration itemDecoration = new
+//                            DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+//                    holder.content.addItemDecoration(itemDecoration);
+//                    holder.content.setAdapter(mAdapter);
+//
+//                } else {
+//                    holder.content.setVisibility(View.GONE);
+//                }
+//                holder.content
+//
+//
+//
+//
+//            }
+//        });
+
         holder.subCategoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (holder.content.getVisibility() == View.GONE) {
-                    holder.content.setVisibility(View.VISIBLE);
-                    mAdapter = new RecyclerAdapter(matterlist);
-                    prepareMovieData();
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-                    holder.content.setLayoutManager(mLayoutManager);
-                    holder.content.setItemAnimator(new DefaultItemAnimator());
-
-                    RecyclerView.ItemDecoration itemDecoration = new
-                            DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-                    holder.content.addItemDecoration(itemDecoration);
-                    holder.content.setAdapter(mAdapter);
-
-                } else {
-                    holder.content.setVisibility(View.GONE);
-                }
-//                holder.content
-
-
-
-
+                context.startActivity(new Intent(context, AidInfoActivity.class));
             }
         });
 
@@ -150,5 +135,23 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
 
 
         mAdapter.notifyDataSetChanged();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView subCategoryName;
+        ImageView subCategoryImg;
+        CardView subCategoryCard;
+        RecyclerView content;
+
+        public MyViewHolder(View view) {
+
+            super(view);
+            subCategoryName = view.findViewById(R.id.fa_sub_tv);
+            subCategoryImg = view.findViewById(R.id.fa_sub_img);
+            subCategoryCard = view.findViewById(R.id.subCategoryCard);
+            content = view.findViewById(R.id.subCategoryContent);
+
+        }
     }
 }

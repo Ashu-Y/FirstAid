@@ -43,7 +43,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
-import com.practice.android.firstaid.Adapters.IMethodCaller;
+import com.practice.android.firstaid.Interfaces.IMethodCaller;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -56,13 +56,11 @@ import java.util.Map;
 
 public class UserDetails extends AppCompatActivity implements OnConnectionFailedListener, IMethodCaller {
 
+    private static int flag = 0;
     FirebaseAuth firebaseAuth, mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-
     GoogleApiClient mGoogleApiClient;
     DatabaseReference mDatabase1, mDatabase2;
-
-    private static int flag = 0;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Calendar myCalendar;
     Button continueButton;

@@ -1,4 +1,4 @@
-package com.practice.android.firstaid.Adapters;
+package com.practice.android.firstaid.Interfaces;
 
 /**
  * Created by parven on 17-10-2017.
@@ -6,6 +6,6 @@ package com.practice.android.firstaid.Adapters;
 
 public interface IMethodCaller {
 
-    public void checkNoCity();
+    void checkNoCity();
 
 }

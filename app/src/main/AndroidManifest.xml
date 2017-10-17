@@ -8,6 +8,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -15,7 +16,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--              The API key for Google Maps-based APIs. -->
+        <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -35,7 +36,8 @@
         <activity android:name=".Activities.UserDetails" />
         <activity android:name=".Activities.Main2Activity" />
         <activity android:name=".Activities.Main3Activity" />
-        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.EditProfile" />
+        <activity android:name=".Activities.AidInfoActivity"></activity>
     </application>
 
 </manifest>

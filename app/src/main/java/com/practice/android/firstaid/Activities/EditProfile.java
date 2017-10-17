@@ -2,9 +2,9 @@ package com.practice.android.firstaid.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
@@ -40,7 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
-import com.practice.android.firstaid.Adapters.IMethodCaller;
+import com.practice.android.firstaid.Interfaces.IMethodCaller;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
@@ -53,13 +53,11 @@ import java.util.Map;
 
 public class EditProfile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, IMethodCaller {
 
+    private static int flag = 0;
     FirebaseAuth firebaseAuth, mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-
     GoogleApiClient mGoogleApiClient;
     DatabaseReference mDatabase1, mDatabase2;
-
-    private static int flag = 0;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Calendar myCalendar;
     Button saveButton;

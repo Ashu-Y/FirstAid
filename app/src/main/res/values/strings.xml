@@ -92,4 +92,8 @@
     <string name="reject">Decline</string>
     <string name="title">Title</string>
     <string name="dialog_message">Content</string>
+
+    <string name="action_previous">Back</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
 </resources>

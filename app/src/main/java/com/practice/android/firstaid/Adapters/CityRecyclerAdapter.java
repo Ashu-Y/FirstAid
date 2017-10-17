@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.practice.android.firstaid.Activities.Matter;
-import com.practice.android.firstaid.Activities.UserDetails;
+import com.practice.android.firstaid.Interfaces.IMethodCaller;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -26,19 +24,6 @@ public class CityRecyclerAdapter extends RecyclerView.Adapter<CityRecyclerAdapte
     private ArrayList<String> cityList;
     private String check;
     private Context mContext;
-
-    public class CityViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView cityTv;
-        ImageView deleteCity;
-
-        public CityViewHolder(View view) {
-
-            super(view);
-            cityTv = (TextView) view.findViewById(R.id.cityTv);
-            deleteCity = view.findViewById(R.id.delete_city);
-        }
-    }
 
     public CityRecyclerAdapter(ArrayList<String> cityList, String check, Context context) {
         this.cityList = cityList;
@@ -83,6 +68,19 @@ public class CityRecyclerAdapter extends RecyclerView.Adapter<CityRecyclerAdapte
             return cityList.size();
         }
         return 0;
+    }
+
+    public class CityViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView cityTv;
+        ImageView deleteCity;
+
+        public CityViewHolder(View view) {
+
+            super(view);
+            cityTv = view.findViewById(R.id.cityTv);
+            deleteCity = view.findViewById(R.id.delete_city);
+        }
     }
 
 }
