@@ -13,8 +13,13 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
+import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -25,8 +30,11 @@ import java.util.ArrayList;
 
 public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.MyViewHolder> {
 
+    private DatabaseReference mDatabase;
     String UserID;
+
     int vis = 0;
+
     ArrayList<BloodRequestDetail> mPosts;
     Context mContext;
     private DatabaseReference mDatabase;
@@ -66,6 +74,8 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
         holder.row_itemCard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
 //                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
 //
@@ -122,6 +132,20 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 
             }
         });
+
+        holder.row_itemCard.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ClipboardManager clipBoard = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Number",post.getPhone());
+                clipBoard.setPrimaryClip(clip);
+
+           //     Toast.makeText(mContext, "Number Copied", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+
 
 //        holder.acceptTV.setOnClickListener(new OnClickListener() {
 //            @Override
@@ -202,5 +226,6 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             fa_bg.setText(post.getBloodGroup());
             phoneTv.append(post.getPhone());
         }
+
     }
 }
