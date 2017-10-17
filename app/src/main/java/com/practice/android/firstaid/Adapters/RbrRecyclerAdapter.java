@@ -200,7 +200,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             dateTV.setText(post.getDate());
             timeTV.setText(post.getTime());
             fa_bg.setText(post.getBloodGroup());
-            phoneTv.setText(post.getPhone());
+            phoneTv.setText("Call: " + post.getPhone());
         }
     }
 }
