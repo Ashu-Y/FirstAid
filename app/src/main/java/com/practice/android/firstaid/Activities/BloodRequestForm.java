@@ -1,5 +1,6 @@
 package com.practice.android.firstaid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class BloodRequestForm extends AppCompatActivity {
 
     private static int flag = 0;
@@ -58,10 +62,22 @@ public class BloodRequestForm extends AppCompatActivity {
 
     ArrayList<String> bloodGroupArray = new ArrayList<>();
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_request_form);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/opensans-regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
         toolbar = (Toolbar) findViewById(R.id.form_toolbar);
 

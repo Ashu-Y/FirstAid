@@ -1,5 +1,6 @@
 package com.practice.android.firstaid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -17,20 +17,32 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.practice.android.firstaid.R;
-import com.practice.android.firstaid.Activities.LogIn.*;
 
-public class Main2Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-    private Button btnLogout;
+public class SettingsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
     GoogleApiClient mGoogleApiClient;
+    private Button btnLogout;
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_settings);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/opensans-regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.setting);
         btnLogout = (Button) findViewById(R.id.btn_logout);
 
@@ -77,7 +89,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        startActivity(new Intent(Main2Activity.this,LogIn.class));
+                        startActivity(new Intent(SettingsActivity.this, LogIn.class));
 
                     }
                 });

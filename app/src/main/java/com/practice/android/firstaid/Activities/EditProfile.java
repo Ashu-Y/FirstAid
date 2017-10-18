@@ -1,9 +1,11 @@
 package com.practice.android.firstaid.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +19,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -51,6 +53,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class EditProfile extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, IMethodCaller {
 
     private static int flag = 0;
@@ -72,7 +77,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
     CityRecyclerAdapter cityRecyclerAdapter;
     RecyclerView cityRecycler;
 
-    ScrollView scrollView;
+    NestedScrollView scrollView;
     String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin;
 
     String[] cities;
@@ -87,9 +92,20 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/opensans-regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
         Languages = null;
 
@@ -132,7 +148,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         myCalendar = Calendar.getInstance();
         selectCal = (ImageView) findViewById(R.id.select_cal);
 
-        addNewCity = (ImageView) findViewById(R.id.add_newCity);
+//        addNewCity = (ImageView) findViewById(R.id.add_newCity);
 
         noCity = (TextView) findViewById(R.id.noCity);
 
@@ -148,7 +164,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         cityRecycler.setLayoutManager(linearLayoutManager);
 
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         scrollView.setVerticalScrollBarEnabled(false);
 
         etName = (EditText) findViewById(R.id.name);
@@ -190,30 +206,30 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             }
         });
 
-        addNewCity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!etCity.getText().toString().isEmpty()) {
-                    cityList.add(etCity.getText().toString());
-
-                    etCity.setText("");
-                }
-
-                cityRecyclerAdapter.notifyDataSetChanged();
-//                cityAdapter.notifyDataSetChanged();
-//                cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
-                cityRecycler.setAdapter(cityRecyclerAdapter);
-//                cityLV.setAdapter(cityAdapter);
-
-                if (!cityList.isEmpty()) {
-                    noCity.setVisibility(View.GONE);
-                    cityRecycler.setVisibility(View.VISIBLE);
-                } else {
-                    noCity.setVisibility(View.VISIBLE);
-                    cityRecycler.setVisibility(View.GONE);
-                }
-            }
-        });
+//        addNewCity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (!etCity.getText().toString().isEmpty()) {
+//                    cityList.add(etCity.getText().toString());
+//
+//                    etCity.setText("");
+//                }
+//
+//                cityRecyclerAdapter.notifyDataSetChanged();
+////                cityAdapter.notifyDataSetChanged();
+////                cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+//                cityRecycler.setAdapter(cityRecyclerAdapter);
+////                cityLV.setAdapter(cityAdapter);
+//
+//                if (!cityList.isEmpty()) {
+//                    noCity.setVisibility(View.GONE);
+//                    cityRecycler.setVisibility(View.VISIBLE);
+//                } else {
+//                    noCity.setVisibility(View.VISIBLE);
+//                    cityRecycler.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -370,7 +386,8 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i("UserDetails: ", "Place: " + place.getName());
-                etCity.setText(place.getName());
+                addCity(place.getName().toString());
+
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
@@ -387,9 +404,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
-
                 ch(userInfo);
-
             }
 
             @Override
@@ -510,5 +525,48 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             noCity.setVisibility(View.VISIBLE);
             cityRecycler.setVisibility(View.GONE);
         }
+    }
+
+    public void addCity(String city) {
+
+        etCity.setText(city);
+
+
+        //add city to list
+        if (!etCity.getText().toString().isEmpty()) {
+
+            int k = 0;
+
+            for (String i : cityList) {
+                if ((etCity.getText().toString()).equals(i)) {
+                    k = -1;
+                    break;
+                }
+            }
+
+            if (k == 0) {
+                cityList.add(etCity.getText().toString());
+                etCity.setText("");
+            } else {
+                Toast.makeText(EditProfile.this, "City already added", Toast.LENGTH_SHORT).show();
+                etCity.setText("");
+            }
+        }
+
+        cityRecyclerAdapter.notifyDataSetChanged();
+//                cityAdapter.notifyDataSetChanged();
+//                cityRecyclerAdapter = new CityRecyclerAdapter(cityList);
+//                cityRecycler.setAdapter(cityRecyclerAdapter);
+//                cityLV.setAdapter(cityAdapter);
+
+        if (!cityList.isEmpty()) {
+            noCity.setVisibility(View.GONE);
+            cityRecycler.setVisibility(View.VISIBLE);
+        } else {
+            noCity.setVisibility(View.VISIBLE);
+            cityRecycler.setVisibility(View.GONE);
+        }
+
+
     }
 }

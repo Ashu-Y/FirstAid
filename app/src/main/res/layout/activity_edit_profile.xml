@@ -16,7 +16,7 @@ tools:context="com.practice.android.firstaid.Activities.EditProfile">
     app:title="Edit Profile"
     app:titleTextAppearance="@style/ToolbarTextAppearance.Title"/>
 
-<ScrollView
+    <android.support.v4.widget.NestedScrollView
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -190,33 +190,33 @@ tools:context="com.practice.android.firstaid.Activities.EditProfile">
             android:text="Add Cities"
             android:textColor="#757575"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:background="@drawable/edit"-->
+        <!--android:orientation="horizontal">-->
 
             <EditText
                 android:id="@+id/edit_city"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
                 android:background="@drawable/edit"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="8dp"
                 android:paddingTop="8dp"/>
 
-            <ImageView
-                android:id="@+id/add_newCity"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_input_add"
-                android:tint="#fff"
-                tools:ignore="ContentDescription,VectorDrawableCompat"/>
-        </LinearLayout>
+        <!--<ImageView-->
+        <!--android:id="@+id/add_newCity"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:src="@android:drawable/ic_input_add"-->
+        <!--android:tint="#fff"-->
+        <!--tools:ignore="ContentDescription,VectorDrawableCompat"/>-->
+
+        <!--</LinearLayout>-->
 
 
         <!--<RelativeLayout android:layout_width="match_parent"-->
@@ -245,18 +245,18 @@ tools:context="com.practice.android.firstaid.Activities.EditProfile">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/label_your_cities"
             android:textColor="#757575" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="8dp">
 
 
             <TextView
@@ -287,5 +287,5 @@ tools:context="com.practice.android.firstaid.Activities.EditProfile">
             android:textColor="#fff"/>
 
     </LinearLayout>
-</ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

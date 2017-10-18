@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miCompose:
-                Intent intent = new Intent(this, Main2Activity.class);
+                Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
 

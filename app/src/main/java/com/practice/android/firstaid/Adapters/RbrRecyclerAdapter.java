@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -136,7 +137,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
                 ClipData clip = ClipData.newPlainText("Number",post.getPhone());
                 clipBoard.setPrimaryClip(clip);
 
-           //     Toast.makeText(mContext, "Number Copied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Phone Number Copied", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
