@@ -43,7 +43,7 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.frag_info_row_item, parent, false);
+                .inflate(R.layout.grid_single, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -152,7 +152,7 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
         public TextView subCategoryName;
         ImageView subCategoryImg;
         CardView subCategoryCard;
-        RecyclerView content;
+//        RecyclerView content;
 
         public MyViewHolder(View view) {
 
@@ -160,7 +160,7 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
             subCategoryName = view.findViewById(R.id.fa_sub_tv);
             subCategoryImg = view.findViewById(R.id.fa_sub_img);
             subCategoryCard = view.findViewById(R.id.subCategoryCard);
-            content = view.findViewById(R.id.subCategoryContent);
+//            content = view.findViewById(R.id.subCategoryContent);
 
         }
     }

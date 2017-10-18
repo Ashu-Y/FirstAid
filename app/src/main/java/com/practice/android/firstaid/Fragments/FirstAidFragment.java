@@ -3,6 +3,7 @@ package com.practice.android.firstaid.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -61,7 +62,8 @@ public class FirstAidFragment extends Fragment {
         subCategoryRecyclerAdapter = new FaSubCategoryRecyclerAdapter(subCategoryList, getContext());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        subCategoryRecycler.setLayoutManager(linearLayoutManager);
+//        subCategoryRecycler.setLayoutManager(linearLayoutManager);
+        subCategoryRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         subCategoryRecycler.setAdapter(subCategoryRecyclerAdapter);
 
