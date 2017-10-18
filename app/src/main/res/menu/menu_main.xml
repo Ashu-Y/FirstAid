@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/miCompose"
-        android:icon="@drawable/settings"
-        android:title="Settings"
-        app:showAsAction="never" />
+        android:id="@+id/editProfileTmenu"
+        android:icon="@drawable/edit_prof1"
+        android:title="Edit Profile"
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/editProfileTmenu"
-        android:title="Edit Profile"
-        app:showAsAction="never" />
+        android:id="@+id/miCompose"
+        android:icon="@drawable/settings1"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
 
 
 </menu>
