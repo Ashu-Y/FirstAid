@@ -229,7 +229,7 @@ public class BloodRequestForm extends AppCompatActivity {
 
         time = sdf.format(myCalender.getTime());
 
-        if (myCalender.get(Calendar.AM_PM) == 0) {
+        if ((myCalender.get(Calendar.AM_PM)) == Calendar.AM) {
             time = time + (" am");
         } else {
             time = time + (" pm");

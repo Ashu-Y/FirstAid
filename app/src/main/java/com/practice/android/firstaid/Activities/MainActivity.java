@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
                     mToolbar.setTitle(R.string.tool_first_aid);
                     mToolbar.setVisibility(View.VISIBLE);
 //                    mToolbar.inflateMenu(R.menu.activity_screen_slide);
+                    mToolbar.getMenu().clear();
 
 //                    getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.content)).commit();
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
 
                     mToolbar.setTitle(R.string.tool_blood_network);
                     mToolbar.setVisibility(View.VISIBLE);
+                    mToolbar.getMenu().clear();
                     pid = R.id.navigation_bloodNetwork;
                     selectedFragment = BloodNetworkFragment.newInstance();
                     break;
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
 
                     mToolbar.setTitle(R.string.tool_search_hospital);
                     mToolbar.setVisibility(View.VISIBLE);
+                    mToolbar.getMenu().clear();
                     pid = R.id.navigation_searchHospital;
                     selectedFragment = MapFragment.newInstance();
                     break;
