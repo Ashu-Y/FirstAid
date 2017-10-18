@@ -5,8 +5,9 @@
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
         android:id="@+id/action_close"
-        android:title="close"
         android:icon="@drawable/cross"
+        android:iconTint="@android:color/white"
+        android:title="close"
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->

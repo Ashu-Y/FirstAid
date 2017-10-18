@@ -1,9 +1,9 @@
 package com.practice.android.firstaid.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,7 +16,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +30,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
@@ -33,21 +38,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BloodRequestForm extends AppCompatActivity {
 
+    private static int flag = 0;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-
     GoogleApiClient mGoogleApiClient;
     DatabaseReference mDatabase1, mDatabase2;
     Calendar myCalender;
     String UserID;
-
-    private static int flag = 0;
-
+    Toolbar toolbar;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Spinner bgSpinner;
     Button uploadBtn;
     EditText etName, etPhone, etCity, etComments;
@@ -59,6 +62,20 @@ public class BloodRequestForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_request_form);
+
+        toolbar = (Toolbar) findViewById(R.id.form_toolbar);
+
+        toolbar.inflateMenu(R.menu.form);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                BloodRequestForm.this.finish();
+
+                return true;
+            }
+        });
 
         myCalender = Calendar.getInstance();
         bloodGroupArray.add("Select blood group");
@@ -95,6 +112,28 @@ public class BloodRequestForm extends AppCompatActivity {
         Log.d("UserDetails", currentEmail);
         mDatabase1 = FirebaseDatabase.getInstance().getReference("BloodRequest");
         mDatabase2 = FirebaseDatabase.getInstance().getReference("userinfo");
+
+
+        etCity.setFocusable(false);
+        etCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                            .build();
+
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(typeFilter)
+                                    .build(BloodRequestForm.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+            }
+        });
 
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,11 +180,11 @@ public class BloodRequestForm extends AppCompatActivity {
         comments = etComments.getText().toString();
 
 
-        if(bgSpinner.getSelectedItem().toString().equals("Select blood group")){
+        if (bgSpinner.getSelectedItem().toString().equals("Select blood group")) {
             Toast.makeText(BloodRequestForm.this, "Blood group can not be left blank", Toast.LENGTH_SHORT).show();
             flag = -1;
             return;
-        }else {
+        } else {
             bg = bgSpinner.getSelectedItem().toString();
         }
 
@@ -162,6 +201,13 @@ public class BloodRequestForm extends AppCompatActivity {
             flag = -1;
             return;
         }
+
+        if (etPhone.getText().toString().length() < 10) {
+            etPhone.setError("Not a valid number");
+            flag = -1;
+            return;
+        }
+
 
         if (TextUtils.isEmpty(city)) {
             flag = -1;
@@ -183,7 +229,7 @@ public class BloodRequestForm extends AppCompatActivity {
 
         time = sdf.format(myCalender.getTime());
 
-        if ((int) myCalender.get(Calendar.AM_PM) == 0) {
+        if (myCalender.get(Calendar.AM_PM) == 0) {
             time = time + (" am");
         } else {
             time = time + (" pm");
@@ -222,6 +268,7 @@ public class BloodRequestForm extends AppCompatActivity {
             }
         });
     }
+
     public void ch(UserInfo userInfo) {
 
 //        cityList.clear();
@@ -313,4 +360,23 @@ public class BloodRequestForm extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i("UserDetails: ", "Place: " + place.getName());
+                etCity.setText(place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i("UserDetails: ", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+    }
+
 }

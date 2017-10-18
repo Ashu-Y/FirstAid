@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.practice.android.firstaid.R;
@@ -49,6 +50,9 @@ public class AnimalBiteFragment extends Fragment {
 //        progressBar.setProgress(mPageNumber+1);
 //        TextView progressText = view.findViewById(R.id.progressText);
 //        progressText.setText("Page " + (mPageNumber+1) + "of 2");
+
+        ScrollView scrollView = view.findViewById(R.id.scrollBite);
+        scrollView.setVerticalScrollBarEnabled(false);
 
         TextView titleBite = view.findViewById(R.id.titleBite);
         TextView text1 = view.findViewById(R.id.text1);
