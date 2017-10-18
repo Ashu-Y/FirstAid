@@ -31,6 +31,7 @@ public class BloodNetworkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //     ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         View inflatedView = inflater.inflate(R.layout.fragment_blood_network, container, false);
 

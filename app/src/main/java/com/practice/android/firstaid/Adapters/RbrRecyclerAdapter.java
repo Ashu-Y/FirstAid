@@ -188,6 +188,13 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 //        });
     }
 
+
+    public void changeListData(ArrayList<BloodRequestDetail> data) {
+        if (data != null) {
+            mPosts = data;
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return mPosts.size();
