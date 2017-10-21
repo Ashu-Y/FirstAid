@@ -419,6 +419,10 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         cityList.clear();
 
         cityList = (ArrayList<String>) userInfo.getCities();
+
+        if (cityList == null) {
+            cityList = new ArrayList<>();
+        }
         cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "EditProfile", this);
         cityRecyclerAdapter.notifyDataSetChanged();
 
@@ -537,12 +541,14 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
             int k = 0;
 
+
             for (String i : cityList) {
                 if ((etCity.getText().toString()).equals(i)) {
                     k = -1;
                     break;
                 }
-            }
+                }
+
 
             if (k == 0) {
                 cityList.add(etCity.getText().toString());
