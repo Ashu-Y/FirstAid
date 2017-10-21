@@ -30,14 +30,23 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity android:name=".Activities.UserDetails" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.Main3Activity" />
         <activity android:name=".Activities.EditProfile" />
-        <activity android:name=".Activities.AidInfoActivity"></activity>
+        <activity android:name=".Activities.AidInfoActivity" />
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

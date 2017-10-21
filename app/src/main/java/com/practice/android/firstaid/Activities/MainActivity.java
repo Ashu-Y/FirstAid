@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.practice.android.firstaid.Fragments.BloodNetworkFragment;
 import com.practice.android.firstaid.Fragments.FirstAidFragment;
 import com.practice.android.firstaid.Fragments.MapFragment;
@@ -26,7 +28,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements HideFirstAidToolbar {
 
+
     private static int pid;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     private Toolbar mToolbar;
     private FirstAidFragment mFirstAidFragment;
     private FragmentManager mFragmentManager;
@@ -104,6 +109,15 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Sign In activity
+            startActivity(new Intent(this, LogIn.class));
+            finish();
+            return;
+        }
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/opensans-regular.ttf")

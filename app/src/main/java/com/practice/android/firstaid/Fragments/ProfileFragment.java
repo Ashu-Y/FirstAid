@@ -3,10 +3,8 @@ package com.practice.android.firstaid.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,10 +32,6 @@ import java.util.ArrayList;
  */
 public class ProfileFragment extends Fragment {
 
-    private FirebaseAuth mAuth;
-    //    private FirebaseAuth.AuthStateListener mAuthListener;
-//    private FirebaseUser firebaseUser;
-    private DatabaseReference mDatabase;
     String UserID;
     //    private GoogleApiClient mGoogleApiClient;
     ArrayList<String> cityList;
@@ -45,6 +39,10 @@ public class ProfileFragment extends Fragment {
     RecyclerView cityRecycler;
     TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv, noCity;
     Switch donateSwitch;
+    private FirebaseAuth mAuth;
+    //    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private FirebaseUser firebaseUser;
+    private DatabaseReference mDatabase;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -124,7 +122,11 @@ public class ProfileFragment extends Fragment {
 
     public void ch(UserInfo userInfo) {
 
-        cityList.clear();
+        if (cityList != null) {
+            cityList.clear();
+        } else {
+            cityList = new ArrayList<>();
+        }
 
         cityList = (ArrayList<String>) userInfo.getCities();
         cityRecyclerAdapter = new CityRecyclerAdapter(cityList, "ProfileFragment", getContext());

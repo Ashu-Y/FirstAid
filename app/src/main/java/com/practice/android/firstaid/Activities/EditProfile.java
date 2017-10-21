@@ -280,8 +280,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
-                    EditProfile.this.finish();
-                    onBackPressed();
+                    finish();
                 }
 
 
@@ -416,7 +415,11 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
     public void ch(UserInfo userInfo) {
 
-        cityList.clear();
+        if (cityList != null) {
+            cityList.clear();
+        } else {
+            cityList = new ArrayList<>();
+        }
 
         cityList = (ArrayList<String>) userInfo.getCities();
 
@@ -452,13 +455,13 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                 cityRecycler.setVisibility(View.VISIBLE);
             }
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
             etName.setText(userInfo.getName());
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
@@ -469,7 +472,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                 etBloodGroup.setSelection(bloodGroupArray.indexOf(userInfo.getBloodGroup()));
             }
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
@@ -480,7 +483,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             }
 
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
@@ -490,13 +493,13 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                 etGender.setSelection(genderArray.indexOf(userInfo.getGender()));
             }
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
             etDob.setText(userInfo.getDOB());
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
 
@@ -506,7 +509,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 //            langTv.setText(userInfo.getLanguages());
 
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
         try {
@@ -514,7 +517,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                 etInterestedInDonating.setChecked(true);
             }
         } catch (NullPointerException e) {
-            Log.e("ProfileFragment: ", e.getMessage());
+            Log.e("EditProfile: ", e.getMessage());
         }
 
 
@@ -575,4 +578,6 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
 
     }
+
+
 }
