@@ -176,12 +176,14 @@ public class ReceivedBloodRequest extends Fragment {
         adapterList = new ArrayList<>();
 
         if (mIsFilterOn) {
+            if (mMyCities != null) {
 
-            for (BloodRequestDetail detail : check)
-                if (mMyCities.contains(detail.getCity())) {
-                    adapterList.add(detail);
+                for (BloodRequestDetail detail : check)
+                    if (mMyCities.contains(detail.getCity())) {
+                        adapterList.add(detail);
 
-                }
+                    }
+            }
         } else {
             adapterList = check;
         }
