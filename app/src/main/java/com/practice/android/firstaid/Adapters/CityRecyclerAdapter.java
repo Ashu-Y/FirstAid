@@ -1,6 +1,8 @@
 package com.practice.android.firstaid.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,12 +52,8 @@ public class CityRecyclerAdapter extends RecyclerView.Adapter<CityRecyclerAdapte
             holder.deleteCity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cityList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, cityList.size());
-                    if(mContext instanceof IMethodCaller){
-                        ((IMethodCaller)mContext).checkNoCity();
-                    }
+
+                    createAlertDialog(mContext, position);
 
                 }
             });
@@ -68,6 +66,60 @@ public class CityRecyclerAdapter extends RecyclerView.Adapter<CityRecyclerAdapte
             return cityList.size();
         }
         return 0;
+    }
+
+
+    public void createAlertDialog(Context context, final int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage("Do you want to delete this city?").setTitle("Confirm Deletion");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                removeCity(position);
+                dialogInterface.dismiss();
+
+
+            }
+
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+
+
+            }
+        });
+
+
+        dialog.show();
+
+
+    }
+
+
+    public void removeCity(int position) {
+        cityList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, cityList.size());
+        if (mContext instanceof IMethodCaller) {
+            ((IMethodCaller) mContext).checkNoCity();
+        }
     }
 
     public class CityViewHolder extends RecyclerView.ViewHolder {
