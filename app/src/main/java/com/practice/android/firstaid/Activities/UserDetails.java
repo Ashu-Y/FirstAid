@@ -136,6 +136,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         cityRecycler.setLayoutManager(linearLayoutManager);
+        cityRecycler.setAdapter(cityRecyclerAdapter);
 
         scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         scrollView.setVerticalScrollBarEnabled(false);
@@ -453,12 +454,14 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
             int k = 0;
 
+
             for (String i : cityList) {
                 if ((etCity.getText().toString()).equals(i)) {
                     k = -1;
                     break;
                 }
             }
+
 
             if (k == 0) {
                 cityList.add(etCity.getText().toString());
