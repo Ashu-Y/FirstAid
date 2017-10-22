@@ -33,22 +33,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LogIn extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
+    private static final String TAG = "SignInActivity";
+    private static final int RC_SIGN_IN = 9001;
+    String UserID;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser firebaseUser;
-
     private DatabaseReference mDatabase;
-    String UserID;
-    private static final String TAG = "SignInActivity";
-    private static final int RC_SIGN_IN = 9001;
-
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
 
@@ -63,11 +60,11 @@ public class LogIn extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/opensans-regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/opensans-regular.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build()
+//        );
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

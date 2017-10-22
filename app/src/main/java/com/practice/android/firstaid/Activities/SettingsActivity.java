@@ -19,7 +19,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.practice.android.firstaid.R;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SettingsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -37,11 +36,11 @@ public class SettingsActivity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/opensans-regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/opensans-regular.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build()
+//        );
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.setting);
         btnLogout = (Button) findViewById(R.id.btn_logout);

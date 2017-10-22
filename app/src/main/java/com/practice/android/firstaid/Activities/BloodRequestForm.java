@@ -41,7 +41,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BloodRequestForm extends AppCompatActivity {
@@ -73,11 +72,11 @@ public class BloodRequestForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_request_form);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/opensans-regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/opensans-regular.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build()
+//        );
 
         toolbar = (Toolbar) findViewById(R.id.form_toolbar);
 

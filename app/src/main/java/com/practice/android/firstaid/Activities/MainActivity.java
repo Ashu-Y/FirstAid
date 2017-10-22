@@ -23,7 +23,6 @@ import com.practice.android.firstaid.Helper.BottomNavigationViewHelper;
 import com.practice.android.firstaid.Interfaces.HideFirstAidToolbar;
 import com.practice.android.firstaid.R;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements HideFirstAidToolbar {
@@ -119,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
             return;
         }
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/opensans-regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/opensans-regular.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build()
+//        );
 
         pid = R.id.navigation_firstAid;
 
