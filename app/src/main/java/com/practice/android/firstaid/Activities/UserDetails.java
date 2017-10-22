@@ -43,6 +43,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Interfaces.IMethodCaller;
 import com.practice.android.firstaid.Models.UserInfo;
@@ -464,7 +465,9 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
 
             if (k == 0) {
-                cityList.add(etCity.getText().toString());
+                String new_city = etCity.getText().toString();
+                cityList.add(new_city);
+                FirebaseMessaging.getInstance().subscribeToTopic(new_city);
                 etCity.setText("");
             } else {
                 Toast.makeText(UserDetails.this, "City already added", Toast.LENGTH_SHORT).show();
