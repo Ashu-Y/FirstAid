@@ -59,40 +59,30 @@ public class Check extends Fragment implements OnMapReadyCallback,
 
 //    SupportMapFragment mapFrag;
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public static String url;
     static int flag = 0;
-
+    static int y = 0;
+    private static String url1 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
+    //    private static String url2 = "&radius=5000&keyword=blood&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
+    private static String url2 = "&rankby=distance&keyword=blood&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
+    protected ProgressDialog pDialog;
     SupportMapFragment mapFrag;
-
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
-
-
-    protected ProgressDialog pDialog;
-
-    private static String url1 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-    private static String url2 = "&radius=5000&keyword=blood&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
-
-    public static String url;
-
     ArrayList<HospitalListModel> hospitalList;
-
     HospitalListAdapter adapter;
-
     Context context;
-
     RecyclerView mRecyclerView;
-
+    private GoogleMap mGoogleMap;
+    //    private MapView mapView;
+    private boolean mapsSupported = true;
 
     public Check() {
         // Required empty public constructor
     }
-
-
-    private GoogleMap mGoogleMap;
-//    private MapView mapView;
-    private boolean mapsSupported = true;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -150,7 +140,6 @@ public class Check extends Fragment implements OnMapReadyCallback,
         }
     }
 
-
     protected synchronized void buildGoogleApiClient() {
         Log.e("Check", "buildGoogleApiClient");
 
@@ -183,7 +172,6 @@ public class Check extends Fragment implements OnMapReadyCallback,
 
     }
 
-
     @Override
     public void onLocationChanged(Location location) {
         Log.e("Check", "onLocationChanged");
@@ -212,8 +200,6 @@ public class Check extends Fragment implements OnMapReadyCallback,
 //        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
 
     }
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -292,7 +278,6 @@ public class Check extends Fragment implements OnMapReadyCallback,
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -302,7 +287,7 @@ public class Check extends Fragment implements OnMapReadyCallback,
         final LinearLayout parent = (LinearLayout) inflater.inflate(R.layout.fragment_check, container, false);
 //        mapView = (MapView) parent.findViewById(R.id.map);
 
-        mRecyclerView = (RecyclerView) parent.findViewById(R.id.lv);
+        mRecyclerView = parent.findViewById(R.id.lv);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -370,7 +355,6 @@ public class Check extends Fragment implements OnMapReadyCallback,
         Log.e("Check", "onLowMemory");
     }
 
-
     private class HospitalAsyncTask extends AsyncTask<Void, Void, Void> {
 
         String jsonStr = null;
@@ -383,7 +367,7 @@ public class Check extends Fragment implements OnMapReadyCallback,
             pDialog.setCancelable(false);
 
 
-                pDialog.show();
+            pDialog.show();
             Log.e("progress", "start");
         }
 
@@ -484,6 +468,4 @@ public class Check extends Fragment implements OnMapReadyCallback,
             }
         }
     }
-
-    static int y = 0;
 }

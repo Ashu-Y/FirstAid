@@ -1,203 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="com.practice.android.firstaid.Activities.EditProfile">
-
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    style="@style/MyToolbar"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
-    app:title="Edit Profile"
-    app:titleTextAppearance="@style/ToolbarTextAppearance.Title"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.practice.android.firstaid.Activities.EditProfile">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/MyToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Edit Profile"
+        app:titleTextAppearance="@style/ToolbarTextAppearance.Title" />
 
     <android.support.v4.widget.NestedScrollView
-    android:id="@+id/scrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Name"
-            android:textColor="#757575"/>
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"/>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Gender"
-            android:textColor="#757575"/>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/gender"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="6dp"/>
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Date of Birth"
-            android:textColor="#757575"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit"
-            android:orientation="horizontal"
-            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Name"
+                android:textColor="#757575" />
 
             <EditText
-                android:id="@+id/edit_date"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/edit"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="8dp"
-                android:paddingTop="8dp"/>
+                android:paddingRight="16dp"
+                android:paddingTop="8dp" />
 
-            <ImageView
-                android:id="@+id/select_cal"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                tools:ignore="ContentDescription,VectorDrawableCompat"/>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Gender"
+                android:textColor="#757575" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Blood Group"
-            android:textColor="#757575"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit">
-
-            <Spinner
-                android:id="@+id/blood_group"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="6dp"/>
-        </LinearLayout>
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Phone Number"
-            android:textColor="#757575"/>
+                <Spinner
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="6dp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit"
-            android:inputType="phone"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"/>
 
-        <!--
-        Languages
-        !-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Date of Birth"
+                android:textColor="#757575" />
 
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="4dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="Languages"-->
-        <!--android:textColor="#757575"/>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit"
+                android:orientation="horizontal">
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:background="@drawable/edit">-->
+                <EditText
+                    android:id="@+id/edit_date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                    android:background="@drawable/edit"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="8dp" />
 
-        <!--<Spinner-->
-        <!--android:id="@+id/languages"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:padding="6dp"/>-->
-        <!--</LinearLayout>-->
+                <ImageView
+                    android:id="@+id/select_cal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_menu_my_calendar"
+                    tools:ignore="ContentDescription,VectorDrawableCompat" />
+            </LinearLayout>
 
-        <Switch
-            android:id="@+id/interested"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginTop="4dp"
-            android:text="Interested in Donating"
-            android:textColor="#757575"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Add Cities"
-            android:textColor="#757575"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Blood Group"
+                android:textColor="#757575" />
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:background="@drawable/edit"-->
-        <!--android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit">
+
+                <Spinner
+                    android:id="@+id/blood_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="6dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Phone Number"
+                android:textColor="#757575" />
 
             <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit"
+                android:inputType="phone"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp" />
+
+            <!--
+            Languages
+            !-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="Languages"-->
+            <!--android:textColor="#757575"/>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:background="@drawable/edit">-->
+
+            <!--<Spinner-->
+            <!--android:id="@+id/languages"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:padding="6dp"/>-->
+            <!--</LinearLayout>-->
+
+            <Switch
+                android:id="@+id/interested"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="4dp"
+                android:text="Interested in Donating"
+                android:textColor="#757575" />
+
+            <LinearLayout
+                android:id="@+id/city_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Add Cities"
+                    android:textColor="#757575" />
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:background="@drawable/edit"-->
+                <!--android:orientation="horizontal">-->
+
+                <EditText
                 android:id="@+id/edit_city"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -205,87 +209,90 @@ tools:context="com.practice.android.firstaid.Activities.EditProfile">
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="8dp"
-                android:paddingTop="8dp"/>
+                    android:paddingTop="8dp" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/add_newCity"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:src="@android:drawable/ic_input_add"-->
-        <!--android:tint="#fff"-->
-        <!--tools:ignore="ContentDescription,VectorDrawableCompat"/>-->
+                <!--<ImageView-->
+                <!--android:id="@+id/add_newCity"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:src="@android:drawable/ic_input_add"-->
+                <!--android:tint="#fff"-->
+                <!--tools:ignore="ContentDescription,VectorDrawableCompat"/>-->
 
-        <!--</LinearLayout>-->
-
-
-        <!--<RelativeLayout android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+                <!--</LinearLayout>-->
 
 
-        <!--<ListView-->
-        <!--android:id="@+id/city_listView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:scrollbars= "vertical"-->
-        <!--android:visibility="invisible"-->
-        <!--android:clickable="false"/>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clickable="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_alignTop="@+id/city_listView" />-->
-
-        <!--</RelativeLayout>-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/label_your_cities"
-            android:textColor="#757575" />
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp">
+                <!--<RelativeLayout android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
 
 
-            <TextView
-                android:id="@+id/noCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
-                android:padding="16dp"
-                android:text="No cities added" />
+                <!--<ListView-->
+                <!--android:id="@+id/city_listView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:scrollbars= "vertical"-->
+                <!--android:visibility="invisible"-->
+                <!--android:clickable="false"/>-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/city_recycler_profile"
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:clickable="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_alignTop="@+id/city_listView" />-->
+
+                <!--</RelativeLayout>-->
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/label_your_cities"
+                    android:textColor="#757575" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+
+                    <TextView
+                        android:id="@+id/noCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:padding="16dp"
+                        android:text="No cities added" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/city_recycler_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorButton"
+                android:text="Save"
+                android:textColor="#fff" />
 
-            </android.support.v7.widget.RecyclerView>
-
-        </android.support.v7.widget.CardView>
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="Save"
-            android:textColor="#fff"/>
-
-    </LinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -2,10 +2,12 @@ package com.practice.android.firstaid.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -71,7 +74,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
     Spinner etGender, etBloodGroup, etLanguage;
     Switch etInterestedInDonating;
     ListView cityLV;
-
+    LinearLayout cityView;
     TextView noCity;
     ArrayList<String> cityList;
     CityRecyclerAdapter cityRecyclerAdapter;
@@ -146,13 +149,17 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         mDatabase1 = FirebaseDatabase.getInstance().getReference("userinfo");
 
         myCalendar = Calendar.getInstance();
-        selectCal = (ImageView) findViewById(R.id.select_cal);
+        selectCal = findViewById(R.id.select_cal);
 
 //        addNewCity = (ImageView) findViewById(R.id.add_newCity);
 
-        noCity = (TextView) findViewById(R.id.noCity);
 
-        cityRecycler = (RecyclerView) findViewById(R.id.city_recycler_profile);
+        noCity = findViewById(R.id.noCity);
+
+        cityView = findViewById(R.id.city_view);
+        cityView.setVisibility(View.GONE);
+
+        cityRecycler = findViewById(R.id.city_recycler_profile);
 
 //        cityLV = (ListView) findViewById(R.id.city_listView);
 
@@ -164,25 +171,25 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         cityRecycler.setLayoutManager(linearLayoutManager);
 
-        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        scrollView = findViewById(R.id.scrollView);
         scrollView.setVerticalScrollBarEnabled(false);
 
-        etName = (EditText) findViewById(R.id.name);
+        etName = findViewById(R.id.name);
         etName.setText(user.getDisplayName());
 
-        etDob = (EditText) findViewById(R.id.edit_date);
-        etPhone = (EditText) findViewById(R.id.phone);
+        etDob = findViewById(R.id.edit_date);
+        etPhone = findViewById(R.id.phone);
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(10);
         etPhone.setFilters(filterArray);
 
-        etCity = (EditText) findViewById(R.id.edit_city);
+        etCity = findViewById(R.id.edit_city);
 
-        etGender = (Spinner) findViewById(R.id.gender);
-        etBloodGroup = (Spinner) findViewById(R.id.blood_group);
+        etGender = findViewById(R.id.gender);
+        etBloodGroup = findViewById(R.id.blood_group);
 //        etLanguage = (Spinner) findViewById(R.id.languages);
 
-        etInterestedInDonating = (Switch) findViewById(R.id.interested);
+        etInterestedInDonating = findViewById(R.id.interested);
 
 
         etCity.setFocusable(false);
@@ -266,7 +273,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 //        adapterLanguage.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        etLanguage.setAdapter(adapterLanguage);
 
-        saveButton = (Button) findViewById(R.id.save_button);
+        saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -288,6 +295,18 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         });
 
         setDetails();
+
+        etInterestedInDonating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //         Toast.makeText(UserDetails.this, "working", Toast.LENGTH_SHORT).show();
+                if (etInterestedInDonating.isChecked())
+                    createAlertDialog(EditProfile.this);
+                else
+                    cityView.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     private void getDetails() {
@@ -486,15 +505,6 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             Log.e("EditProfile: ", e.getMessage());
         }
 
-        try {
-            if (userInfo.getGender().isEmpty()) {
-                etGender.setSelection(0);
-            } else {
-                etGender.setSelection(genderArray.indexOf(userInfo.getGender()));
-            }
-        } catch (NullPointerException e) {
-            Log.e("EditProfile: ", e.getMessage());
-        }
 
         try {
             etDob.setText(userInfo.getDOB());
@@ -515,10 +525,53 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         try {
             if (userInfo.getInterestedinDonating().equals("true")) {
                 etInterestedInDonating.setChecked(true);
+                cityView.setVisibility(View.VISIBLE);
             }
         } catch (NullPointerException e) {
             Log.e("EditProfile: ", e.getMessage());
         }
+
+
+    }
+
+    public void createAlertDialog(Context context) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.title);
+
+        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                etInterestedInDonating.setChecked(true);
+                cityView.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+
+        builder.setNegativeButton(R.string.reject, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+                etInterestedInDonating.setChecked(false);
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                etInterestedInDonating.setChecked(false);
+            }
+        });
+
+
+        dialog.show();
 
 
     }
