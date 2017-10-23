@@ -65,7 +65,7 @@ public class Check extends Fragment implements OnMapReadyCallback,
     static int y = 0;
     private static String url1 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
     //    private static String url2 = "&radius=5000&keyword=blood&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
-    private static String url2 = "&rankby=distance&keyword=blood&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
+    private static String url2 = "&rankby=distance&keyword=blooddonation&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
     protected ProgressDialog pDialog;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
