@@ -17,6 +17,7 @@ public class PagerAdapterSearchHospital extends FragmentStatePagerAdapter{
     String lat, lng;
     int i;
 
+
     public PagerAdapterSearchHospital(FragmentManager fm, int numOfTabs) {
         super(fm);
         this.mNumOfTabs = numOfTabs;
