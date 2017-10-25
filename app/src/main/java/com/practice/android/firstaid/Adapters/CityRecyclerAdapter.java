@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.practice.android.firstaid.Interfaces.IMethodCaller;
 import com.practice.android.firstaid.R;
 
@@ -114,6 +115,9 @@ public class CityRecyclerAdapter extends RecyclerView.Adapter<CityRecyclerAdapte
 
 
     public void removeCity(int position) {
+
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(cityList.get(position));
+
         cityList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, cityList.size());

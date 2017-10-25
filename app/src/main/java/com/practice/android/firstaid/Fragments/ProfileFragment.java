@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +38,10 @@ public class ProfileFragment extends Fragment {
     CityRecyclerAdapter cityRecyclerAdapter;
     RecyclerView cityRecycler;
     TextView nameTv, fa_btnTv, genderTv, dobTv, bgTv, phoneTv, langTv, noCity;
-    Switch donateSwitch;
+    TextView donateSwitch;
+
+    LinearLayout profileCityView;
+
     private FirebaseAuth mAuth;
     //    private FirebaseAuth.AuthStateListener mAuthListener;
 //    private FirebaseUser firebaseUser;
@@ -58,6 +61,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
         nameTv = view.findViewById(R.id.nameTv);
         fa_btnTv = view.findViewById(R.id.fa_btnTv);
         genderTv = view.findViewById(R.id.genderTv);
@@ -67,7 +72,7 @@ public class ProfileFragment extends Fragment {
 //        langTv = view.findViewById(R.id.langTv);
         cityRecycler = view.findViewById(R.id.city_recycler_profile);
         noCity = view.findViewById(R.id.noCity);
-
+        profileCityView = view.findViewById(R.id.profile_city_view);
         donateSwitch = view.findViewById(R.id.donateSwitch);
 
         cityList = new ArrayList<>();
@@ -139,7 +144,6 @@ public class ProfileFragment extends Fragment {
         try {
 
 
-
 //            if(cityList.isEmpty()){
 //                noCity.setVisibility(View.VISIBLE);
 //                cityRecycler.setVisibility(View.GONE);
@@ -151,7 +155,7 @@ public class ProfileFragment extends Fragment {
 //            noCity.setVisibility(View.GONE);
 //            cityRecycler.setVisibility(View.VISIBLE);
 
-            if(cityList.isEmpty()){
+            if (cityList.isEmpty()) {
                 noCity.setVisibility(View.VISIBLE);
                 cityRecycler.setVisibility(View.GONE);
             } else {
@@ -166,47 +170,51 @@ public class ProfileFragment extends Fragment {
         try {
             nameTv.setText(userInfo.getName());
 
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
         try {
             fa_btnTv.setText(userInfo.getBloodGroup());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
         try {
             genderTv.setText(userInfo.getGender());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
         try {
             dobTv.setText(userInfo.getDOB());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
         try {
             bgTv.setText(userInfo.getBloodGroup());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
         try {
             phoneTv.setText(userInfo.getPhoneNumber());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.e("ProfileFragment: ", e.getMessage());
         }
 
 
 //            langTv.setText(userInfo.getLanguages());
 
-            if (userInfo.getInterestedinDonating().equals("true")) {
-                donateSwitch.setChecked(true);
-            }
+        if (userInfo.getInterestedinDonating().equals("true")) {
+            donateSwitch.setText("Yes");
+            profileCityView.setVisibility(View.VISIBLE);
+        } else {
+            donateSwitch.setText("No");
+            profileCityView.setVisibility(View.GONE);
 
+        }
 
 
     }
