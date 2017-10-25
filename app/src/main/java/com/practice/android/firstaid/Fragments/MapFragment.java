@@ -2,8 +2,10 @@ package com.practice.android.firstaid.Fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +36,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.practice.android.firstaid.Adapters.PagerAdapterSearchHospital;
 import com.practice.android.firstaid.R;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -282,6 +286,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         View inflatedView = inflater.inflate(R.layout.fragment_map, container, false);
 
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(getContext(), "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
+        } else {
+            showGPSDisabledAlertToUser();
+        }
+
         mapView = (MapView) inflatedView.findViewById(R.id.map);
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -312,7 +324,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 i = tab.getPosition();
-                viewPager.setCurrentItem(tab.getPosition(), true);
+                //      viewPager.setCurrentItem(tab.getPosition(), true);
             }
 
             @Override
@@ -381,6 +393,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         mapView.onLowMemory();
 
         Log.e("Check", "onLowMemory");
+    }
+
+
+    private void showGPSDisabledAlertToUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Goto Settings ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 
