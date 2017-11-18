@@ -22,9 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.practice.android.firstaid.Activities.*;
 import com.practice.android.firstaid.Adapters.MyBrRecyclerAdapter;
-import com.practice.android.firstaid.Adapters.RbrRecyclerAdapter;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
 import com.practice.android.firstaid.R;
 
@@ -35,16 +33,13 @@ import java.util.ArrayList;
  */
 public class BloodMyRequest extends Fragment {
 
-    private DatabaseReference mDatabase;
     String UserID;
-
     RecyclerView mRecyclerView;
     MyBrRecyclerAdapter mRecyclerAdapter;
-
     ArrayList<BloodRequestDetail> check;
-
     ImageView placeHolderImg;
     TextView placeHolderTv;
+    private DatabaseReference mDatabase;
 
     public BloodMyRequest() {
         // Required empty public constructor
@@ -65,6 +60,7 @@ public class BloodMyRequest extends Fragment {
         }
 
         mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+        mDatabase.keepSynced(true);
 
 
         View v = inflater.inflate(R.layout.fragment_blood_my_request, container, false);

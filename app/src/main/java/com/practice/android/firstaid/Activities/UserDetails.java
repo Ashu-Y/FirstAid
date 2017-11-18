@@ -79,7 +79,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     RecyclerView cityRecycler;
 
     NestedScrollView scrollView;
-    String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin;
+    String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl;
 
     String[] cities;
 
@@ -97,6 +97,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         setContentView(R.layout.activity_user_details);
 
         Languages = null;
+        ProfileUrl = null;
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -117,16 +118,16 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         mDatabase1 = FirebaseDatabase.getInstance().getReference("userinfo");
 
         myCalendar = Calendar.getInstance();
-        selectCal = (ImageView) findViewById(R.id.select_cal);
+        selectCal = findViewById(R.id.select_cal);
 
 //        addNewCity = (ImageView) findViewById(R.id.add_newCity);
 
-        noCity = (TextView) findViewById(R.id.noCity);
+        noCity = findViewById(R.id.noCity);
 
-        cityView = (LinearLayout) findViewById(R.id.city_view);
+        cityView = findViewById(R.id.city_view);
         cityView.setVisibility(View.GONE);
 
-        cityRecycler = (RecyclerView) findViewById(R.id.city_recycler_profile);
+        cityRecycler = findViewById(R.id.city_recycler_profile);
 
 //        cityLV = (ListView) findViewById(R.id.city_listView);
 
@@ -139,25 +140,25 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         cityRecycler.setLayoutManager(linearLayoutManager);
         cityRecycler.setAdapter(cityRecyclerAdapter);
 
-        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        scrollView = findViewById(R.id.scrollView);
         scrollView.setVerticalScrollBarEnabled(false);
 
-        etName = (EditText) findViewById(R.id.name);
+        etName = findViewById(R.id.name);
         etName.setText(user.getDisplayName());
 
-        etDob = (EditText) findViewById(R.id.edit_date);
-        etPhone = (EditText) findViewById(R.id.phone);
+        etDob = findViewById(R.id.edit_date);
+        etPhone = findViewById(R.id.phone);
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(10);
         etPhone.setFilters(filterArray);
 
-        etCity = (EditText) findViewById(R.id.edit_city);
+        etCity = findViewById(R.id.edit_city);
 
-        etGender = (Spinner) findViewById(R.id.gender);
-        etBloodGroup = (Spinner) findViewById(R.id.blood_group);
+        etGender = findViewById(R.id.gender);
+        etBloodGroup = findViewById(R.id.blood_group);
 //        etLanguage = (Spinner) findViewById(R.id.languages);
 
-        etInterestedInDonating = (Switch) findViewById(R.id.interested);
+        etInterestedInDonating = findViewById(R.id.interested);
 
         etInterestedInDonating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,7 +261,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 //        adapterLanguage.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        etLanguage.setAdapter(adapterLanguage);
 
-        continueButton = (Button) findViewById(R.id.continue_button);
+        continueButton = findViewById(R.id.continue_button);
         continueButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,7 +271,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
                 if (flag != -1) {
                     flag = 0;
 
-                    writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
+                    writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl, cityList);
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
@@ -391,10 +392,10 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
     }
 
-    public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, List Cities) {
+    public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, String ProfileUrl, List Cities) {
 
         String Key = mDatabase1.child(UserID).push().getKey();
-        UserInfo userinfo = new UserInfo(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, Cities);
+        UserInfo userinfo = new UserInfo(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl, Cities);
         Map<String, Object> postValues = userinfo.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

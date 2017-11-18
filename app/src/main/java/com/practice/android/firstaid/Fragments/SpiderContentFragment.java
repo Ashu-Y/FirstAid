@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.practice.android.firstaid.R;
 
+import static com.practice.android.firstaid.Activities.MainActivity.FTAG;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,8 +28,10 @@ public class SpiderContentFragment extends Fragment {
     ProgressBar progressBar;
     TextView progressText, backTv, nextTv;
     Toolbar toolbar;
+    //public static String FTAG;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
+
 
 
     public SpiderContentFragment() {
@@ -56,6 +60,8 @@ public class SpiderContentFragment extends Fragment {
         backTv = view.findViewById(R.id.backTv);
         backTv.setVisibility(View.INVISIBLE);
         nextTv = view.findViewById(R.id.nextTv);
+
+        FTAG = "FirstAidFragment";
 
 
         mPager = view.findViewById(R.id.viewPager);

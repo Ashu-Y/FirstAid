@@ -31,18 +31,16 @@ import java.util.List;
  */
 public class ReceivedBloodRequest extends Fragment {
 
-    private DatabaseReference mDatabase;
-    private DatabaseReference mUserReference;
     String UserID;
     Switch filterSwitch;
     boolean mIsFilterOn = false;
-
     RecyclerView mRecyclerView;
     RbrRecyclerAdapter mRecyclerAdapter;
-
     ArrayList<BloodRequestDetail> check;
     ArrayList<BloodRequestDetail> adapterList;
     List<String> mMyCities;
+    private DatabaseReference mDatabase;
+    private DatabaseReference mUserReference;
 
 
     public ReceivedBloodRequest() {
@@ -53,7 +51,12 @@ public class ReceivedBloodRequest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_received_blood_request, container, false);
+
+//        RecyclerView cardView = (RecyclerView) v.findViewById(R.id.recycler_receivedBR);
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -70,27 +73,22 @@ public class ReceivedBloodRequest extends Fragment {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+        mDatabase.keepSynced(true);
         mUserReference = FirebaseDatabase.getInstance().getReference("userinfo");
+        mUserReference.keepSynced(true);
         getUserDetails();
 
-
-        View v = inflater.inflate(R.layout.fragment_received_blood_request, container, false);
 
         filterSwitch = v.findViewById(R.id.filter_Switch);
         filterSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //        Toast.makeText(getContext(), "filter : " + filterSwitch.isChecked(), Toast.LENGTH_SHORT).show();
-                if (filterSwitch.isChecked()) {
-                    mIsFilterOn = true;
-                } else {
-                    mIsFilterOn = false;
-                }
+                mIsFilterOn = filterSwitch.isChecked();
                 createAdapterList();
 
             }
         });
-
 
 
         mRecyclerView = v.findViewById(R.id.recycler_receivedBR);
@@ -111,7 +109,6 @@ public class ReceivedBloodRequest extends Fragment {
     public void getDetails() {
 
 
-
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -126,10 +123,12 @@ public class ReceivedBloodRequest extends Fragment {
                     ch(userInfo);
                 }
 
-                mRecyclerAdapter = new RbrRecyclerAdapter(check,getContext());
+                mRecyclerAdapter = new RbrRecyclerAdapter(check, getContext());
 
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
                 mRecyclerView.setLayoutManager(linearLayoutManager);
                 mRecyclerView.setAdapter(mRecyclerAdapter);
 
@@ -191,4 +190,79 @@ public class ReceivedBloodRequest extends Fragment {
     }
 
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        int[] location = new int[2];
+//        mRecyclerView.getLocationInWindow(location);
+//
+//        int x = location[0];
+//        int y = location[1];
+//
+//        x = (int) mRecyclerView.getX() + mRecyclerView.getWidth() / 2;
+//        y = (int) mRecyclerView.getY() + mRecyclerView.getHeight() / 2;
+//
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        y = displayMetrics.heightPixels / 2;
+//        x = displayMetrics.widthPixels / 2;
+//        new SpotlightView.Builder(getActivity())
+//                .introAnimationDuration(400)
+//                .enableRevealAnimation(true)
+//                .performClick(true)
+//                .fadeinTextDuration(400)
+//                .headingTvColor(Color.parseColor("#eb273f"))
+//                .headingTvSize(32)
+//                .headingTvText("Love")
+//                .subHeadingTvColor(Color.parseColor("#ffffff"))
+//                .subHeadingTvSize(16)
+//                .subHeadingTvText("Like the picture?\nLet others know.")
+//                .maskColor(Color.parseColor("#dc000000"))
+//                .target(cardView)
+//                .lineAnimDuration(400)
+//                .lineAndArcColor(Color.parseColor("#eb273f"))
+//                .dismissOnTouch(true)
+//                .dismissOnBackPress(true)
+//                .enableDismissAfterShown(true)
+//                .usageId("1") //UNIQUE ID
+//                .show();
+
+
+//        SimpleTarget simpleTarget = new SimpleTarget.Builder(getActivity())
+//                .setPoint(x,y)// position of the Target. setPoint(Point point), setPoint(View view) will work too.
+//                .setRadius(200f) // radius of the Target
+//                .setTitle("the title") // title
+//                .setDescription("the description") // description
+//                .setOnSpotlightStartedListener(new OnTargetStateChangedListener<SimpleTarget>() {
+//                    @Override
+//                    public void onStarted(SimpleTarget target) {
+//                        // do something
+//                    }
+//                    @Override
+//                    public void onEnded(SimpleTarget target) {
+//                        // do something
+//                    }
+//                })
+//                .build();
+//
+//        Spotlight.with(getActivity())
+//                .setDuration(1000L) // duration of Spotlight emerging and disappearing in ms
+//                .setAnimation(new DecelerateInterpolator(2f)) // animation of Spotlight
+//                .setTargets(simpleTarget) // set targets. see below for more info
+//                .setOnSpotlightStartedListener(new OnSpotlightStartedListener() { // callback when Spotlight starts
+//                    @Override
+//                    public void onStarted() {
+//                        Toast.makeText(getActivity(), "spotlight is started", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .setOnSpotlightEndedListener(new OnSpotlightEndedListener() { // callback when Spotlight ends
+//                    @Override
+//                    public void onEnded() {
+//                        Toast.makeText(getActivity(), "spotlight is ended", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .start(); // start Spotlight
+//    }
 }
+

@@ -3,6 +3,7 @@ package com.practice.android.firstaid.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -42,13 +43,15 @@ public class LogIn extends AppCompatActivity implements
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
     String UserID;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
+    Context context;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser firebaseUser;
     private DatabaseReference mDatabase;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
-
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -68,6 +71,7 @@ public class LogIn extends AppCompatActivity implements
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (user != null) {
 
@@ -95,9 +99,12 @@ public class LogIn extends AppCompatActivity implements
                 .build();
         // [END build_client]
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("userinfo");
 
         findViewById(R.id.signInButton).setOnClickListener(this);
+
+        context = getApplicationContext();
+        sharedPref = context.getSharedPreferences("IsLoggedIn", Context.MODE_PRIVATE);
+
     }
 
     @Override
@@ -152,6 +159,8 @@ public class LogIn extends AppCompatActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             firebaseAuthWithGoogle(acct);
+
+
         } else {
             // Signed out, show unauthenticated UI.
             next(null);
@@ -173,6 +182,7 @@ public class LogIn extends AppCompatActivity implements
                             Toast.makeText(LogIn.this, "Logged in via Google", Toast.LENGTH_SHORT).show();
                             firebaseUser = mAuth.getCurrentUser();
                             next(firebaseUser);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -236,6 +246,11 @@ public class LogIn extends AppCompatActivity implements
                 UserID = user.getUid();
                 final String curremail = user.getEmail();
                 Log.d("FirstSignInSupport", curremail);
+
+
+                editor = sharedPref.edit();
+                editor.putBoolean("IsLoggedIn", true);
+                editor.apply();
             }
 
             first();
@@ -262,6 +277,8 @@ public class LogIn extends AppCompatActivity implements
 
 
     private void first() {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("userinfo");
 
         mDatabase.child(UserID).addValueEventListener(new ValueEventListener() {
             @Override

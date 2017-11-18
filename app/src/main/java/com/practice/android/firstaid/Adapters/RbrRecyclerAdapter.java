@@ -6,9 +6,9 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,66 +68,86 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             Log.d("FirstSignInSupport", curremail);
         }
 
-        holder.row_itemCard.setOnClickListener(new OnClickListener() {
+//        holder.row_itemCard.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+////                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
+////
+////                mDatabase.addValueEventListener(new ValueEventListener() {
+////                    @Override
+////                    public void onDataChange(DataSnapshot dataSnapshot) {
+////
+////                        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+////
+////                        if (user != null) {
+////
+////                            UserID = user.getUid();
+////                            final String curremail = user.getEmail();
+////                            Log.d("FirstSignInSupport", curremail);
+////                        }
+////
+////                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+////
+////                            BloodRequestDetail userInfo = postSnapshot.getValue(BloodRequestDetail.class);
+////
+////                            if (userInfo.getKey().equals(mPosts.get(position).getKey())) {
+////
+////                                if (userInfo.getStatus().equals("Pending")) {
+////
+////                                    if (!userInfo.getUserID().equals(UserID)) {
+////                                        vis = 1;
+////                                    }
+////                                }
+////                            }
+////                        }
+////
+////                    }
+////
+////                    @Override
+////                    public void onCancelled(DatabaseError databaseError) {
+////
+////                    }
+////                });
+//
+////                if(!mPosts.get(position).getUserID().equals(UserID)){
+////                    if (mPosts.get(position).getStatus().equals("Pending")){
+////                        vis = 1;
+////                    }
+////                }
+////
+////                if (vis == 1) {
+////                    if (holder.ll.getVisibility() == View.GONE) {
+////                        holder.ll.setVisibility(View.VISIBLE);
+////                    } else {
+////                        holder.ll.setVisibility(View.GONE);
+////                    }
+////                    vis = 0;
+////                }
+//
+//
+//
+//            }
+//        });
+
+        if (!mPosts.get(position).getPhone().isEmpty() || (mPosts.get(position).getPhone() == null)) {
+            holder.ll.setVisibility(View.VISIBLE);
+        }
+
+        holder.row_itemCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                Toast toast = Toast.makeText(mContext, "Long press on the card to copy phone number", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
 
-
-//                mDatabase = FirebaseDatabase.getInstance().getReference("BloodRequest");
-//
-//                mDatabase.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//
-//                        if (user != null) {
-//
-//                            UserID = user.getUid();
-//                            final String curremail = user.getEmail();
-//                            Log.d("FirstSignInSupport", curremail);
-//                        }
-//
-//                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//
-//                            BloodRequestDetail userInfo = postSnapshot.getValue(BloodRequestDetail.class);
-//
-//                            if (userInfo.getKey().equals(mPosts.get(position).getKey())) {
-//
-//                                if (userInfo.getStatus().equals("Pending")) {
-//
-//                                    if (!userInfo.getUserID().equals(UserID)) {
-//                                        vis = 1;
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-
-                if(!mPosts.get(position).getUserID().equals(UserID)){
-                    if (mPosts.get(position).getStatus().equals("Pending")){
-                        vis = 1;
-                    }
-                }
-
-                if (vis == 1) {
-                    if (holder.ll.getVisibility() == View.GONE) {
-                        holder.ll.setVisibility(View.VISIBLE);
-                    } else {
-                        holder.ll.setVisibility(View.GONE);
-                    }
-                    vis = 0;
-                }
 
             }
+
+
         });
 
         holder.row_itemCard.setOnLongClickListener(new View.OnLongClickListener() {
@@ -187,6 +207,8 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 //
 //            }
 //        });
+
+
     }
 
 
@@ -211,7 +233,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             super(itemView);
 
             nameTV = itemView.findViewById(R.id.name);
-            statusTV = itemView.findViewById(R.id.status);
+//            statusTV = itemView.findViewById(R.id.status);
             dateTV = itemView.findViewById(R.id.date);
             timeTV = itemView.findViewById(R.id.time);
             fa_bg = itemView.findViewById(R.id.fa_bg);
@@ -224,11 +246,11 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
 
         public void setData(BloodRequestDetail post, int position) {
             nameTV.setText(post.getName());
-            statusTV.setText(post.getStatus());
+//            statusTV.setText(post.getStatus());
             dateTV.setText(post.getDate());
             timeTV.setText(post.getTime());
             fa_bg.setText(post.getBloodGroup());
-            phoneTv.append(post.getPhone());
+            phoneTv.setText("Call: " + post.getPhone());
         }
 
     }

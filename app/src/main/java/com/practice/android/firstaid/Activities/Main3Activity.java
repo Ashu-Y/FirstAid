@@ -2,14 +2,11 @@ package com.practice.android.firstaid.Activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Adapters.FaSubCategoryRecyclerAdapter;
 import com.practice.android.firstaid.Models.FaSubCategory;
 import com.practice.android.firstaid.R;
@@ -19,14 +16,12 @@ import java.util.ArrayList;
 public class Main3Activity extends AppCompatActivity {
 
 
-    private FragmentManager mFragmentManager;
-    private com.practice.android.firstaid.Activities.FragmentInfo FragmentInfo;
     RecyclerView subCategoryRecycler;
     FaSubCategoryRecyclerAdapter subCategoryRecyclerAdapter;
-
     ArrayList<FaSubCategory> subCategoryList;
-
     Toolbar toolbar;
+    private FragmentManager mFragmentManager;
+    private com.practice.android.firstaid.Activities.FragmentInfo FragmentInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +35,7 @@ public class Main3Activity extends AppCompatActivity {
 //        FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        transaction.add(R.id.frame,FragmentInfo);
 //        transaction.commit();
-        toolbar = (Toolbar) findViewById(R.id.toolbarFaSub);
+        toolbar = findViewById(R.id.toolbarFaSub);
         toolbar.setNavigationIcon(R.drawable.arrow1);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -53,28 +48,28 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
 
-        subCategoryList = new ArrayList<>();
+//        subCategoryList = new ArrayList<>();
+//
+//        subCategoryRecycler = (RecyclerView) findViewById(R.id.fa_sub_recyclerList);
+//        subCategoryRecyclerAdapter = new FaSubCategoryRecyclerAdapter(subCategoryList, this);
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        subCategoryRecycler.setLayoutManager(linearLayoutManager);
 
-        subCategoryRecycler = (RecyclerView) findViewById(R.id.fa_sub_recyclerList);
-        subCategoryRecyclerAdapter = new FaSubCategoryRecyclerAdapter(subCategoryList, this);
+//        subCategoryRecycler.setAdapter(subCategoryRecyclerAdapter);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        subCategoryRecycler.setLayoutManager(linearLayoutManager);
-
-        subCategoryRecycler.setAdapter(subCategoryRecyclerAdapter);
-
-        getSubcategories();
+//        getSubcategories();
     }
 
-    public void getSubcategories(){
-        subCategoryList.add(new FaSubCategory(R.drawable.spider, "Spider"));
-        subCategoryList.add(new FaSubCategory(R.drawable.wasp, "Wasp"));
-        subCategoryList.add(new FaSubCategory(R.drawable.snake, "Snake"));
-        subCategoryList.add(new FaSubCategory(R.drawable.dog, "Dog"));
-
-        subCategoryRecyclerAdapter.notifyDataSetChanged();
-
-    }
+//    public void getSubcategories(){
+//        subCategoryList.add(new FaSubCategory(R.drawable.spider, "Spider"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.wasp, "Wasp"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.snake, "Snake"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.dog, "Dog"));
+//
+//        subCategoryRecyclerAdapter.notifyDataSetChanged();
+//
+//    }
 
 
 }

@@ -2,7 +2,6 @@ package com.practice.android.firstaid.Fragments;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -47,19 +46,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    PagerAdapterSearchHospital pagerAdapter;
-
-    private String currentLat, currentLng;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static int i;
+    static boolean cp = false;
+    PagerAdapterSearchHospital pagerAdapter;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
-
+    private String currentLat, currentLng;
     private GoogleMap mGoogleMap;
     private MapView mapView;
     private boolean mapsSupported = true;
-
 
     public MapFragment() {
         // Required empty public constructor
@@ -87,7 +85,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         Log.e("Check", "initializeMap");
 
         if (mGoogleMap == null && mapsSupported) {
-            mapView = (MapView) getActivity().findViewById(R.id.map);
+            mapView = getActivity().findViewById(R.id.map);
             mapView.getMapAsync(this);
 
             //setup markers etc...
@@ -118,12 +116,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             } else {
                 //Request Location Permission
                 checkLocationPermission();
+                cp = true;
             }
         } else {
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
 //            new HospitalAsyncTask().execute();
         }
+
+//        if(cp){
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                if (ContextCompat.checkSelfPermission(getActivity(),
+//                        android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    //Location Permission already granted
+//                    buildGoogleApiClient();
+//                    mGoogleMap.setMyLocationEnabled(true);
+////                new HospitalAsyncTask().execute();
+//                } else {
+//                    //Request Location Permission
+//                    checkLocationPermission();
+//                    cp = true;
+//                }
+//            }
+//        }
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -143,6 +160,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
 
         mLocationRequest = new LocationRequest();
+
         mLocationRequest.setSmallestDisplacement(0.5f);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
@@ -200,8 +218,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -257,6 +273,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                             buildGoogleApiClient();
                         }
                         mGoogleMap.setMyLocationEnabled(true);
+
                     }
 
                 } else {
@@ -291,15 +308,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(getContext(), "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
         } else {
-            showGPSDisabledAlertToUser();
+//            showGPSDisabledAlertToUser();
         }
 
-        mapView = (MapView) inflatedView.findViewById(R.id.map);
+        mapView = inflatedView.findViewById(R.id.map);
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        mGoogleApiClient.connect();
 
         TabLayout tabLayout = inflatedView.findViewById(R.id.tab_layout_searchHospital);
         tabLayout.addTab(tabLayout.newTab().setText("Search Hospital"));
@@ -324,7 +343,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 i = tab.getPosition();
-                //      viewPager.setCurrentItem(tab.getPosition(), true);
+                viewPager.setCurrentItem(tab.getPosition(), true);
             }
 
             @Override
@@ -396,27 +415,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
 
-    private void showGPSDisabledAlertToUser() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
-                .setCancelable(false)
-                .setPositiveButton("Goto Settings ",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivity(callGPSSettingIntent);
-                            }
-                        });
-        alertDialogBuilder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
-    }
+    //    private void showGPSDisabledAlertToUser() {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+//        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
+//                .setCancelable(false)
+//                .setPositiveButton("Goto Settings ",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                Intent callGPSSettingIntent = new Intent(
+//                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                                startActivity(callGPSSettingIntent);
+//                            }
+//                        });
+//        alertDialogBuilder.setNegativeButton("Cancel",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+//        AlertDialog alert = alertDialogBuilder.create();
+//        alert.show();
+//    }
 
 
 }

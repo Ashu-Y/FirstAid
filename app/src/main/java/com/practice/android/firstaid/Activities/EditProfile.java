@@ -81,7 +81,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
     RecyclerView cityRecycler;
 
     NestedScrollView scrollView;
-    String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin;
+    String UserID, Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl;
 
     String[] cities;
 
@@ -283,9 +283,10 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                 if (flag != -1) {
                     flag = 0;
 
-                    writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, cityList);
+                    writeNewPost(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl, cityList);
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
+
 
                     finish();
                 }
@@ -373,10 +374,10 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
         etDob.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, List Cities) {
+    public void writeNewPost(String Name, String Gender, String DOB, String BloodGroup, String PhoneNumber, String Languages, String InterestedinDonating, String FirstLogin, String ProfileUrl, List Cities) {
 
         String Key = mDatabase1.child(UserID).push().getKey();
-        UserInfo userinfo = new UserInfo(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, Cities);
+        UserInfo userinfo = new UserInfo(Name, Gender, DOB, BloodGroup, PhoneNumber, Languages, InterestedinDonating, FirstLogin, ProfileUrl, Cities);
         Map<String, Object> postValues = userinfo.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -531,6 +532,12 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
             Log.e("EditProfile: ", e.getMessage());
         }
 
+        try {
+            ProfileUrl = userInfo.getProfileUrl();
+        } catch (NullPointerException e) {
+
+            Log.e("EditProfile: ", e.getMessage());
+        }
 
     }
 

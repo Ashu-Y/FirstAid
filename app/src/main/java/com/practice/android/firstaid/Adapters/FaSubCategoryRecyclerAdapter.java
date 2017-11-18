@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.practice.android.firstaid.Activities.MainActivity;
 import com.practice.android.firstaid.Activities.Matter;
 import com.practice.android.firstaid.Fragments.SpiderContentFragment;
@@ -52,8 +53,10 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         final FaSubCategory subCategory = subCategoriesList.get(position);
-        holder.subCategoryImg.setImageResource(subCategory.getImg());
-        holder.subCategoryName.setText(subCategory.getSubCategoryName());
+
+
+        Glide.with(context).load(subCategory.getIconUrl()).fitCenter().skipMemoryCache(false).into(holder.subCategoryImg);
+        holder.subCategoryName.setText(subCategory.getName());
 
 //        holder.subCategoryCard.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -88,7 +91,7 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
             public void onClick(View view) {
 
                 if (context instanceof HideFirstAidToolbar) {
-                    ((HideFirstAidToolbar) context).hideToolbar(subCategory.getSubCategoryName());
+                    ((HideFirstAidToolbar) context).hideToolbar(subCategory.getName());
                 }
 
 

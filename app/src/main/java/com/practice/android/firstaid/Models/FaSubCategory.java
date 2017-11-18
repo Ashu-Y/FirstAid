@@ -6,27 +6,30 @@ package com.practice.android.firstaid.Models;
 
 public class FaSubCategory {
 
-    private int img;
-    private String subCategoryName;
+    private String IconUrl;
+    private String Name;
 
-    public FaSubCategory(int img, String subCategoryName) {
-        this.img = img;
-        this.subCategoryName = subCategoryName;
+    public FaSubCategory() {
     }
 
-    public int getImg() {
-        return img;
+    public FaSubCategory(String IconUrl, String Name) {
+        this.IconUrl = IconUrl;
+        this.Name = Name;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public String getIconUrl() {
+        return IconUrl;
     }
 
-    public String getSubCategoryName() {
-        return subCategoryName;
+    public void setIconUrl(String IconUrl) {
+        this.IconUrl = IconUrl;
     }
 
-    public void setSubCategoryName(String subCategoryName) {
-        this.subCategoryName = subCategoryName;
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
     }
 }

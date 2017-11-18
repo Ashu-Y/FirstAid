@@ -16,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.BloodRequestDetail;
-import com.practice.android.firstaid.Models.Post;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
@@ -27,11 +26,10 @@ import java.util.ArrayList;
 
 public class MyBrRecyclerAdapter extends RecyclerView.Adapter<MyBrRecyclerAdapter.MyViewHolder> {
 
+    public static int flag = 0;
     ArrayList<BloodRequestDetail> mPosts;
     Context mContext;
     private DatabaseReference mDatabase;
-
-    public static int flag = 0;
 
     public MyBrRecyclerAdapter(ArrayList<BloodRequestDetail> posts) {
         mPosts = posts;
@@ -121,7 +119,7 @@ public class MyBrRecyclerAdapter extends RecyclerView.Adapter<MyBrRecyclerAdapte
             super(itemView);
 
             nameTV = itemView.findViewById(R.id.name);
-            statusTV = itemView.findViewById(R.id.status);
+//            statusTV = itemView.findViewById(R.id.status);
             dateTV = itemView.findViewById(R.id.date);
             timeTV = itemView.findViewById(R.id.time);
             fa_bg = itemView.findViewById(R.id.fa_bg);
@@ -134,7 +132,7 @@ public class MyBrRecyclerAdapter extends RecyclerView.Adapter<MyBrRecyclerAdapte
 
         public void setData(BloodRequestDetail post, int position) {
             nameTV.setText(post.getName());
-            statusTV.setText(post.getStatus());
+//            statusTV.setText(post.getStatus());
             dateTV.setText(post.getDate());
             timeTV.setText(post.getTime());
             fa_bg.setText(post.getBloodGroup());

@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">FirstAid</string>
+    <string name="app_name">Blood Care</string>
     <string name="first_aid">FIRST AID</string>
     <string name="tool_first_aid">First Aid</string>
     <string name="blood_network">BLOOD NETWORK</string>
     <string name="tool_blood_network">Blood Network</string>
-    <string name="search_hospital">SEARCH HOSPITAL</string>
-    <string name="tool_search_hospital">Search Hospital</string>
+    <string name="search_hospital">HOSPITALS</string>
+    <string name="tool_search_hospital">Hospitals</string>
     <string name="profile">PROFILE</string>
     <string name="tool_profile">Profile</string>
     <string name="loading">Loading...</string>

@@ -409,8 +409,11 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
                         model.setName(name);
                         model.setVicinity(vicinity);
 
-                        hospitalList.add(model);
-
+                        if (hospitalList.size() < 10) {
+                            hospitalList.add(model);
+                        } else {
+                            break;
+                        }
                     }
 
 

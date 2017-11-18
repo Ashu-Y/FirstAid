@@ -90,24 +90,24 @@
                     android:textColor="#000"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/label_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="Status"
-                    android:textColor="#9E9E9E" />
+                <!--<TextView-->
+                <!--android:id="@+id/label_status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="Status"-->
+                <!--android:textColor="#9E9E9E" />-->
 
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/label_status"
-                    android:layout_marginTop="2dp"
-                    android:text="Pending"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                <!--android:id="@+id/status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/label_status"-->
+                <!--android:layout_marginTop="2dp"-->
+                <!--android:text="Pending"-->
+                <!--android:textColor="@color/colorAccent"-->
+                <!--android:textStyle="bold" />-->
 
                 <TextView
                     android:id="@+id/label_time"
@@ -132,21 +132,21 @@
 
                 <LinearLayout
                     android:id="@+id/select_status"
-                    android:orientation="horizontal"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentLeft="true"
-                    android:visibility="gone"
-                    android:layout_marginTop="8dp"
-                    android:layout_below="@+id/date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/date"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/del"
-                        android:gravity="right"
-                        android:paddingTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingTop="8dp"
                         android:text="Delete"
                         android:textColor="#d50000" />
 

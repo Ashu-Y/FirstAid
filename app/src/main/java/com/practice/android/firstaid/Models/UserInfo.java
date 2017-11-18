@@ -20,6 +20,7 @@ public class UserInfo {
     private String Languages;
     private String InterestedinDonating;
     private String FirstLogin;
+    private String ProfileUrl;
     private List<String> Cities;
 
     public UserInfo() {
@@ -33,6 +34,7 @@ public class UserInfo {
                     String Languages,
                     String InterestedinDonating,
                     String FirstLogin,
+                    String ProfileUrl,
                     List Cities)
     {
         this.Name=Name;
@@ -43,6 +45,7 @@ public class UserInfo {
         this.Languages=Languages;
         this.InterestedinDonating=InterestedinDonating;
         this.FirstLogin=FirstLogin;
+        this.ProfileUrl = ProfileUrl;
         this.Cities=Cities;
     }
 
@@ -82,6 +85,13 @@ public class UserInfo {
         return PhoneNumber;
     }
 
+    public String getProfileUrl() {
+        return ProfileUrl;
+    }
+
+    public void setProfileUrl(String ProfileUrl) {
+        this.ProfileUrl = ProfileUrl;
+    }
 
     @Exclude
     public Map<String,Object> toMap()
@@ -95,6 +105,7 @@ public class UserInfo {
         result.put("Languages",Languages);
         result.put("InterestedinDonating",InterestedinDonating);
         result.put("FirstLogin",FirstLogin);
+        result.put("ProfileUrl", ProfileUrl);
         result.put("Cities",Cities);
         return result;
     }

@@ -91,24 +91,24 @@
                     android:textColor="#000"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/label_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="Status"
-                    android:textColor="#9E9E9E" />
+                <!--<TextView-->
+                <!--android:id="@+id/label_status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="Status"-->
+                <!--android:textColor="#9E9E9E" />-->
 
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/label_status"
-                    android:layout_marginTop="2dp"
-                    android:text="Pending"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                <!--android:id="@+id/status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/label_status"-->
+                <!--android:layout_marginTop="2dp"-->
+                <!--android:text="Pending"-->
+                <!--android:textColor="@color/colorAccent"-->
+                <!--android:textStyle="bold" />-->
 
                 <TextView
                     android:id="@+id/label_time"

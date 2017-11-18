@@ -1,5 +1,6 @@
 package com.practice.android.firstaid.application;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.practice.android.firstaid.Helper.FontsOverride;
 
 /**
@@ -14,5 +15,7 @@ public final class FontApplication extends android.app.Application {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "opensans-regular.ttf");
         FontsOverride.setDefaultFont(this, "SERIF", "opensans-regular.ttf");
         FontsOverride.setDefaultFont(this, "SANS_SERIF", "opensans-regular.ttf");
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }

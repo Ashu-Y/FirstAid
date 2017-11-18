@@ -30,48 +30,48 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/set1"
+                android:id="@+id/feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Legal"
+                android:text="Feedback"
                 android:textColor="#000"
                 android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/set2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Licences"
-                android:textColor="#000"
-                android:textSize="15dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/set2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Licences"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15dp" />-->
 
-            <TextView
-                android:id="@+id/set3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Privacy Policy"
-                android:textColor="#000"
-                android:textSize="15dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/set3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Privacy Policy"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15dp" />-->
 
-            <TextView
-                android:id="@+id/set4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Terms &amp; Conditions"
-                android:textColor="#000"
-                android:textSize="15dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/set4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Terms &amp; Conditions"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15dp" />-->
 
-            <TextView
-                android:id="@+id/set5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Delete Account"
-                android:textColor="#000"
-                android:textSize="15dp" />
+            <!--<TextView-->
+            <!--android:id="@+id/set5"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Delete Account"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="15dp" />-->
 
         </LinearLayout>
 

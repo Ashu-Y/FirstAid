@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Adapters.FaSubCategoryRecyclerAdapter;
 import com.practice.android.firstaid.Models.FaSubCategory;
 import com.practice.android.firstaid.R;
@@ -22,10 +27,11 @@ import java.util.ArrayList;
  */
 public class FirstAidFragment extends Fragment {
 
+    public static String Ftag;
     RecyclerView subCategoryRecycler;
     FaSubCategoryRecyclerAdapter subCategoryRecyclerAdapter;
-
     ArrayList<FaSubCategory> subCategoryList;
+    private DatabaseReference mDatabase;
 
     public FirstAidFragment() {
         // Required empty public constructor
@@ -56,6 +62,11 @@ public class FirstAidFragment extends Fragment {
 //
 //        });
 
+        mDatabase = FirebaseDatabase.getInstance().getReference("FirstAidCategory");
+        mDatabase.keepSynced(true);
+
+
+
         subCategoryList = new ArrayList<>();
 
         subCategoryRecycler = view.findViewById(R.id.fa_sub_recyclerList);
@@ -71,18 +82,47 @@ public class FirstAidFragment extends Fragment {
         return view;
     }
 
-    public void getSubcategories() {
-        subCategoryList.add(new FaSubCategory(R.drawable.spider, "Spider Bite"));
-        subCategoryList.add(new FaSubCategory(R.drawable.wasp, "Bee Sting"));
-        subCategoryList.add(new FaSubCategory(R.drawable.snake, "Snake Bite"));
-        subCategoryList.add(new FaSubCategory(R.drawable.dog, "Dog Bite"));
-        subCategoryList.add(new FaSubCategory(R.drawable.bleeding, "Bleeding"));
-        subCategoryList.add(new FaSubCategory(R.drawable.bones_muscles, "Broken Bone"));
-        subCategoryList.add(new FaSubCategory(R.drawable.burns, "Burns"));
-        subCategoryList.add(new FaSubCategory(R.drawable.choking, "Choking"));
-        subCategoryList.add(new FaSubCategory(R.drawable.chest_pain, "Chest Pain"));
+//    public void getSubcategories() {
+//        subCategoryList.add(new FaSubCategory(R.drawable.spider, "Spider Bite"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.wasp, "Bee Sting"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.snake, "Snake Bite"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.dog, "Dog Bite"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.bleeding, "Bleeding"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.bones_muscles, "Broken Bone"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.burns, "Burns"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.choking, "Choking"));
+//        subCategoryList.add(new FaSubCategory(R.drawable.chest_pain, "Chest Pain"));
+//
+//        subCategoryRecyclerAdapter.notifyDataSetChanged();
+//
+//    }
 
-        subCategoryRecyclerAdapter.notifyDataSetChanged();
+    public void getSubcategories() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                subCategoryList.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    FaSubCategory faSubCategory = postSnapshot.getValue(FaSubCategory.class);
+
+                    ch(faSubCategory);
+                }
+
+                subCategoryRecyclerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ch(FaSubCategory faSubCategory) {
+        subCategoryList.add(new FaSubCategory(faSubCategory.getIconUrl(), faSubCategory.getName()));
 
     }
 
