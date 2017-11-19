@@ -304,6 +304,8 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
             ft.replace(R.id.content, FirstAidFragment.newInstance(), null);
             ft.commit();
 
+            mToolbar.setTitle(R.string.tool_first_aid);
+
             FTAG = "BLANK";
 
         } else if (FTAG.equals("BLANK")) {
