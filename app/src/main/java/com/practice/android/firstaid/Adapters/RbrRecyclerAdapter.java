@@ -6,7 +6,6 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.MyViewHolder> {
 
     String UserID;
-
+    Toast toast;
     int vis = 0;
 
     ArrayList<BloodRequestDetail> mPosts;
@@ -140,28 +139,31 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
             @Override
             public void onClick(View view) {
 
-                Toast toast = Toast.makeText(mContext, "Long press on the card to copy phone number", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                if (toast == null) {
 
+                    toast = Toast.makeText(mContext, "Long press on the card to copy phone number", Toast.LENGTH_SHORT);
+                    //toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
+                } else {
+                    toast.cancel();
+                }
 
             }
-
 
         });
 
         holder.row_itemCard.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                ClipboardManager clipBoard = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Number",post.getPhone());
+                ClipboardManager clipBoard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Number", post.getPhone());
                 clipBoard.setPrimaryClip(clip);
 
                 Toast.makeText(mContext, "Phone Number Copied", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
-
 
 
 //        holder.acceptTV.setOnClickListener(new OnClickListener() {
@@ -218,6 +220,7 @@ public class RbrRecyclerAdapter extends RecyclerView.Adapter<RbrRecyclerAdapter.
         }
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return mPosts.size();

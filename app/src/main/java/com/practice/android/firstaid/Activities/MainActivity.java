@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.practice.android.firstaid.Fragments.BloodNetworkFragment;
@@ -34,6 +35,7 @@ import com.practice.android.firstaid.Interfaces.HideFirstAidToolbar;
 import com.practice.android.firstaid.R;
 import com.practice.android.firstaid.utility.NotificationUtils;
 
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements HideFirstAidToolbar {
@@ -147,7 +149,11 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.activity_main);
+
 
         FTAG = "BLANK";
         context = getApplicationContext();

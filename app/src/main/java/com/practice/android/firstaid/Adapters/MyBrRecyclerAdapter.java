@@ -54,18 +54,18 @@ public class MyBrRecyclerAdapter extends RecyclerView.Adapter<MyBrRecyclerAdapte
         BloodRequestDetail post = mPosts.get(position);
         holder.setData(post, position);
 
-        holder.row_itemCard.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (holder.ll.getVisibility() == View.GONE) {
-                    holder.ll.setVisibility(View.VISIBLE);
-                }else {
-                    holder.ll.setVisibility(View.GONE);
-                }
-
-            }
-        });
+//        holder.row_itemCard.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (holder.ll.getVisibility() == View.GONE) {
+//                    holder.ll.setVisibility(View.VISIBLE);
+//                }else {
+//                    holder.ll.setVisibility(View.GONE);
+//                }
+//
+//            }
+//        });
 
         holder.del.setOnClickListener(new OnClickListener() {
             @Override

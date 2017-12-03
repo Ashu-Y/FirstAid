@@ -1,5 +1,6 @@
 package com.practice.android.firstaid.Adapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Activities.MainActivity;
 import com.practice.android.firstaid.Activities.Matter;
 import com.practice.android.firstaid.Fragments.SpiderContentFragment;
@@ -26,11 +32,14 @@ import java.util.List;
 
 public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCategoryRecyclerAdapter.MyViewHolder> {
 
+    static int x = 0;
+    protected ProgressDialog pDialog;
     ArrayList<FaSubCategory> subCategoriesList;
     Context context;
     private List<Matter> matterlist = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
+    private DatabaseReference mDatabase;
 
     public FaSubCategoryRecyclerAdapter() {
     }
@@ -90,13 +99,36 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
             @Override
             public void onClick(View view) {
 
+                pDialog = new ProgressDialog(context);
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(false);
+                pDialog.show();
+
                 if (context instanceof HideFirstAidToolbar) {
                     ((HideFirstAidToolbar) context).hideToolbar(subCategory.getName());
                 }
+                mDatabase = FirebaseDatabase.getInstance().getReference("FirstAidContent");
+                mDatabase.child("Animal Bite").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                ((MainActivity) context).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, SpiderContentFragment.newInstance(), "Spider content").commit();
+                        if (dataSnapshot.exists()) {
+                            x = (int) dataSnapshot.getChildrenCount();
+                            pDialog.dismiss();
+                            callFrag(subCategory.getName());
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
 
 //                context.startActivity(new Intent(context, AidInfoActivity.class));
             }
@@ -150,6 +182,12 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
         mAdapter.notifyDataSetChanged();
     }
 
+    public void callFrag(String t) {
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, SpiderContentFragment.newInstance(t, x), "Spider content").commit();
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView subCategoryName;
@@ -167,6 +205,5 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
 
         }
     }
-
 
 }

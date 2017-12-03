@@ -4,6 +4,7 @@ package com.practice.android.firstaid.Fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -58,16 +59,17 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         LocationListener {
 
 
-//    SupportMapFragment mapFrag;
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public static String url;
+    //    SupportMapFragment mapFrag;
     static int flag = 0;
     static int y = 0;
     private static String url1 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
     //    private static String url2 = "&radius=5000&keyword=hospital&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
     private static String url2 = "&rankby=distance&keyword=hospital&key=AIzaSyAd6xyFMj2-K3FOQj0th8AiqzhMPGD9oHw";
     protected ProgressDialog pDialog;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -299,7 +301,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         context = getContext();
 
         hospitalList = new ArrayList<>();
-
+        sharedPref = context.getSharedPreferences("IsLoggedIn", Context.MODE_PRIVATE);
         return parent;
     }
 
@@ -367,9 +369,17 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
 
+            sharedPref = getActivity().getApplicationContext().getSharedPreferences("firstTime", Context.MODE_PRIVATE);
 
-            pDialog.show();
-            Log.e("progress", "start");
+            boolean firstTime = sharedPref.getBoolean("firstTime", false);
+
+            if (!firstTime) {
+                pDialog.show();
+                editor = sharedPref.edit();
+                editor.putBoolean("firstTime", true);
+                editor.apply();
+                Log.e("progress", "start");
+            }
         }
 
         @Override
@@ -423,7 +433,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    "Connection Error",
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
@@ -436,7 +446,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
                     @Override
                     public void run() {
                         Toast.makeText(getActivity(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "Connection Error",
                                 Toast.LENGTH_LONG)
                                 .show();
                     }

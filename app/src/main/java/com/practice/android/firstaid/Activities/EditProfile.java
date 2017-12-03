@@ -43,6 +43,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
@@ -287,6 +288,26 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
+                    mDatabase1.child(UserID).child("Cities").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            GenericTypeIndicator<ArrayList<String>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
+                            };
+
+                            ArrayList<String> subscribeCities = dataSnapshot.getValue(genericTypeIndicator);
+
+                            if (InterestedinDonating.equals("true")) {
+                                subscribeSavedCities(subscribeCities);
+                            } else {
+                                unSubscribeSavedCities(subscribeCities);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
                     finish();
                 }
@@ -610,7 +631,7 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
                     k = -1;
                     break;
                 }
-                }
+            }
 
 
             if (k == 0) {
@@ -641,5 +662,21 @@ public class EditProfile extends AppCompatActivity implements GoogleApiClient.On
 
     }
 
+    public void subscribeSavedCities(ArrayList<String> cities) {
 
+        for (String city : cities) {
+
+            FirebaseMessaging.getInstance().subscribeToTopic(city);
+
+        }
+    }
+
+    public void unSubscribeSavedCities(ArrayList<String> cities) {
+
+        for (String city : cities) {
+
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(city);
+
+        }
+    }
 }

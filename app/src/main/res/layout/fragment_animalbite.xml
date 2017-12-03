@@ -1,142 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollBite"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/animalrecycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffdddddd"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/toolbar"-->
-    <!--style="@style/MyToolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?actionBarSize"-->
-    <!--android:elevation="0dp"-->
-    <!--app:popupTheme="@style/MyPopupMenu"-->
-    <!--app:titleTextAppearance="@style/ToolbarTextAppearance.Title" />-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_marginLeft="32dp"-->
-    <!--android:text="Back"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textSize="20sp" />-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/progressText"-->
-    <!--android:text="Page 1 of 2"-->
-    <!--android:layout_gravity="bottom|center"-->
-    <!--android:layout_marginTop="4dp"-->
-    <!--android:layout_marginBottom="4dp"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--<ProgressBar-->
-    <!--android:id="@+id/progressAnimalBite"-->
-    <!--style="@style/CustomProgressBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:progress="1"-->
-    <!--android:max="2"-->
-    <!--android:layout_marginLeft="24dp"-->
-    <!--android:layout_marginRight="24dp" />-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_vertical|right"-->
-    <!--android:layout_marginRight="32dp"-->
-    <!--android:text="Next"-->
-    <!--android:textColor="@android:color/white"-->
-    <!--android:textSize="20sp" />-->
-
-
-    <!--</LinearLayout>-->
-
-
-    <!--</FrameLayout>-->
-
-    <ImageView
-        android:id="@+id/biteImage"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/spider1" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/titleBite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:text="1\t Apply cold treatment"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="textMultiLine"
-            android:text="\u2022 \t Wash the bitten area well to remove any remaining venom from the skin. "
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="textMultiLine"
-            android:text="\u2022 \t Keep the patient still to reduce the toxic effects of the venom."
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="textMultiLine"
-            android:text="\u2022 \t Apply a wrapped ice pack for up to 10 minutes at a time, or a cold compress that has been soaked in water to which a few ice cubes have been added."
-            android:textSize="16sp" />
+    </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
-    </LinearLayout>
 
-</ScrollView>

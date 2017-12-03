@@ -2,6 +2,7 @@ package com.practice.android.firstaid.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.practice.android.firstaid.R;
 
 import static com.practice.android.firstaid.Activities.MainActivity.FTAG;
@@ -24,23 +27,66 @@ import static com.practice.android.firstaid.Activities.MainActivity.FTAG;
  */
 public class SpiderContentFragment extends Fragment {
 
-    private static final int NUM_PAGES = 3;
+    private static int NUM_PAGES;
     ProgressBar progressBar;
     TextView progressText, backTv, nextTv;
     Toolbar toolbar;
+    String mTitle;
     //public static String FTAG;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
-
-
+    private DatabaseReference mDatabase;
 
     public SpiderContentFragment() {
         // Required empty public constructor
     }
 
-    public static SpiderContentFragment newInstance() {
+    public static SpiderContentFragment newInstance(String title, int y) {
         SpiderContentFragment fragment = new SpiderContentFragment();
+        Bundle args = new Bundle();
+        args.putString("Title", title);
+        args.putInt("NUM", y);
+        fragment.setArguments(args);
         return fragment;
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mTitle = getArguments().getString("Title");
+
+        NUM_PAGES = getArguments().getInt("NUM");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("FirstAidContent");
+
+
+//        mDatabase.child("Animal Bite").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                int x = 0;
+//                for (DataSnapshot page: dataSnapshot.getChildren()){
+//
+//                    if(page.getKey().equals("NUM_PAGES")){
+//                        x = (int) page.getValue(Integer.class);
+//                    }
+//
+//                }
+//
+//
+//                        Toast.makeText(getActivity(), "loop : " + x, Toast.LENGTH_SHORT).show();
+//                NUM_PAGES = x;
+//
+//
+//                }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
     }
 
@@ -52,6 +98,8 @@ public class SpiderContentFragment extends Fragment {
         toolbar = view.findViewById(R.id.toolbarAidInfo);
         toolbar.setTitle("");
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        getNum();
 
         progressBar = view.findViewById(R.id.progressAnimalBite);
         progressBar.setMax(NUM_PAGES);
@@ -100,6 +148,7 @@ public class SpiderContentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+                mPagerAdapter.notifyDataSetChanged();
             }
         });
 
@@ -109,14 +158,34 @@ public class SpiderContentFragment extends Fragment {
 
                 if (nextTv.getText().equals("Next")) {
                     mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+                    mPagerAdapter.notifyDataSetChanged();
                 } else {
 
                 }
             }
         });
 
+        mPagerAdapter.notifyDataSetChanged();
         return view;
     }
+
+
+    public void getNum() {
+//        mDatabase.child("Animal Bite").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                NUM_PAGES = (int) dataSnapshot.getChildrenCount();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+    }
+
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -125,7 +194,8 @@ public class SpiderContentFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return AnimalBiteFragment.newInstance(position);
+//            return AnimalBiteFragment.newInstance(position);
+            return BlankFragment.newInstance(position, mTitle);
         }
 
         @Override
@@ -133,5 +203,6 @@ public class SpiderContentFragment extends Fragment {
             return NUM_PAGES;
         }
     }
+
 
 }
