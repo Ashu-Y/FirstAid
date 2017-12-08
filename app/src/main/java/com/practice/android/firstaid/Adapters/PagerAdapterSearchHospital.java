@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.practice.android.firstaid.Fragments.Check;
+import com.practice.android.firstaid.Fragments.BloodBanks;
 import com.practice.android.firstaid.Fragments.SearchHospital;
 
 /**
@@ -34,8 +34,8 @@ public class PagerAdapterSearchHospital extends FragmentStatePagerAdapter{
                 return searchHospital;
 
             case 1:
-                Check check;
-                check  = new Check();
+                BloodBanks check;
+                check = new BloodBanks();
                 return check;
 
             default:

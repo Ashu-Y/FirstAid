@@ -25,7 +25,7 @@ import static com.practice.android.firstaid.Activities.MainActivity.FTAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SpiderContentFragment extends Fragment {
+public class ContentPageFragment extends Fragment {
 
     private static int NUM_PAGES;
     ProgressBar progressBar;
@@ -37,12 +37,12 @@ public class SpiderContentFragment extends Fragment {
     private PagerAdapter mPagerAdapter;
     private DatabaseReference mDatabase;
 
-    public SpiderContentFragment() {
+    public ContentPageFragment() {
         // Required empty public constructor
     }
 
-    public static SpiderContentFragment newInstance(String title, int y) {
-        SpiderContentFragment fragment = new SpiderContentFragment();
+    public static ContentPageFragment newInstance(String title, int y) {
+        ContentPageFragment fragment = new ContentPageFragment();
         Bundle args = new Bundle();
         args.putString("Title", title);
         args.putInt("NUM", y);
@@ -93,7 +93,7 @@ public class SpiderContentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_aid_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_contentpage, container, false);
 
         toolbar = view.findViewById(R.id.toolbarAidInfo);
         toolbar.setTitle("");
