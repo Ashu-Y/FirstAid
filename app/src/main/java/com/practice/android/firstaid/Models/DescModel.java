@@ -10,13 +10,15 @@ public class DescModel {
 
     private String Title;
     private List<String> Desc;
+    private String ImageUrl;
 
     public DescModel() {
     }
 
-    public DescModel(String Title, List<String> Desc) {
+    public DescModel(String Title, List<String> Desc, String ImageUrl) {
         this.Title = Title;
         this.Desc = Desc;
+        this.ImageUrl = ImageUrl;
     }
 
     public String getTitle() {
@@ -33,5 +35,13 @@ public class DescModel {
 
     public void setDesc(List<String> Desc) {
         this.Desc = Desc;
+    }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String ImageUrl) {
+        this.ImageUrl = ImageUrl;
     }
 }

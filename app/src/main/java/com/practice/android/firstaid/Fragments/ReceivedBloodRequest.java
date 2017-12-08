@@ -187,6 +187,7 @@ public class ReceivedBloodRequest extends Fragment {
             adapterList = check;
         }
         mRecyclerAdapter.changeListData(adapterList);
+        mRecyclerView.scrollToPosition(adapterList.size() - 1);
     }
 
 

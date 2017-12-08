@@ -270,12 +270,12 @@ public class ProfileFragment extends Fragment {
             if (userInfo.getProfileUrl() != null && !userInfo.getProfileUrl().isEmpty()) {
                 Glide.with(getActivity()).load(userInfo.getProfileUrl()).fitCenter().skipMemoryCache(false).into(profile_pic);
             } else {
-                profile_pic.setImageResource(R.drawable.profilecheck);
+                profile_pic.setImageResource(R.drawable.profile);
             }
 
         } catch (NullPointerException e) {
 
-            profile_pic.setImageResource(R.drawable.profilecheck);
+            profile_pic.setImageResource(R.drawable.profile);
 
             Log.e("ProfileFragment: ", e.getMessage());
         }

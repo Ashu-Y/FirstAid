@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -101,14 +102,13 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
 
                 pDialog = new ProgressDialog(context);
                 pDialog.setMessage("Please wait...");
-                pDialog.setCancelable(false);
                 pDialog.show();
 
                 if (context instanceof HideFirstAidToolbar) {
                     ((HideFirstAidToolbar) context).hideToolbar(subCategory.getName());
                 }
                 mDatabase = FirebaseDatabase.getInstance().getReference("FirstAidContent");
-                mDatabase.child("Animal Bite").addValueEventListener(new ValueEventListener() {
+                mDatabase.child(subCategory.getName()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -117,6 +117,9 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
                             x = (int) dataSnapshot.getChildrenCount();
                             pDialog.dismiss();
                             callFrag(subCategory.getName());
+                        } else {
+                            pDialog.dismiss();
+                            Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
                         }
 
                     }

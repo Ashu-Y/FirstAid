@@ -195,7 +195,7 @@ public class SpiderContentFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
 //            return AnimalBiteFragment.newInstance(position);
-            return BlankFragment.newInstance(position, mTitle);
+            return ContentFragment.newInstance(position, mTitle);
         }
 
         @Override

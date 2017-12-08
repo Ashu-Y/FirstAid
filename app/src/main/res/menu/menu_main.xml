@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/miCompose"
-        android:icon="@drawable/settings1"
+        android:icon="@drawable/ic_settings_new"
         android:title="Settings"
         app:showAsAction="ifRoom" />
 

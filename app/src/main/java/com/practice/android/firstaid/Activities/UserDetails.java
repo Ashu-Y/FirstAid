@@ -41,8 +41,12 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.practice.android.firstaid.Adapters.CityRecyclerAdapter;
 import com.practice.android.firstaid.Interfaces.IMethodCaller;
@@ -275,6 +279,27 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
                     Log.d("Values", Name + "\t" + DOB + "\t" + PhoneNumber + "\t" + Gender + "\t" + BloodGroup + "\t" + Languages + "\t" + InterestedinDonating);
 
+                    mDatabase1.child(UserID).child("Cities").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            GenericTypeIndicator<ArrayList<String>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
+                            };
+
+                            ArrayList<String> subscribeCities = dataSnapshot.getValue(genericTypeIndicator);
+
+                            if (InterestedinDonating.equals("true")) {
+                                subscribeSavedCities(subscribeCities);
+                            } else {
+                                unSubscribeSavedCities(subscribeCities);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                     UserDetails.this.finish();
                     startActivity(new Intent(UserDetails.this, MainActivity.class));
                 }
@@ -491,5 +516,23 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
         }
 
 
+    }
+
+    public void subscribeSavedCities(ArrayList<String> cities) {
+
+        for (String city : cities) {
+
+            FirebaseMessaging.getInstance().subscribeToTopic(city);
+
+        }
+    }
+
+    public void unSubscribeSavedCities(ArrayList<String> cities) {
+
+        for (String city : cities) {
+
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(city);
+
+        }
     }
 }
