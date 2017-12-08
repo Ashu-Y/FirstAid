@@ -36,7 +36,6 @@ import com.practice.android.firstaid.R;
 import com.practice.android.firstaid.utility.NotificationUtils;
 
 import io.fabric.sdk.android.Fabric;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements HideFirstAidToolbar {
 
@@ -125,10 +124,10 @@ public class MainActivity extends AppCompatActivity implements HideFirstAidToolb
 
     };
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

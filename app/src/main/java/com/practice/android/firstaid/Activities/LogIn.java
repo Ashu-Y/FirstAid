@@ -34,7 +34,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Models.UserInfo;
 import com.practice.android.firstaid.R;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LogIn extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -53,10 +52,10 @@ public class LogIn extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

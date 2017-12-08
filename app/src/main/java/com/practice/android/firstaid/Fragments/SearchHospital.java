@@ -47,7 +47,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.google.android.gms.internal.zzahg.runOnUiThread;
+import static com.google.android.gms.internal.zzagr.runOnUiThread;
 
 
 /**
@@ -92,7 +92,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         super.onActivityCreated(savedInstanceState);
         MapsInitializer.initialize(getActivity());
 
-        Log.e("Check", "onActivityCreated");
+        Log.e("BloodBanks", "onActivityCreated");
 
 //        if (mapView != null) {
 //            mapView.onCreate(savedInstanceState);
@@ -101,7 +101,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     }
 
     private void initializeMap() {
-        Log.e("Check", "initializeMap");
+        Log.e("BloodBanks", "initializeMap");
 
 //        if (mGoogleMap == null && mapsSupported) {
 //            mapView = (MapView) getActivity().findViewById(R.id.map);
@@ -115,7 +115,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
-        Log.e("Check", "onMapReady");
+        Log.e("BloodBanks", "onMapReady");
 
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -144,7 +144,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     }
 
     protected synchronized void buildGoogleApiClient() {
-        Log.e("Check", "buildGoogleApiClient");
+        Log.e("BloodBanks", "buildGoogleApiClient");
 
         mGoogleApiClient.connect();
 
@@ -156,7 +156,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.e("Check", "onConnected");
+        Log.e("BloodBanks", "onConnected");
 
 
         mLocationRequest = new LocationRequest();
@@ -171,13 +171,13 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.e("Check", "onConnectionSuspended");
+        Log.e("BloodBanks", "onConnectionSuspended");
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.e("Check", "onLocationChanged");
+        Log.e("BloodBanks", "onLocationChanged");
 
 
 //        mLastLocation = location;
@@ -277,7 +277,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("Check", "onConnectionFailed");
+        Log.e("BloodBanks", "onConnectionFailed");
 
     }
 
@@ -285,7 +285,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.e("Check", "onCreateView");
+        Log.e("BloodBanks", "onCreateView");
 
         final LinearLayout parent = (LinearLayout) inflater.inflate(R.layout.fragment_check, container, false);
 //        mapView = (MapView) parent.findViewById(R.id.map);
@@ -310,7 +310,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         super.onSaveInstanceState(outState);
 //        mapView.onSaveInstanceState(outState);
 
-        Log.e("Check", "onSaveInstanceState");
+        Log.e("BloodBanks", "onSaveInstanceState");
     }
 
     @Override
@@ -318,7 +318,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         super.onResume();
 //        mapView.onResume();
 
-        Log.e("Check", "onResume");
+        Log.e("BloodBanks", "onResume");
 
         initializeMap();
         buildGoogleApiClient();
@@ -327,7 +327,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     @Override
     public void onStart() {
         super.onStart();
-        Log.e("Check", "onStart");
+        Log.e("BloodBanks", "onStart");
 
         buildGoogleApiClient();
     }
@@ -336,7 +336,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     public void onPause() {
         super.onPause();
 
-        Log.e("Check", "onPause");
+        Log.e("BloodBanks", "onPause");
 
 //        mapView.onPause();
     }
@@ -345,7 +345,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
     public void onDestroy() {
         super.onDestroy();
 
-        Log.e("Check", "onDestroy");
+        Log.e("BloodBanks", "onDestroy");
 
 //        mapView.onDestroy();
     }
@@ -355,7 +355,7 @@ public class SearchHospital extends Fragment implements OnMapReadyCallback,
         super.onLowMemory();
 //        mapView.onLowMemory();
 
-        Log.e("Check", "onLowMemory");
+        Log.e("BloodBanks", "onLowMemory");
     }
 
     private class HospitalAsyncTask extends AsyncTask<Void, Void, Void> {

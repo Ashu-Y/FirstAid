@@ -18,14 +18,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.practice.android.firstaid.Activities.MainActivity;
-import com.practice.android.firstaid.Activities.Matter;
-import com.practice.android.firstaid.Fragments.SpiderContentFragment;
+import com.practice.android.firstaid.Fragments.ContentPageFragment;
 import com.practice.android.firstaid.Interfaces.HideFirstAidToolbar;
 import com.practice.android.firstaid.Models.FaSubCategory;
 import com.practice.android.firstaid.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by parven on 16-10-2017.
@@ -37,9 +35,6 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
     protected ProgressDialog pDialog;
     ArrayList<FaSubCategory> subCategoriesList;
     Context context;
-    private List<Matter> matterlist = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private RecyclerAdapter mAdapter;
     private DatabaseReference mDatabase;
 
     public FaSubCategoryRecyclerAdapter() {
@@ -144,50 +139,11 @@ public class FaSubCategoryRecyclerAdapter extends RecyclerView.Adapter<FaSubCate
         return subCategoriesList.size();
     }
 
-    private void prepareMovieData() {
 
-        matterlist.clear();
-
-        Matter movie = new Matter("Apply cold treatment", "Wash the bitten area well to remove any remaining venom from the skin.\n"
-                + "Keep the patient still to reduce the toxic effects of the venom.\n"
-                + "Apply a wrapped ice pack for up to 10 minutes at a time, or a cold \n" +
-                "compress that has been soaked in water to which a few ice cubes have been \n" +
-                "added.");
-        matterlist.add(movie);
-
-        movie = new Matter("Raise a bitten limb", "If the bite is on a limb, raise it to limit swelling.\n"
-                + "If an arm or hand is involved, apply an elevation sling to provide comfort \n" +
-                "and support.");
-        matterlist.add(movie);
-
-//        movie = new Matter("Star Wars: Episode VII - The Force Awakens", "Action");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("Shaun the Sheep", "Animation");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("The Martian", "Science Fiction & Fantasy");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("Mission: Impossible Rogue Nation", "Action");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("Up", "Animation");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("Star Trek", "Science Fiction");
-//        matterlist.add(movie);
-//
-//        movie = new Matter("The LEGO Matter()", "Animation");
-//        matterlist.add(movie);
-
-
-        mAdapter.notifyDataSetChanged();
-    }
 
     public void callFrag(String t) {
         ((MainActivity) context).getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, SpiderContentFragment.newInstance(t, x), "Spider content").commit();
+                .replace(R.id.content, ContentPageFragment.newInstance(t, x), "Spider content").commit();
 
     }
 

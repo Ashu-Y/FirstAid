@@ -1,6 +1,5 @@
 package com.practice.android.firstaid.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +40,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BloodRequestForm extends AppCompatActivity {
 
@@ -62,10 +60,10 @@ public class BloodRequestForm extends AppCompatActivity {
     ArrayList<String> bloodGroupArray = new ArrayList<>();
 
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +76,7 @@ public class BloodRequestForm extends AppCompatActivity {
 //                .build()
 //        );
 
-        toolbar = (Toolbar) findViewById(R.id.form_toolbar);
+        toolbar = findViewById(R.id.form_toolbar);
 
         toolbar.inflateMenu(R.menu.form);
 
@@ -103,17 +101,17 @@ public class BloodRequestForm extends AppCompatActivity {
         bloodGroupArray.add("AB+");
         bloodGroupArray.add("AB-");
 
-        uploadBtn = (Button) findViewById(R.id.upload_btn);
-        etName = (EditText) findViewById(R.id.etName);
-        etPhone = (EditText) findViewById(R.id.etPhone);
-        etCity = (EditText) findViewById(R.id.etCity);
-        etComments = (EditText) findViewById(R.id.etComments);
+        uploadBtn = findViewById(R.id.upload_btn);
+        etName = findViewById(R.id.etName);
+        etPhone = findViewById(R.id.etPhone);
+        etCity = findViewById(R.id.etCity);
+        etComments = findViewById(R.id.etComments);
 
         InputFilter[] filterArray = new InputFilter[1];
         filterArray[0] = new InputFilter.LengthFilter(10);
         etPhone.setFilters(filterArray);
 
-        bgSpinner = (Spinner) findViewById(R.id.bgSpinner);
+        bgSpinner = findViewById(R.id.bgSpinner);
         ArrayAdapter adapterBloodGroup = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, bloodGroupArray);
         adapterBloodGroup.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bgSpinner.setAdapter(adapterBloodGroup);

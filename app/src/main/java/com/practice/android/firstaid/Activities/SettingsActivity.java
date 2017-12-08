@@ -31,7 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SettingsActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -43,10 +42,10 @@ public class SettingsActivity extends AppCompatActivity implements GoogleApiClie
     Context context;
     private Button btnLogout;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,13 +178,6 @@ public class SettingsActivity extends AppCompatActivity implements GoogleApiClie
     public class Async extends AsyncTask<Void, Void, Boolean>
 
     {
-//        boolean boolea;
-//
-//        public Async() {
-//            super();
-//            boolea = false;
-//        }
-
 
         @Override
         protected Boolean doInBackground(Void... parms) {
