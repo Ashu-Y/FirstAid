@@ -139,6 +139,10 @@ public class ContentPageFragment extends Fragment {
                     nextTv.setVisibility(View.VISIBLE);
                 }
 
+                if (mPager.getChildCount() == 1) {
+                    nextTv.setVisibility(View.INVISIBLE);
+                }
+
 //                invalidateOptionsMenu();
             }
         });

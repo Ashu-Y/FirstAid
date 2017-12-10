@@ -9,11 +9,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -99,6 +101,58 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
+
+
+        final AppCompatTextView cityinfo = findViewById(R.id.cityinfo);
+        cityinfo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= cityinfo.getRight() - cityinfo.getTotalPaddingRight()) {
+                        // your action for drawable click event
+
+                        Toast.makeText(UserDetails.this, "You will get a push notification when someone requests for blood in these cities", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                }
+                return true;
+            }
+        });
+
+        final TextView phoneinfo = findViewById(R.id.phoneinfo);
+        phoneinfo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= phoneinfo.getRight() - phoneinfo.getTotalPaddingRight()) {
+                        // your action for drawable click event
+
+                        Toast.makeText(UserDetails.this, "We will auto populate your number when you create a request for blood donation", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                }
+                return true;
+            }
+        });
+
+        final TextView dobinfo = findViewById(R.id.dobinfo);
+        dobinfo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= dobinfo.getRight() - dobinfo.getTotalPaddingRight()) {
+                        // your action for drawable click event
+
+                        Toast.makeText(UserDetails.this, "To confirm your age", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                }
+                return true;
+            }
+        });
 
         Languages = null;
         ProfileUrl = null;
@@ -379,7 +433,7 @@ public class UserDetails extends AppCompatActivity implements OnConnectionFailed
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setMessage(R.string.dialog_message).setTitle(R.string.title);
+        builder.setMessage(R.string.dialog_message);
 
         builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
             @Override

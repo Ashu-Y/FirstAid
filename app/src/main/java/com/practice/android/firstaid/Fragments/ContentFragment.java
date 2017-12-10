@@ -128,7 +128,7 @@ public class ContentFragment extends Fragment {
 
     public void setDesc(DescModel descModel) {
 
-        Glide.with(getActivity()).load(descModel.getImageUrl()).fitCenter().skipMemoryCache(false).into(stepImage);
+        Glide.with(getActivity()).load(descModel.getImageUrl()).fitCenter().skipMemoryCache(false).placeholder(R.drawable.placeholder).into(stepImage);
 
         stepTitle = descModel.getTitle();
         titleTv.setText((mPageNumber + 1) + ". " + stepTitle);

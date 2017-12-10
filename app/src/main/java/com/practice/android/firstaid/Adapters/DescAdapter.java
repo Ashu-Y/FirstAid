@@ -27,7 +27,7 @@ public class DescAdapter extends RecyclerView.Adapter<DescAdapter.DescViewHolder
     public DescViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.blank_row_item, parent, false);
+                .inflate(R.layout.content_row_item, parent, false);
 
         return new DescViewHolder(itemView);
     }

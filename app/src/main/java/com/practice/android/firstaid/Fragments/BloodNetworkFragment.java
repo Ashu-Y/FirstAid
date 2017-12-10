@@ -36,8 +36,8 @@ public class BloodNetworkFragment extends Fragment {
         View inflatedView = inflater.inflate(R.layout.fragment_blood_network, container, false);
 
         TabLayout tabLayout = inflatedView.findViewById(R.id.tab_layout_bloodNetwork);
-        tabLayout.addTab(tabLayout.newTab().setText("Received request"));
-        tabLayout.addTab(tabLayout.newTab().setText("My request"));
+        tabLayout.addTab(tabLayout.newTab().setText("Received requests"));
+        tabLayout.addTab(tabLayout.newTab().setText("My requests"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

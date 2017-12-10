@@ -70,10 +70,12 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/dobinfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="8dp"
+                android:drawableRight="@drawable/ic_question1"
                 android:text="Date of Birth"
                 android:textColor="#757575" />
 
@@ -127,10 +129,12 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/phoneinfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="8dp"
+                android:drawableRight="@drawable/ic_question1"
                 android:text="Phone Number"
                 android:textColor="#757575" />
 
@@ -186,11 +190,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/cityinfo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="8dp"
+                    android:drawableRight="@drawable/ic_question1"
                     android:text="Add Cities"
                     android:textColor="#757575" />
 

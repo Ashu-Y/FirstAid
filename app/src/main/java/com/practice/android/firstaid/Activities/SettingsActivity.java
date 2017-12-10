@@ -123,7 +123,7 @@ public class SettingsActivity extends AppCompatActivity implements GoogleApiClie
 //                }
 //                sa = as.getBool();
 
-                Toast.makeText(SettingsActivity.this, "" + logout, Toast.LENGTH_LONG).show();
+                //Toast.makeText(SettingsActivity.this, "" + logout, Toast.LENGTH_LONG).show();
 
                 if (logout) {
                     signOut();

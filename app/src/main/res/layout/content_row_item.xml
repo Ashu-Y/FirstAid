@@ -18,7 +18,7 @@
             android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="6dp"
             android:text="\u2022 \t Wash the bitten area well to remove any remaining venom from the skin." />
     </LinearLayout>
 

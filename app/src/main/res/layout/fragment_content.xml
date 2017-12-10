@@ -26,14 +26,15 @@
             android:layout_marginTop="4dp"
             android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
                 android:inputType="textMultiLine"
-                android:text="1.\t Apply hot treatment"
+                android:text="1. Apply hot treatment"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />

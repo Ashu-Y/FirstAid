@@ -95,7 +95,7 @@
     <string name="accept">Accept</string>
     <string name="reject">Decline</string>
     <string name="title">Title</string>
-    <string name="dialog_message">Content</string>
+    <string name="dialog_message">You must be 18-60 years of age and having a minimum weight of 50 Kg to donate blood.</string>
 
     <string name="action_previous">Back</string>
     <string name="action_next">Next</string>
